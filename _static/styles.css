@@ -1,0 +1,52 @@
+button.btn.navbar-btn.search-button-field.search-button__button:hover {
+    border-width: 1px;
+}
+
+.circ {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.circ-params {
+    color: #ffffff;
+    background-color: #5e5e5e;
+}
+
+.params {
+    color: #5e5e5e;
+    font-weight: bold;
+}
+
+.circ-variables {
+    color: #ffffff;
+    background-color: #0076ba;
+}
+
+.variables {
+    color: #0076ba;
+    font-weight: bold;
+}
+
+.circ-objective {
+    color: #ffffff;
+    background-color: #f09937;
+}
+
+.objective {
+    color: #f09937;
+    font-weight: bold;
+}
+
+.circ-constraints {
+    color: #ffffff;
+    background-color: #d41876;
+}
+
+.constraints {
+    color: #d41876;
+    font-weight: bold;
+}
