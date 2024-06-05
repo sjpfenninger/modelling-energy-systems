@@ -10,9 +10,8 @@ platforms = ["osx-arm64", "linux-64", "win-64"]
 [tool.pixi.tasks]
 figures = "modelling_energy_systems"
 html = "jupyter-book build ."
-html_rtd = "jupyter-book build . --path-output $READTHEDOCS_OUTPUT/html/"
 clean = "jupyter-book clean ."
-build_rtd = {depends_on = ["figure", "html_rtd"] }
+build = {depends_on = ["figures", "html"] }
 
 [tool.pixi.dependencies]
 python = "3.12.*"

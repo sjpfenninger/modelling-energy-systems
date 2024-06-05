@@ -7,4 +7,6 @@ build:
   commands:
     - mamba install -c conda-forge pixi
     - pixi install
-    - pixi build_rtd
+    - pixi run build
+    - mkdir $READTHEDOCS_OUTPUT
+    - mv _build/html $READTHEDOCS_OUTPUT/html
