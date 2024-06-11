@@ -8,6 +8,9 @@ parts:
   chapters:
     - file: basics/introduction.md
     - file: basics/lp.md
+- caption: Advanced topics
+  chapters:
+    - file: advanced/uncertainty.md
 - caption: Reference
   chapters:
     - file: reference/reading.md
