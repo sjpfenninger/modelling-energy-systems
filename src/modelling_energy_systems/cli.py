@@ -1,11 +1,11 @@
 import click
 
-from modelling_energy_systems import lp
+from modelling_energy_systems import dispatch_lp
 
 
 @click.command()
 def run():
-    lp.build_figures()
+    dispatch_lp.build_figures()
 
 
 if __name__ == "__main__":

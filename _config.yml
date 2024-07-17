@@ -33,10 +33,14 @@ sphinx:
     # Custom analytics:
     # html_js_files: [ ['https://plausible.io/js/script.js', {'defer': 'defer', 'data-domain': 'yourdomain.com'}] ]
     myst_substitutions:
-      circle_1_params: '<span class="circ circ-params">1</span> <span class="params">Parameters</span>'
-      circle_2_variables: '<span class="circ circ-variables">2</span> <span class="variables">Variables</span>'
-      circle_3_objective: '<span class="circ circ-objective">3</span> <span class="objective">Objective</span>'
-      circle_4_constraints: '<span class="circ circ-constraints">4</span> <span class="constraints">Constraints</span>'
+      circle_1: '<span class="circ circ-params">1</span>'
+      circle_2: '<span class="circ circ-variables">2</span>'
+      circle_3: '<span class="circ circ-objective">3</span>'
+      circle_4: '<span class="circ circ-constraints">4</span>'
+      circle_1_params: '<span class="circ circ-params">1</span> <span class="circ-text params">Parameters</span>'
+      circle_2_variables: '<span class="circ circ-variables">2</span> <span class="circ-text variables">Variables</span>'
+      circle_3_objective: '<span class="circ circ-objective">3</span> <span class="circ-text objective">Objective</span>'
+      circle_4_constraints: '<span class="circ circ-constraints">4</span> <span class="circ-text constraints">Constraints</span>'
 
 exclude_patterns: [.pixi, Thumbs.db, .DS_Store, README.md, "**.ipynb_checkpoints", "**BUILD-IGNORE**", "_assets"]
 

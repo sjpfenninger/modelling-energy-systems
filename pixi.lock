@@ -1,8 +1,10 @@
-version: 4
+version: 5
 environments:
   default:
     channels:
     - url: https://conda.anaconda.org/conda-forge/
+    indexes:
+    - https://pypi.org/simple
     packages:
       linux-64:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/_libgcc_mutex-0.1-conda_forge.tar.bz2
@@ -1365,8 +1367,8 @@ packages:
   license: MIT
   license_family: MIT
   purls:
-  - pkg:pypi/debugpy
   - pkg:pypi/bytecode
+  - pkg:pypi/debugpy
   size: 3105043
   timestamp: 1707445249662
 - kind: conda
@@ -4922,7 +4924,7 @@ packages:
   name: modelling-energy-systems
   version: 0.1.0
   path: .
-  sha256: 13abf19c2399bc01bc7b00c2aa785c28f8479e10bdc41c28159c9284648fbe9c
+  sha256: b3d1a4edc2f5f634047eefa26872647ce80616322afac79b0637b89227210821
   editable: true
 - kind: conda
   name: mpg123

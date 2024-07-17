@@ -1,9 +1,10 @@
-import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
-sns.set_context("talk")
 
-# from curlyBrace import curlyBrace
+SAVETO_KWARGS = dict(
+    dpi=300,
+    bbox_inches="tight",
+    pad_inches=0.5,
+)
 
 
 def plot_function(x, f, axis=None, **plot_specs):
@@ -13,13 +14,15 @@ def plot_function(x, f, axis=None, **plot_specs):
     line = axis.plot(x, f(x), **plot_specs)
     return line[0]
 
+
 def plot_x_range(x_min, x_max, axis=None, **plot_specs):
     if axis is None:
         axis = plt.gca()
 
     lower_x_range = axis.axvline(x_min, **plot_specs)
     upper_x_range = axis.axvline(x_max, **plot_specs)
-    return lower_x_range , upper_x_range
+    return lower_x_range, upper_x_range
+
 
 def plot_y_range(y_min, y_max, axis=None, **plot_specs):
     if axis is None:
@@ -27,7 +30,8 @@ def plot_y_range(y_min, y_max, axis=None, **plot_specs):
 
     lower_y_range = axis.axhline(y_min, **plot_specs)
     upper_y_range = axis.axhline(y_max, **plot_specs)
-    return lower_y_range , upper_y_range
+    return lower_y_range, upper_y_range
+
 
 def find_intersection(line1, line2):
     """
@@ -45,11 +49,11 @@ def find_intersection(line1, line2):
     m2, c2 = line2
 
     # Check if line1 has infinite slope
-    if m1 == float('inf'):
+    if m1 == float("inf"):
         x = c1
         y = m2 * x + c2
     # Check if line2 has infinite slope
-    elif m2 == float('inf'):
+    elif m2 == float("inf"):
         x = c2
         y = m1 * x + c1
     else:
@@ -61,7 +65,10 @@ def find_intersection(line1, line2):
 
     return x, y
 
-def draw_line_segment(point1, point2, axis=None, color='grey', line_weight=5, dot_size=10, **line_specs):
+
+def draw_line_segment(
+    point1, point2, axis=None, color="grey", line_weight=5, dot_size=10, **line_specs
+):
     if axis is None:
         axis = plt.gca()
 
@@ -70,21 +77,34 @@ def draw_line_segment(point1, point2, axis=None, color='grey', line_weight=5, do
 
     axis.plot([x1, x2], [y1, y2], color=color, linewidth=line_weight, **line_specs)
 
-    axis.plot(x1, y1, 'o', color=color, markersize=dot_size)
-    axis.plot(x2, y2, 'o', color=color, markersize=dot_size)
+    axis.plot(x1, y1, "o", color=color, markersize=dot_size)
+    axis.plot(x2, y2, "o", color=color, markersize=dot_size)
 
-def repeat_line(x, f, obj_val, ax, num_copies, offset_distance, arrow_length=100,  labels=True, **kwargs):
+
+def repeat_line(
+    x,
+    f,
+    obj_val,
+    ax,
+    num_copies,
+    offset_distance,
+    arrow_length=100,
+    labels=True,
+    **kwargs
+):
     """
     Plot parallel lines to a given function at constant offsets in both directions on a specified axis.
 
     """
 
-    annotation_fontstyle = {'family': 'serif',
-            'color':  'black',
-            'weight': 'normal',
-            'size': 14,
-            'ha': 'center', 'va': 'center'
-            }
+    annotation_fontstyle = {
+        "family": "serif",
+        "color": "black",
+        "weight": "normal",
+        "size": 14,
+        "ha": "center",
+        "va": "center",
+    }
 
     # Calculate the slope of the original line
     x_mid = (x[0] + x[-1]) / 2
@@ -93,21 +113,36 @@ def repeat_line(x, f, obj_val, ax, num_copies, offset_distance, arrow_length=100
     # Plot the original line
     ax.plot(x, f(x), **kwargs)
     if labels:
-        ax.text(1.1*x[-1], f(x[-1]), '$J = $'+ str(int(obj_val(x[-1],f(x[-1])))), fontdict=annotation_fontstyle)
+        ax.text(
+            1.1 * x[-1],
+            f(x[-1]),
+            "$J = $" + str(int(obj_val(x[-1], f(x[-1])))),
+            fontdict=annotation_fontstyle,
+        )
 
     # Plot parallel lines on the positive side
     for i in range(1, num_copies + 1):
         offset = i * offset_distance
         ax.plot(x, f(x) + offset, **kwargs)
         if i == 1 and labels:
-            ax.text(1.1*x[-1], f(x[-1])+offset, '$J = $'+ str(int(obj_val(x[-1],f(x[-1])+offset))), fontdict=annotation_fontstyle)
+            ax.text(
+                1.1 * x[-1],
+                f(x[-1]) + offset,
+                "$J = $" + str(int(obj_val(x[-1], f(x[-1]) + offset))),
+                fontdict=annotation_fontstyle,
+            )
 
     # Plot parallel lines on the negative side
     for i in range(1, num_copies + 1):
         offset = i * offset_distance
         ax.plot(x, f(x) - offset, **kwargs)
         if i == 1 and labels:
-            ax.text(1.1*x[-1], f(x[-1])-offset, '$J = $'+ str(int(obj_val(x[-1],f(x[-1])-offset))), fontdict=annotation_fontstyle)
+            ax.text(
+                1.1 * x[-1],
+                f(x[-1]) - offset,
+                "$J = $" + str(int(obj_val(x[-1], f(x[-1]) - offset))),
+                fontdict=annotation_fontstyle,
+            )
 
     # Calculate perpendicular slopes
     perpendicular_slope = -1 / slope
@@ -118,41 +153,40 @@ def repeat_line(x, f, obj_val, ax, num_copies, offset_distance, arrow_length=100
     x1_text = x_mid
     y1_text = f(x_mid) + offset
 
-    x2_text , y2_text = find_intersection((slope, f(0) - offset), (perpendicular_slope,f(x_mid)+offset-perpendicular_slope*x_mid))
+    x2_text, y2_text = find_intersection(
+        (slope, f(0) - offset),
+        (perpendicular_slope, f(x_mid) + offset - perpendicular_slope * x_mid),
+    )
     x2 = x2_text - arrow_length / 2
     y2 = f(x2_text) - offset - perpendicular_slope * arrow_length / 2
 
     # Draw arrows
-    ax.annotate('', xy=(x1, y1), xytext=(x1_text, y1_text),
-                arrowprops=dict(facecolor='black', linewidth=0.5, headwidth=10, headlength=10, mutation_scale=10, shrink=0.1))
+    ax.annotate(
+        "",
+        xy=(x1, y1),
+        xytext=(x1_text, y1_text),
+        arrowprops=dict(
+            facecolor="black",
+            linewidth=0.5,
+            headwidth=10,
+            headlength=10,
+            mutation_scale=10,
+            shrink=0.1,
+        ),
+    )
 
-    ax.annotate('', xy=(x2, y2), xytext=(x2_text, y2_text),
-                arrowprops=dict(facecolor='black', linewidth=0.5, headwidth=10, headlength=10, mutation_scale=10, shrink=0.1))
+    ax.annotate(
+        "",
+        xy=(x2, y2),
+        xytext=(x2_text, y2_text),
+        arrowprops=dict(
+            facecolor="black",
+            linewidth=0.5,
+            headwidth=10,
+            headlength=10,
+            mutation_scale=10,
+            shrink=0.1,
+        ),
+    )
 
     return (x1, y1), (x2, y2)
-
-
-def fig_lp_decisionspace():
-    MIN_COORD = 0
-    MAX_COORD = 500
-
-    fig, ax = plt.subplots(figsize=(8, 8))
-
-    ax.set_xlim(MIN_COORD, MAX_COORD)
-    ax.set_ylim(MIN_COORD, MAX_COORD)
-    ax.set_xlabel('$\\mathbf{P_1}$: Power from coal power plant [MW]')
-    ax.set_ylabel('$\\mathbf{P_2}$: Power from gas power plant [MW]')
-    ax.grid(True)
-
-    x = np.linspace(MIN_COORD, MAX_COORD, 100)
-    plt.fill_between(x, MIN_COORD*np.ones_like(x), MAX_COORD*np.ones_like(x), color='gray', alpha=0.5)
-    plt.text((MAX_COORD-MIN_COORD)/2, (MAX_COORD-MIN_COORD)/2, 'Decision Space', ha='center', va='center')
-    return fig
-
-
-def build_figures():
-    fig = fig_lp_decisionspace()
-    plt.savefig(
-        "images-built/lp-decisionspace.jpg",
-        dpi=300, bbox_inches='tight', pad_inches=0.5
-    )

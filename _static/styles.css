@@ -11,6 +11,20 @@ button.btn.navbar-btn.search-button-field.search-button__button:hover {
     border-radius: 50%;
 }
 
+.toc-entry .circ {
+    width: 15px;
+    height: 15px;
+    font-size: 75%
+}
+
+/* .circ-text {
+    font-weight: bold;
+} */
+
+.toc-entry .circ-text {
+    font-weight: normal;
+}
+
 .circ-params {
     color: #ffffff;
     background-color: #5e5e5e;
@@ -18,7 +32,6 @@ button.btn.navbar-btn.search-button-field.search-button__button:hover {
 
 .params {
     color: #5e5e5e;
-    font-weight: bold;
 }
 
 .circ-variables {
@@ -28,7 +41,6 @@ button.btn.navbar-btn.search-button-field.search-button__button:hover {
 
 .variables {
     color: #0076ba;
-    font-weight: bold;
 }
 
 .circ-objective {
@@ -38,7 +50,6 @@ button.btn.navbar-btn.search-button-field.search-button__button:hover {
 
 .objective {
     color: #f09937;
-    font-weight: bold;
 }
 
 .circ-constraints {
@@ -48,5 +59,4 @@ button.btn.navbar-btn.search-button-field.search-button__button:hover {
 
 .constraints {
     color: #d41876;
-    font-weight: bold;
 }

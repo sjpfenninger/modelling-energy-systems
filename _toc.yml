@@ -5,10 +5,12 @@ format: jb-book
 root: index.md
 parts:
 - caption: Basics
+  numbered: true
   chapters:
     - file: basics/introduction.md
     - file: basics/lp.md
 - caption: Advanced topics
+  numbered: true
   chapters:
     - file: advanced/uncertainty.md
 - caption: Reference
