@@ -22,8 +22,8 @@ Modelling energy systems
 
 ::::
 
-```{note}
-This is draft content under development!
+```{warning}
+*Modelling energy systems* is under development and will see iterative additions and improvements through time. See the [changelog](changelog.md) for an overview of recent additions.
 ```
 
 # Modelling energy systems

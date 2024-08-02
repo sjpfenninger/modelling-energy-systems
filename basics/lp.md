@@ -46,7 +46,7 @@ Now that we've introduced economic dispatch ({numref}`content:lp:economic-dispat
 
 We assume that we're looking at a one-hour time frame and ignore everything that happens before and after that hour.
 
-```{admonition} "Programming"
+```{admonition} "Programming" in the context of optimisation
 :class: tip
 Linear optimisation is often called "linear programming" and abbreviated to LP. "Programming" in this context does not mean "computer programming" in the modern sense but comes from the history of how these methods were developed in the United States during World War II, where "programming" referred to logistics scheduling in the military. We will use "programming" and "optimisation" interchangeably.
 ```
@@ -116,6 +116,8 @@ In our example, with two power plants, we end up with the following linear optim
 
 Since this is a two-dimensional problem, with our two decision variables $P_1$ and $P_2$, we can visualise the solution graphically. In principle, we are looking for a value for $P_1$ and $P_2$, so a point in the two-dimensional decision space seen in {numref}`fig-dispatchlp-decisionspace`.
 
+To find the best solution, we first need to identify the **feasible region**. This region includes all feasible points, that is, points that meet the constraints of the problem.
+
 ```{figure} ../images-built/fig_dispatchlp_decisionspace.jpg
 :name: fig-dispatchlp-decisionspace
 :figwidth: 500px
@@ -123,7 +125,7 @@ Since this is a two-dimensional problem, with our two decision variables $P_1$ a
 The two-dimensional decision space.
 ```
 
-First, we can draw in the operational constraints for both units. These constraints are **inequality constraints**: they state that a variable must be lesser or equal to, greater than or equal to, a specific value. This turns the decision space into a well-constrained area, as seen in {numref}`fig-dispatchlp-decisionspace-operationalconstraints`.
+First, we can draw in the operational constraints for both units. These constraints are **inequality constraints**: they state that a variable must be lesser or equal to, greater than or equal to, a specific value. This gives us a feasible region bounded on all sides, as seen in {numref}`fig-dispatchlp-decisionspace-operationalconstraints`.
 
 ```{figure} ../images-built/fig_dispatchlp_decisionspace_operationalconstraints.jpg
 :name: fig-dispatchlp-decisionspace-operationalconstraints
@@ -131,8 +133,7 @@ First, we can draw in the operational constraints for both units. These constrai
 
 The two-dimensional decision space with the operational constraints for both units shown in red ($P_1$) and green ($P_2$).
 ```
-
-Next, we need to consider the demand constraint. The demand constraint is an **equality constraint**. We want a linear combination of the supply variables to add up to exactly the known power demand for the hour, 500 MW. In combining the operational constraints from above with the demand constraint, we end up with the **feasible region** which in this case is just a line segment ({numref}`fig-dispatchlp-decisionspace-allconstraints`).
+Next, we need to consider the demand constraint. The demand constraint is an **equality constraint**. We want a linear combination of the supply variables to add up to exactly the known power demand for the hour, 500 MW. In combining the operational constraints from above with the demand constraint, we end up with a feasible region which in this case is just a line segment ({numref}`fig-dispatchlp-decisionspace-allconstraints`).
 
 ```{figure} ../images-built/fig_dispatchlp_decisionspace_allconstraints.jpg
 :name: fig-dispatchlp-decisionspace-allconstraints
@@ -141,10 +142,191 @@ Next, we need to consider the demand constraint. The demand constraint is an **e
 The two-dimensional decision space after the addition of the demand constraint. The feasible region is now a line segment (grey).
 ```
 
-There are still an infinite number of feasible solutions to this problem ({numref}`fig-dispatchlp-decisionspace-allconstraints` highlights one possible feasible solution). Which solution is the optimal one?
+The best solution, or **optimal solution**, is a feasible point that gives the highest or lowest value of the objective function. The corners of the feasible region, where two or more constraints intersect, are the **extreme points**. An optimal solution, if it exists, will be an extreme point. There may be more than one optimal solution (we will look at such a case below).
+
+If it is impossible to meet all constraints (the problem is infeasible) or the constraints don't form a closed area (the problem is unbounded), then there is no solution at all.
+
+To find the optimal solution, we can calculate the objective function's value at each extreme point ({numref}`fig-dispatchlp-optimalsolution`). The point that gives the best value is the optimal solution. This method is impractical for problems with many variables and constraints but works for problems with just two decision variables.
+
+```{figure} ../images-built/fig_dispatchlp_optimalsolution.jpg
+:name: fig-dispatchlp-optimalsolution
+:figwidth: 500px
+
+Iteratively looking for the optimal solution by evaluating the objective function value at all of the corners of the feasible space (in this case, there are two "corners" since the feasible space is a line segment).
+```
+
+Why is an optimal solution, if it exists, going to be at one of the extreme points? To understand this, we can use contour lines (also called *isolines*).
 
 ## Contour lines
 
+A contour line is "a curve along which the function has a constant value, so that the curve joins points of equal value" ([see Wikipedia](https://en.wikipedia.org/wiki/Contour_line), and {numref}`fig-contourlines` below). Topographic maps use contour lines to show the shape of the three-dimensional landscape on a two-dimensional paper or screen.
+
+```{figure} ../images/Courbe_niveau.svg
+:name: fig-contourlines
+:figwidth: 400px
+
+Illustration of contour lines. From [Wikipedia (CC-BY 2.5)](https://en.wikipedia.org/wiki/Contour_line#/media/File:Courbe_niveau.svg).
+```
+
+Similarly, we can use contour lines to visualise the "third dimension" representing the value of the objective function in our two-dimensional variable space. Because our objective function is linear, the contour lines are straight lines. They represent the projection of the three-dimensional "objective function plane" into the two-dimensional variable space.
+
+To draw contour lines, we set the objective function to a given value (since we already know that 1700 is the optimum, let's start with that). We can transform the objective function equation into a two-dimensional function. Thus,
+
+\begin{equation}
+C = 1700 = 3 P_1 + 4 P_2
+\end{equation}
+
+becomes
+
+\begin{equation}
+P_2 = 425 - 0.75 P_1
+\end{equation}
+
+To draw further lines we increase and decrease the value by a constant value and repeat the process. In {numref}`fig-dispatchlp-contourlines` we can see what this looks like. In the direction towards the upper right of the plot, the objective function value decreases, in the direction of the lower left of the plot, it decreases. Looking at teh contour lines, we can imagine that we are walking "downhill" in a direction perpendicular to the parallel contour lines (since we are minimising) inside the feasible space, until we hit the edge of the feasible space and cannot go downhill any further - this is the optimum.
+
+```{figure} ../images-built/fig_dispatchlp_contourlines.jpg
+:name: fig-dispatchlp-contourlines
+:figwidth: 500px
+
+Contour lines of the economic dispatch problem.
+```
+
+What if we change our objective function slightly so that both coefficients are $4$? The objective function becomes:
+
+\begin{equation}
+C = 4 P_1 + 4 P_2
+\end{equation}
+
+Drawing the contour lines of this revised objective function, we can see that they are parallel to the feasible space ({numref}`fig-dispatchlp-contourlines-parallel`). If we go "downhill" along these lines, we cannot end up in a single point - any point along the contour line overlapping with the feasible space is an equally good solution. This illustrates that depending on how the constraints and objective function are set up, a problem may have not just one but an infinite number of optimal solutions.
+
+```{figure} ../images-built/fig_dispatchlp_contourlines_parallel.jpg
+:name: fig-dispatchlp-contourlines-parallel
+:figwidth: 500px
+
+Contour lines of the economic dispatch problem with revised objective function.
+```
+
 ## Active constraints
 
-## More reading
+Finally, let's look at the **active constraints**. These are the constraints that "force" the objective function to the value it takes in the optimum. In other words, they are the binding constraints. In our example, two constraints are active / binding (see {numref}`fig-dispatchlp-activeconstraints`):
+
+* the maximum output constraint for $P_1$: $P_1 <= 300$
+* the demand constraint (note that by definition, equality constraints are *always* active)
+
+```{figure} ../images-built/fig_dispatchlp_activeconstraints.jpg
+:name: fig-dispatchlp-activeconstraints
+:figwidth: 500px
+
+Active constraints (highlighted red) in the economic dispatch problem.
+```
+
+More formally, if we have a constraint $g(x) \leq 0$ then this constraint is active (binding) at $x$ if $g(x) = 0$ and inactive (non-binding) if $g(x) \lt 0$. The **active set** is the set of constraints that are active at the current point.
+
+## Solving LP problems algorithmically
+
+So far we looked at a simple case with only two dimensions, which allows us to represent the problem graphically. In addition, our feasible region is so simple that we had only two extreme points to examine for the optimal objective function value. Let's modify the demand constraint from an equality to an inequality constraint:
+
+\begin{equation}
+\label{eq:ed_balance_modified}
+P_1 + P_2 \leq 500
+\end{equation}
+
+This does not necessarily make a lot of real-world sense - in our problem formulation we are minimising cost and so we would expect that electricity generation is as small as possible if there is no equality constraint that forces the model to deliver a certain demand. And indeed the new optimum is $J = 500$ ({numref}`fig-dispatchlp-modifieddemand`).
+
+```{figure} ../images-built/fig_dispatchlp_modifieddemand.jpg
+:name: fig-dispatchlp-modifieddemand
+:figwidth: 500px
+
+Optimal solution with demand constraint changed from an equality to an inequality constraint.
+```
+
+Again, for this two-dimensional problem, the contour lines can help to give an intuition about why this is the optimal solution: we go downhill along the contour lines within the feasible region until we are stuck in the "lowest" corner and cannot go any further ({numref}`fig-dispatchlp-modifieddemand-contourlines`).
+
+```{figure} ../images-built/fig_dispatchlp_modifieddemand_contourlines.jpg
+:name: fig-dispatchlp-modifieddemand-contourlines
+:figwidth: 500px
+
+Contour lines in the modified problem.
+```
+
+But what about problems with three dimensions or more? For example, if we have four power plants, we have four decision variables, so we have a four-dimensional problem which already is impossible to draw or solve graphically. However, even in $n$ dimensions, the optimal solution would still be at an $n$-dimensional extreme point. And moving within the feasible space in the direction of increasing or decreasing objective function value would lead to that optimal solution.
+
+In principle, even for very large problems, we could calculate the objective function value at all extreme points. But that might take a very long time. Luckily, very powerful algorithms exist that can solve even very large problems. The **simplex method** is one such algorithm. It was developed by George Dantzig in the 1940s and today is still the most popular algorithm used to solve linear optimisation problems. It begins by identifying an initial extreme point and then examines neighbouring extreme points. The algorithm calculates the objective function's value for each neighbouring point and moves to the one with the best value. The process continues until no better value is found, at which point the algorithm stops: the current extreme point is the optimal solution. This method skips many points, checking only those that are likely to improve the result. Therefore it is computationally feasible even for large problems.
+
+{numref}`fig-simplex-moore` illustrates this for a three-dimensional problem (with three decision variables), where we can still illustrate the process graphically. We will not look at the specifics of the simplex algorithm, but the intuitive understanding we gained above by using contour lines in two-dimensional problems gives us a sense of what the simplex algorithm does.
+
+```{figure} ../images/simplex-moore.png
+:name: fig-simplex-moore
+:figwidth: 350px
+
+A three-dimensional linear optimisation problem and the Simplex algorithm's path towards its optimal solution. The objective is to maximise the value of the objective function *c*. Adapted from Figure 9.16 in {cite:t}`moore.mertens_nature_2011`.
+```
+
+```{admonition} Convex optimisation
+:class: tip
+Linear optimisation problems are a subset of the general class of ["convex optimisation" problems](https://en.wikipedia.org/wiki/Convex_optimization). Convex optimisation means that we are dealing with convex functions over convex regions and makes the above approaches to finding a solution possible.
+```
+
+(content:lp:general-formulation)=
+## General formulation of an LP problem
+
+So far, we have discussed a specific example - a simple economic dispatch problem of two power plants. In this simple case, we have two variables, so it is a two-dimensional problem that we can plot in two-dimensional space and thus solve graphically. More generally, an optimisation problem can be arbitrarily large and have many dozens, thousands, or even millions of variables. A more general formulation of an LP problem follows with $n$ variables is as follows.
+
+Our {{ circle_1 }} parameters are $(a_{11}, a_{12}, \ldots, a_{ij})$ and the {{ circle_2 }} variables are $(x_1, x_2, x_3, \ldots, x_n)$.
+
+The {{ circle_3 }} objective function is:
+
+\begin{equation}
+f(x) = c_1x_1 + c_2x_2 + c_3x_3 + \ldots + c_nx_n
+\end{equation}
+
+$c_1 \ldots c_n$ are the objective function coefficients.
+
+We optimise (maximise or minimise) the objective function subject to a number of {{ circle_4 }} linear inequality constraints of the form:
+
+$$a_{11}x_1 + a_{12}x_2 + a_{13}x_3 + \ldots + a_{1n}x_n \leq b_1$$
+$$a_{21}x_1 + a_{22}x_2 + a_{23}x_3 + \ldots + a_{2n}x_n \leq b_2$$
+$$\ldots$$
+$$a_{m1}x_1 + a_{m2}x_2 + a_{m3}x_3 + \ldots + a_{mn}x_n \leq b_m$$
+
+The largest or smallest value of the objective function is called the **optimal value**, and a collection of values $(x_1^*, x_2^*, x_3^*, \ldots, x_n^*)$ that gives the optimal value is called an **optimal solution**.
+
+### Standard form
+
+When formulating or dealing with problems that are small enough to write down, it is often easier to first transform them into a **standard form**. We can write a standard form problem as an objective function $f$ together with inequality constraint functions $g$ and equality constraint functions $h$:
+
+\begin{align}
+\text{Min.} \; & f(x) \\
+\text{s.t.} \; & g_i(x) \leq 0, \quad i = 1, \ldots, n \\
+& h_j(x) = 0, \quad j = 1, \ldots, n
+\end{align}
+
+There is no universally agreed upon standard form. You will see slightly different formulations described as standard form elsewhere, for example a maximisation rather than a minimisation or different constraint notations.
+
+To convert a problem into our chosen standard form, we can turn $\geq$ inequality constraints into the form of $\leq$ constraints through multiplying by $-1$. Similarly, multiplying the objective function by $-1$ changes a minimisation into a maximisation problem. So minimising $f(x)$ is equivalent to maximising $-f(x)$.
+
+To convert a problem like the one in {numref}`content:lp:general-formulation` into standard form we also move any constant coefficients onto the left-hand side of the constraints. Putting all of this together, we might turn a constraint like:
+
+\begin{equation}
+2x_1 + 4x_2 \geq 10
+\end{equation}
+
+Into the equivalent:
+
+\begin{equation}
+-2x_1 - 4x_2 + 10 \leq 0
+\end{equation}
+
+## Further reading
+
+The following chapters in {cite:t}`hillier_introduction_2021` are particularly relevant:
+
+* "Introduction to Linear Programming" for more mathematical background and additional examples
+* If you want to understand how the simplex algorithm works, "Solving Linear Programming
+Problems: The Simplex Method" and "The Theory of the Simplex Method"
+
+## References
+
+```{bibliography}
+:filter: docname in docnames
+```

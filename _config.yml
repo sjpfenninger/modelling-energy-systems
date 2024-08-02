@@ -1,7 +1,7 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: Modelling energy systems
-author: Stefan Pfenninger
+author: ""
 # logo: images/logo-text.png
 
 # Force re-execution of notebooks on each build.
@@ -60,4 +60,4 @@ html:
   # use_repository_button: true
   # favicon: images/favicon.ico
   extra_footer: |
-    <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a></p>
+    <p><a href="reference/about.html">Authors</a> | License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> (please link to the <a href="https://www.modelling-energy-systems.org/">main page</a> for attribution)</p>
