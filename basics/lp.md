@@ -27,18 +27,18 @@ In the context of "economic dispatch", you will frequently hear these terms:
 
 To formulate a mathematical optimisation problem, we will generally need four components.
 
-First, we have some {{ circle_1 }} **parameters**, known quantities that remain fixed. Second, we have the {{ circle_2 }} **decision variables**, the quantities we do not know and would like to find optimal values for.
+First, we have some {{ circle_params }} **parameters**, known quantities that remain fixed. Second, we have the {{ circle_vars }} **decision variables**, the quantities we do not know and would like to find optimal values for.
 
-In order to find optimal values for the variables, we need to know what we are looking for. That is where the {{ circle_3 }} **objective function** comes in: this is a function made up of our variables that we seek to either minimise or maximise. For example, if we want to minimise cost across all our power plants, our objective function would represent that cost by summing up each individual plant's cost.
+In order to find optimal values for the variables, we need to know what we are looking for. That is where the {{ circle_obj }} **objective function** comes in: this is a function made up of our variables that we seek to either minimise or maximise. For example, if we want to minimise cost across all our power plants, our objective function would represent that cost by summing up each individual plant's cost.
 
-Finally, we likely have some {{ circle_4 }} **constraints**. These are expressions that limit the values that our variables can take. For example, if we have a variable describing the power generation of a power plant, we would want to **constrain** that variable so that its maximum value is the rated power output of the power plant.
+Finally, we likely have some {{ circle_constr }} **constraints**. These are expressions that limit the values that our variables can take. For example, if we have a variable describing the power generation of a power plant, we would want to **constrain** that variable so that its maximum value is the rated power output of the power plant.
 
 In summary, these are the four components of an optimisation problem - we will use this structure whenever we think through a problem formulation:
 
-* {{ circle_1_params }}
-* {{ circle_2_variables }}
-* {{ circle_3_objective }}
-* {{ circle_4_constraints }}
+* {{ labeled_circle_params }}
+* {{ labeled_circle_vars }}
+* {{ labeled_circle_obj }}
+* {{ labeled_circle_constr }}
 
 ## Economic dispatch as an optimisation problem
 
@@ -51,7 +51,7 @@ We assume that we're looking at a one-hour time frame and ignore everything that
 Linear optimisation is often called "linear programming" and abbreviated to LP. "Programming" in this context does not mean "computer programming" in the modern sense but comes from the history of how these methods were developed in the United States during World War II, where "programming" referred to logistics scheduling in the military. We will use "programming" and "optimisation" interchangeably.
 ```
 
-### {{ circle_1_params }}
+### {{ labeled_circle_params }}
 
 We know the demand for the hour we are looking at, $P_{demand}$ = 500 MW.
 
@@ -64,13 +64,13 @@ The specifics of our two units are:
 * Unit 1 is a coal-fired power plant: Cost is 3 EUR/MW, minimum output is 50 MW, maximum output 300 MW
 * Unit 2 is a gas-fired power plant: Cost is 4 EUR/MW, minimum output 100 MW, and maximum output 400 MW
 
-### {{ circle_2_variables }}
+### {{ labeled_circle_vars }}
 
 We want to decide how to operate our units, so our variables - the unknown quantities that we want to optimise - are the power generated in each unit $i$:
 
 $P_i$
 
-### {{ circle_3_objective }}
+### {{ labeled_circle_obj }}
 
 Our objective is to minimise our cost of generating power. Given the cost per unit, $C_i$, and the power generated in each unit, $P_i$, we can formulate the total cost as follows:
 
@@ -79,7 +79,7 @@ Our objective is to minimise our cost of generating power. Given the cost per un
 C = \sum_{i=1}^{n} C_i * P_{i}
 \end{equation}
 
-### {{ circle_4_constraints }}
+### {{ labeled_circle_constr }}
 
 We have two practical constraints to consider.
 
@@ -272,9 +272,9 @@ Linear optimisation problems are a subset of the general class of ["convex optim
 
 So far, we have discussed a specific example - a simple economic dispatch problem of two power plants. In this simple case, we have two variables, so it is a two-dimensional problem that we can plot in two-dimensional space and thus solve graphically. More generally, an optimisation problem can be arbitrarily large and have many dozens, thousands, or even millions of variables. A more general formulation of an LP problem follows with $n$ variables is as follows.
 
-Our {{ circle_1 }} parameters are $(a_{11}, a_{12}, \ldots, a_{ij})$ and the {{ circle_2 }} variables are $(x_1, x_2, x_3, \ldots, x_n)$.
+Our {{ circle_params }} parameters are $(a_{11}, a_{12}, \ldots, a_{ij})$ and the {{ circle_vars }} variables are $(x_1, x_2, x_3, \ldots, x_n)$.
 
-The {{ circle_3 }} objective function is:
+The {{ circle_obj }} objective function is:
 
 \begin{equation}
 f(x) = c_1x_1 + c_2x_2 + c_3x_3 + \ldots + c_nx_n
@@ -282,7 +282,7 @@ f(x) = c_1x_1 + c_2x_2 + c_3x_3 + \ldots + c_nx_n
 
 $c_1 \ldots c_n$ are the objective function coefficients.
 
-We optimise (maximise or minimise) the objective function subject to a number of {{ circle_4 }} linear inequality constraints of the form:
+We optimise (maximise or minimise) the objective function subject to a number of {{ circle_constr }} linear inequality constraints of the form:
 
 $$a_{11}x_1 + a_{12}x_2 + a_{13}x_3 + \ldots + a_{1n}x_n \leq b_1$$
 $$a_{21}x_1 + a_{22}x_2 + a_{23}x_3 + \ldots + a_{2n}x_n \leq b_2$$
