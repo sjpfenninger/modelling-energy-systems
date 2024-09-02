@@ -277,4 +277,10 @@ In practice, we do not start from the general expression in Equation {eq}`eqn:du
 
 ## Further reading
 
-For more background on duality and to dive deeper into the mathematics, we suggest reading Chapter 5 of S. Boyd and L. Vandenberghe's _Convex optimization_ which is [freely available online](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf).
+For more background on duality and to dive deeper into the mathematics, we suggest reading Chapter 5 of {cite:t}`boyd.vandenberghe_convex_2004` which is [freely available online](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf).
+
+## References
+
+```{bibliography}
+:filter: docname in docnames
+```
