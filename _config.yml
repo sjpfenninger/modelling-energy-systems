@@ -59,4 +59,4 @@ html:
   # use_repository_button: true
   # favicon: images/favicon.ico
   extra_footer: |
-    <p><a href="reference/about.html">Authors</a> | License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> (please link to the <a href="https://www.modelling-energy-systems.org/">main page</a> for attribution)</p>
+    <p><a href="reference/about">Authors</a> | License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> (please link to the <a href="https://www.modelling-energy-systems.org/">main page</a> for attribution)</p>
