@@ -1,6 +1,7 @@
-# One-pager summary: KKT conditions
+# KKT conditions: summary
 
 ## Unconstrained optimisation
+
 Let's go back to basic optimisation (high school mathematics). Whenever you had to optimise (minimise or maximise) a function, you were doing unconstrained optimisation. To determine the optimum of a certain function, we should take the derivative of that function w.r.t. the decision variable $x$ and equate it to zero. Then we take the second order derivative to see if it is a minimum or maximum.
 
 \begin{align}
@@ -11,6 +12,7 @@ Let's go back to basic optimisation (high school mathematics). Whenever you had 
 \end{align}
 
 ## Equality constrained optimisation
+
 Now consider an optimisation problem with an equality constraint, such as the demand constraint in an economic dispatch problem. To deal with the constraint, we introduce the Lagrangian. The Lagrangian elevates the constraint to the objective function.
 
 Consider the following minimisation problem with equality constraints $h_i(x)$ written in standard form:
@@ -62,6 +64,7 @@ The Lagrangian is:
 The Lagrangian has three components: the original objective function, the equality constraints multiplied by their Lagrange multipliers, and the inequality constraints multiplied by their Lagrange multipliers.
 
 ### KKT Conditions
+
 Then we derive the following set of equations that characterises the optimal solution. These are the KKT conditions.
 
 \begin{align}

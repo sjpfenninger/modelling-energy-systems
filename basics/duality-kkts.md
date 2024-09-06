@@ -1,18 +1,180 @@
-# Duality and KKTs
+# Duality and KKT conditions
+
+In this chapter we take a few steps back to consider some of the mathematical properties of the types of problems we are looking at. Understanding these is not strictly necessary - you could just use a modelling language ({numref}`content:modelling-languages`) to formulate and let the computer solve your problem while ignoring everything in this chapter.
+
+However, understanding duality and KKT conditions will be useful in various ways. Duality can be exploited to perform sensitivity analyses and is important when using optimisation methods to solve market problems ({numref}`content:milp`). An understanding of KKT conditions will become relevant particularly when we look at mixed complementarity ({numref}`content:mixed-complementarity`) and non-linear programming ({numref}`content:nonlinear`) problems. As you will see below, duality and KKT conditions are also related. Understanding one can help you understand the other, and vice versa.
 
 ## Duality
 
-... more to be added ...
+### Introduction to duality
+
+In linear programming, for every problem, which we shall call the **primal problem**, there exists a "mirrored" problem that we call the **dual problem**. What's important is that we (or a computer) can follow a set number of rules to transform the primal problem into the dual problem, and having the dual problem available opens up some interesting possibilities. We will get into these rules and the possibilities further below.
+
+What a dual problem is, is best illustrated with an example. Consider this LP problem (from Table 6.1 in {cite:p}`hillier_introduction_2021`):
+
+\begin{align}
+    \max &~ Z = 3x_1 + 5x_2 \\
+    \text{s.t.}&~ x_1 \leq 4 \\
+    &~ 2x_2 \leq 12 \\
+    &~ 3x_1 + 2x_2 \leq 18 \\
+    &~ x_1 \geq 0 \\
+    &~ x_2 \geq 0
+\end{align}
+
+The corresponding dual problem is:
+
+\begin{align}
+    \min &~ W = 4y_1 + 12y_2 + 18y_3 \\
+    \text{s.t.}&~ y_1 + 3y_3 \geq 3 \\
+    &~ 2y_2 + 2y_3 \geq 5 \\
+    &~ y_1 \geq 0 \\
+    &~ y_2 \geq 0 \\
+    &~ y_3 \geq 0
+\end{align}
+
+The color coding in {numref}`fig:duality_ex1` illustrates some important points:
+
+* Green: The dual problem of a maximisation primal problem is a minimisation problem (and vice versa).
+* Yellow: Two primal variables lead to two dual constraints. The primal objective function coefficients (3 and 5) are the dual constraint parameters.
+* Purple: The "$\geq 0$" bounds on the primal variables lead to "$\geq$" in the dual constraints.
+* Blue: Three primal constraints lead to three dual variables. The primal constraint parameters (4, 12, and 18) are the dual objective function coefficients.
+* Cyan: The "$\leq$" in the primal constraints leads to "$\geq 0$" bounds on the dual variables.
+* Red: The coefficients of the dual constraints are a "rotation" of the primal constraint coefficients.
+
+```{figure} ../images/duality_introduction.jpg
+:name: fig:duality_ex1
+
+Relationship between primal and dual problem. Adapted from Table 6.1 in {cite:p}`hillier_introduction_2021`.
+```
+
+If we look at the solutions to the primal and dual problems, we see another important property of duality in linear problems: the optimal solution to the primal problem is the same value as the optimal solution to the dual problem. Furthermore, the shadow prices of the primal problem are the optimal variable values of the dual problem, and vice versa. The shadow prices of the primal problem in {numref}`fig:duality_ex1` are $(0, 1.5, 1)$. The value of the variables in the optimal solution to the dual problem are also $(0, 1.5, 1)$.
 
 :::{admonition} Strong and weak duality
 :class: note
 
-Weak duality means that the solution to any primal minimisation problem is always greater than or equal to the solution of the corresponding dual (maximisation) problem. Under certain conditions - and this includes the condition that we are dealing with linear optimisation - we also see strong duality, which means that the solution of the primal problem is **equal to** the solution of the dual problem. We only deal with the linear case here, where strong duality always applies, so we do not consider this distinction further.
+Weak duality means that the solution to any primal minimisation problem is always greater than or equal to the solution of the corresponding dual (maximisation) problem. Under certain conditions - and this includes the condition that we are dealing with linear optimisation - we also see strong duality, which means that the solution of the primal problem is **equal to** the solution of the dual problem. We only deal with the linear case here, where strong duality always applies. Thus we will not consider this distinction further, but it is something you will find discussed in detail elsewhere.
 :::
 
-<!-- We have already discussed duality in linear programming problems. In this course, we focus on convex optimisation problems. Recall that for any primal problem, there exists a corresponding dual problem. For the optimal solution of the problem, the primal objective and dual objective are the same. This is called strong duality. The optimal values of the primal decision variables are the shadow prices, or Lagrange multipliers, of the dual problem, and vice versa. We also learned how to convert a primal problem into a dual problem using tables or by rewriting the primal problem in standard form for which the dual problem is known. -->
+### Economic dispatch example
+
+We will now revisit the economic dispatch problem from {numref}`content:lp:economic-dispatch` and formulate the corresponding dual problem. Recall our economic dispatch problem:
+
+\begin{align}
+    \text{Min.} \; & J = 3P_1 + 4P_2 \\
+    \text{s.t.} \; & 50 \leq P_1 \leq 300 \\
+    & 100 \leq P_2 \leq 400 \\
+    & P_1 + P_2 = 500 \\
+\end{align}
+
+We also have the variable bounds: $P_1 \geq 0$ and $P_2 \geq 0$ (this comes from the physical nature of our system: power plants produce electricity; their power production has to be a positive value).
+
+Now, to make our life easier, we will rewrite this problem into the standard form that we introduced in {numref}`content:lp:standard-form`. We separate out the upper and lower limits on generation which are technically separate constraints, and give all the constraints the same sign.
+
+```{figure} ../images/duality_economic_dispatch_standardform.jpg
+:name: fig:duality_ed_standardform
+
+Modifying our economic dispatch example into a standard form.
+```
+So our problem now looks like this:
+
+\begin{align}
+    \text{Min.} \; & J = 3P_1 + 4P_2 \\
+    \text{s.t.} \; & P_1 \leq 300 \\
+    & P_2 \leq 400 \\
+    & -P_1 \leq -50 \\
+    & -P_2 \leq -100 \\
+    & P_1 + P_2 = 500 \\
+\end{align}
+
+It is up to us to pick the naming for the new variables in the dual problem. Often we write down the variable name we'll use in the dual problem next to the corresponding constraint in the primal problem, which in the above example would look like this:
+
+\begin{align}
+    \text{Min.} \; & J = 3P_1 + 4P_2 \\
+    \text{s.t.} \; & P_1 \leq 300 \quad &(X_1) \\
+    & P_2 \leq 400 \quad &(X_2) \\
+    & -P_1 \leq -50 \quad &(X_3) \\
+    & -P_2 \leq -100 \quad &(X_4) \\
+    & P_1 + P_2 = 500 \quad &(X_5) \\
+\end{align}
+
+Now, we can use the rules in {numref}`table:standard_duality_conversion`:
+
+```{csv-table} Conversion from a standard-form minimisation primal problem to its dual problem.
+:widths: 15, 15
+:width: 50%
+:name: table:standard_duality_conversion
+
+"**Primal**","**Dual**"
+"Minimise","Maximise"
+"**Variables**","**Constraints**"
+"$\geq 0$","$\leq$"
+"**Constraints**","**Variables**"
+"$=$","Unconstrained"
+"$\leq$","$\leq 0$"
+```
+
+The dual problem becomes a maximisation problem. There are two primal variables of the form "$\geq 0$" so there are two dual constraints of the form "$\leq$". The primal constraints of "$\leq$" form become dual variables with bounds "$\leq 0$", while the primal constraint of "$=$" form corresponds to a dual variable that is unconstrained or unbounded. We have five primal constraints, which means there are five dual variables.
+
+This is the resulting conversion:
+
+```{figure} ../images/duality_economic_dispatch_conversion.jpg
+:name: fig:duality_ed_conversion
+
+Converting our standard form economic dispatch example into its dual (maximisation) problem.
+```
+
+We end up with this dual problem:
+
+\begin{align}
+    \text{Max.} \; & Z = 300X_1 + 400X_2 - 50X_3 - 100X_4 + 500X_5 \\
+    \text{s.t.} \; & X_1 - X_3 + X_5 \leq 3 \\
+    & X_2 - X_4 + X_5 \leq 4 \\
+\end{align}
+
+Our new variables are $X_1 \leq 0, X_2 \leq 0, X_3 \leq 0, X_4 \leq 0$, and $X_5$ unconstrained. Notice that the objective function coefficients 3 and 4 are the parameters in the dual constraints. Likewise, the primal constraint parameters 300, 400, -50, -100, and 500 are the coefficients in the dual objective function.
+
+:::{admonition} Elaboration on constraints (red box in {numref}`fig:duality_ed_conversion`)
+:class: tip
+
+The left-hand side of the primal and dual constraints can be understood as a rotation of each other. In the context of the economic dispatch example:
+* $P_1$ in the first primal constraint leads to $X_1$ in the first dual constraint
+* $P_2$ in the second primal constraint leads to $X_2$ in the second dual constraint
+* $-P_1$ in the third primal constraint leads to $-X_3$ in the first dual constraint
+* $-P_2$ in the fourth primal constraint leads to $-X_4$ in the second dual constraint
+* $P_1$ in the fifth primal constraint leads to $X_5$ in the first dual constraint
+* $P_2$ in the fifth primal constraint leads to $X_5$ in the second dual constraint
+
+Notice that when there is a factor of $P_\mathbf{1}$ in a primal constraint, this leads to a term in the **first** dual constraint. When there is a factor of $P_\mathbf{2}$, it leads to a term in the **second** dual constraint. The **first** primal constraint leads to a factor of $X_\mathbf{1}$ in the dual constraint, the **second** primal constraint leads to a factor of $X_\mathbf{2}$ in the dual constraint, the **third** primal constraint leads to a factor of $X_\mathbf{3}$ in the dual constraint, and so on.
+:::
+
+We can solve the dual problem to obtain the optimal solution ($X_1 = 1, X_2 = 0, X_3 = 0, X_4 = 0, X_5 = 4$). Recall that this solution to the dual problem gives the shadow prices of the primal problem. Looking at the shadow prices also reveals something about the primal constraints. When the shadow price is zero, that means the constraint is non-binding. In our example, only the first constraint ($P_1 \leq 300$, capacity limit on unit 1) and last constraint ($P_1 + P_2 = 500$, demand constraint) are active. If the right-hand side of the demand constraint is changed marginally (by one unit) then the optimal value of the objective function will change by $X_5 = 4$. The objective function value is 1700 in both the primal and dual solution. The optimal value of the objective function in the primal problem is always equal to the optimal value of the dual objective function.
+
+### Strategies to convert a primal into its dual problem
+
+The easiest approach to convert a primal problem to its dual problem, and the one we use above, is:
+
+* Rewrite the primal problem to standard form
+* Follow the (standard, always same) steps to convert the standard-form problem to its dual
+
+You do not have to rewrite to standard form first, however. There is a method called "SOB" which gives you a "map" on how to translate a primal problem into the corresponding dual problem, no matter what exact form it is in. In principle this also always works, but it can be a bit trickier to get your head around and it is easier to make mistakes.
+
+The table in {numref}`fig:duality_conversion_table` shows you how what the rules in the SOB method are.
+
+```{figure} ../images/duality_conversion.jpg
+:name: fig:duality_conversion_table
+:figwidth: 600 px
+
+How to convert a primal problem into a dual problem **CITE From the "SOB method": Benjamin (1995), SIAM Review 37(1): 85-87 as summarised in Hillier and Lieberman, 10th ed., Table 6.14**
+```
+<!--
+
+### Applications of duality
+
+ TODO -->
 
 ## Karush-Kuhn-Tucker (KKT) conditions
+
+<!-- TODO intro -->
 
 ### Unconstrained optimisation
 
