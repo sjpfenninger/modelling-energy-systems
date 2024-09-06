@@ -1,3 +1,5 @@
+(content:appendix:duality-examples)=
+
 # Duality: additional examples
 
 ## Maximisation problem

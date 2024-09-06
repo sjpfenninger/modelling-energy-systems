@@ -166,6 +166,11 @@ The table in {numref}`fig:duality_conversion_table` shows you how what the rules
 
 How to convert a primal problem into a dual problem **CITE From the "SOB method": Benjamin (1995), SIAM Review 37(1): 85-87 as summarised in Hillier and Lieberman, 10th ed., Table 6.14**
 ```
+
+### Additional examples
+
+In the appendix chapter "{ref}`content:appendix:duality-examples`" you can find additional examples of duality, including an example of how duality allows you to see the same problem from two perspectives (the buyer and the seller of ingredients for a lunch).
+
 <!--
 
 ### Applications of duality
