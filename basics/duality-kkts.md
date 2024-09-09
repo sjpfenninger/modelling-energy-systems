@@ -329,7 +329,7 @@ Then we derive the following set of equations that characterises the optimal sol
 :class: tip
 
 * Note that all constraints in a standard form have zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints below). 
-* Inequality constraints are always of the form $g_j(x) \leq 0$, not $g_j(x) \geq 0$. Only if you write all inequality constraints as $g_j(x) \leq 0$, the sign of the Lagrangian above are correct!
+* Inequality constraints are always of the form $g_j(x) \leq 0$, not $g_j(x) \geq 0$. Only if you write all inequality constraints as $g_j(x) \leq 0$, the signs of the Lagrangian above are correct!
 
 :::
 
