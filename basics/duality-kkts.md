@@ -164,7 +164,7 @@ The table in {numref}`fig:duality_conversion_table` shows you how what the rules
 :name: fig:duality_conversion_table
 :figwidth: 600 px
 
-How to convert a primal problem into a dual problem **CITE From the "SOB method": Benjamin (1995), SIAM Review 37(1): 85-87 as summarised in Hillier and Lieberman, 10th ed., Table 6.14**
+How to convert a primal problem into a dual problem From the "SOB method": Benjamin (1995), SIAM Review 37(1): 85-87 as summarised in {cite:p}`hillier_introduction_2021`, Table 6.14**
 ```
 
 ### Additional examples
@@ -179,7 +179,7 @@ In the appendix chapter "{ref}`content:appendix:duality-examples`" you can find 
 
 ## Karush-Kuhn-Tucker (KKT) conditions
 
-In this section, we introduce the Karush-Kuhn-Tucker (KKT) conditions for convex optimization problems with equality and inequality constraints. For such convex problems, these conditions form a set of conditions that describe all optimal solutions to the problem at hand. They form the basis for many numerical methods to solve optimization problems and in simple cases allow determining the solution analytically. They also combine primal and dual variables, which offers additional insight in the solution (e.g., which constraints are active, or what is the electricity price in this system?). 
+In this section, we introduce the Karush-Kuhn-Tucker (KKT) conditions for convex optimization problems with equality and inequality constraints. For such convex problems, these conditions form a set of conditions that describe all optimal solutions to the problem at hand. They form the basis for many numerical methods to solve optimization problems and in simple cases allow determining the solution analytically. They also combine primal and dual variables, which offers additional insight in the solution (e.g., which constraints are active, or what is the electricity price in this system?).
 
 We start from unconstrained optimization and gradually introduce equality and inequality constraints. We will use an economic dispatch example to illustrate our approach.
 
@@ -328,7 +328,7 @@ Then we derive the following set of equations that characterises the optimal sol
 :::{admonition} Note on inequality signs in standard form
 :class: tip
 
-* Note that all constraints in a standard form have zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints below). 
+* Note that all constraints in a standard form have zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints below).
 * Inequality constraints are always of the form $g_j(x) \leq 0$, not $g_j(x) \geq 0$. Only if you write all inequality constraints as $g_j(x) \leq 0$, the signs of the Lagrangian above are correct!
 
 :::
