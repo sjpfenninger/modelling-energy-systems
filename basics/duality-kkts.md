@@ -179,7 +179,9 @@ In the appendix chapter "{ref}`content:appendix:duality-examples`" you can find 
 
 ## Karush-Kuhn-Tucker (KKT) conditions
 
-<!-- TODO intro -->
+In this section, we introduce the Karush-Kuhn-Tucker (KKT) conditions for convex optimization problems with equality and inequality constraints. For such convex problems, these conditions form a set of conditions that describe all optimal solutions to the problem at hand. They form the basis for many numerical methods to solve optimization problems and in simple cases allow determining the solution analytically. They also combine primal and dual variables, which offers additional insight in the solution (e.g., which constraints are active, or what is the electricity price in this system?). 
+
+We start from unconstrained optimization and gradually introduce equality and inequality constraints. We will use an economic dispatch example to illustrate our approach.
 
 ### Unconstrained optimisation
 
@@ -194,7 +196,7 @@ Let's go back to basic optimisation (high school mathematics). Whenever you had 
 
 A point that satisfies the necessary condition for optimality ($\frac{\partial f(x)}{\partial x} =  0$) is called a stationary point. For convex optimisation problems, we never use the sufficient condition because any stationary point will be a minimum.
 
-### Economic dispatch example Part I: unconstrained optimisation and equality constrained optimisation
+### Equality constrained optimisation
 
 In energy systems, unfortunately we do not deal with many unconstrained optimisation problems---usually there are at least a few constraints. Consider the example of economic dispatch that we have studied. We will build up the complexity of the problem throughout this document to illustrate how we can use duality and KKT conditions to solve such problems and interpret their solutions.
 
@@ -223,9 +225,7 @@ To do this, we draw on our knowledge of unconstrained optimisation, since now we
     & \frac{\partial \mathcal{L}}{\partial \lambda} = L - g_1 - g_2 = 0
 \end{align}
 
-Notice that now we have three equations and three unknowns. So, we can solve for $g_1$, $g_2$, and $\lambda$, which gives the optimal solution to the original optimisation problem.
-
-### Equality constrained optimisation
+Notice that now we have three equations and three unknowns. So, we can solve for $g_1$, $g_2$, and $\lambda$, which gives the optimal solution to the original optimisation problem. Note that the last equation is identical to our original constraint. A solution to the system of equations above will hence be as such that $g_1$ and $g_2$ jointly meet the load $L$.
 
 Now we will generalise the Lagrangian to any equality constrained optimisation problem. Consider the following minimisation problem with equality constraints $h_i(x)$:
 \begin{align}
@@ -246,7 +246,13 @@ We can find the optimal solution ($x^*, \lambda_i^*$) to the original optimisati
     & \frac{\partial \mathcal{L}}{\partial \lambda_i} = h_i(x) = 0 \quad \forall i \in  \{1,2,...,m\}
 \end{align}
 
-#### Graphical interpretation
+:::{admonition} Note on notation and standard form
+:class: tip
+
+* In this section, we will use $h_i(x)$ to refer to equality constraints. In the rest of this reader, we used $g_i(x)$ to refer to equality constraints.
+* Note that we will write all constraints in a standard form with zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints below). This ensures that you don't make mistakes when you're constructing the Lagrangian. Note the difference with the approach above to construct the dual problem! This highlights that there is no generally "correct" approach to write a standard form, but it makes sense to go with an approach that works best for what you are doing.
+
+:::
 
 The equality constrained optmisation problem also has a graphical interpretation. {numref}`fig:KKT_eqconst_graphical` shows the graphical interpretation of our economic dispatch example.
 
@@ -262,7 +268,7 @@ $g_1$ and $g_2$ are on the axes. The red contour lines are constant values of th
     \nabla f(x) + \lambda \cdot \nabla h(x) = 0
 \end{equation}
 
-### Economic dispatch example Part II: inequality and equality constrained optimisation
+### Inequality and equality constrained optimisation
 
 In energy systems, we not only have equality constraints, but also inequality constraints. For example, returning to the economic dispatch example, the generators have capacity constraints $\overline{G_1}$ and $\overline{G_2}$ and cannot run at negative output (lower bound of zero). The optimisation problem becomes:
 
@@ -284,9 +290,7 @@ Graphical representation of the equality and inequality constrained economic dis
 
 The optimal solution needs to be part of the feasible solution set. In this case, we see that the optimal solution (green dot) is indeed in the feasible area. Thus the inequality constraints $0 \leq g_1 \leq \overline{G_1}$ and $0 \leq g_2 \leq \overline{G_2}$ actually do not play a role in this particular example.
 
-However, this is not always the case. What if the capacity limits on $g_1$ and $g_2$ do play a role? Then we want to figure out which inequality constraints are active. We can replace these constraints with equality constraints. Then we have an equality constrained optimisation problem which we know how to solve.
-
-### Inequality and equality constrained optimisation
+However, this is not always the case. What if the capacity limits on $g_1$ and $g_2$ do play a role? Then we want to figure out which inequality constraints are active. If we can identify the active constraints, we can replace these constraints with equality constraints (e.g., $g_1 \leq \overline{G_1}$ becomes $g_1 = \overline{G_1}$) and ignore all inactive constraints (because they don't influence the solution). Then we are left with an equality constrained optimisation problem which we know how to solve.
 
 For most problems, we do not know which constraints will be active/binding. Luckily, we can use a set of optimality conditions called Karush-Kuhn-Tucker (KKT) conditions to reflect the fact that in some cases inequality constraints are binding and in some cases they are not.
 
@@ -321,6 +325,14 @@ Then we derive the following set of equations that characterises the optimal sol
 \end{align}
 ```
 
+:::{admonition} Note on inequality signs in standard form
+:class: tip
+
+* Note that all constraints in a standard form have zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints below). 
+* Inequality constraints are always of the form $g_j(x) \leq 0$, not $g_j(x) \geq 0$. Only if you write all inequality constraints as $g_j(x) \leq 0$, the signs of the Lagrangian above are correct!
+
+:::
+
 Let's look at each of these equations in a little more detail. We have:
 1. Derivative of Lagrangian w.r.t. decision variables $x$ equal to zero $\rightarrow$ optimality conditions
 2. Derivative of Lagrangian w.r.t. Lagrange multipliers $\lambda_i$ (equality constraints) $\rightarrow$ primal feasibility (solution is feasible with respect to the primal constraints)
@@ -345,8 +357,6 @@ Note that sometimes KKT conditions are written in condensed form:
     & \mu_j \cdot g_j(x) =  0 \quad \forall j \in  \{1,2,...,n\}  \\
     & \mu_j \geq 0 \quad \forall j \in  \{1,2,...,n\}
 \end{align}
-
-### Economic dispatch example Part III: KKT conditions
 
 Let's revisit the economic dispatch example and apply KKT conditions. In standard form, the constraints are written separately with a zero on the right-hand sign and "=" or "$\leq$" signs:
 \begin{align}
@@ -440,7 +450,7 @@ This is the dual problem. We denote the optimal value of this problem as $d^*$.
 
 As mentioned at the beginning, strong duality is when the optimal value of the primal equals the optimal value of the dual. In our new terminology, this is written as $d^* = p^*$. Strong duality can be used to show that a solution that satisfies the KKT conditions must be an optimal solution to the primal and dual problems. Meaning, the KKT conditions are necessary and sufficient conditions for optimality. Weak duality is when $d^* \leq p^*$. This holds even for non-convex problems. $p^* - d^*$ is referred to as the duality gap.
 
-In practice, we do not start from the general expression in Equation {eq}`eqn:dual` to derive the dual problem. Instead, we write the primal problem in standard form, for which we know the relation between the dual and the primal problem, or we use tables.
+In practice, we do not start from the general expression in Equation {eq}`eqn:dual` to derive the dual problem. Instead, we write the primal problem in standard form, for which we know the relation between the dual and the primal problem, or we use the tables introduced above.
 
 ## Further reading
 
