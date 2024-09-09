@@ -1,71 +1,26 @@
 # KKT conditions: summary
 
-## Unconstrained optimisation
+## Problem in standard form
 
-Let's go back to basic optimisation (high school mathematics). Whenever you had to optimise (minimise or maximise) a function, you were doing unconstrained optimisation. To determine the optimum of a certain function, we should take the derivative of that function w.r.t. the decision variable $x$ and equate it to zero. Then we take the second order derivative to see if it is a minimum or maximum.
-
-\begin{align}
-    \min f(x) & \rightarrow & \frac{\partial f(x)}{\partial x} =  0 \quad \text{(necessary condition)} \\
-    & & \frac{\partial^2 f(x)}{\partial x^2} > 0 \quad \text{(sufficient condition)} \\
-    \max f(x) & \rightarrow & \frac{\partial f(x)}{\partial x} =  0 \quad \text{(necessary condition)} \\
-    & & \frac{\partial^2 f(x)}{\partial x^2} < 0 \quad \text{(sufficient condition)} \\
-\end{align}
-
-## Equality constrained optimisation
-
-Now consider an optimisation problem with an equality constraint, such as the demand constraint in an economic dispatch problem. To deal with the constraint, we introduce the Lagrangian. The Lagrangian elevates the constraint to the objective function.
-
-Consider the following minimisation problem with equality constraints $h_i(x)$ written in standard form:
-\begin{align}
-    \text{min.} \; & f(x) \\
-    \text{s.t.} \; & h_i(x) = 0 \quad (\lambda_i) \quad \forall i \in \{1,2,...,m\}
-\end{align}
-There are $m$ equality constraints. We associate a Lagrange multiplier $\lambda_i$ to each constraint.
-
-The Lagrangian is:
-\begin{equation}
-    \mathcal{L} = f(x) + \sum_{i=1}^m \lambda_i \cdot h_i(x)
-\end{equation}
-The first part of the Lagrangian is the original objective function. Then we add the constraints multiplied by their Lagrange multipliers $\lambda_i$.
-
-To find the optimal solution ($x^*, \lambda_i^*$), we draw on our knowledge of unconstrained optimisation, since now we have a single function, the Lagrangian, to minimise. We take the derivative of the Lagrangian w.r.t. the decision variables $x$ and w.r.t. the Lagrange multipliers $\lambda_i$. Notice that taking $\frac{\partial \mathcal{L}}{\partial \lambda_i} = 0$ recovers the equality constraints $h_i(x) = 0$.
-
-\begin{align}
-    & \frac{\partial \mathcal{L}}{\partial x} = 0 \\
-    & \frac{\partial \mathcal{L}}{\partial \lambda_i} = h_i(x) = 0 \quad \forall i \in  \{1,2,...,m\}
-\end{align}
-
-Notice that now we have as many equations as we have unknowns, so we can solve for $x$ and $\lambda_i$, to obtain the optimal solution to the original optimisation problem.
-
-## Inequality and equality constrained optimisation
-In energy systems, we not only have equality constraints, but also inequality constraints. For example, capacity constraints in the economic dispatch problem. Sometimes inequality constraints are active/binding and sometimes they are not. To solve a problem with equality and inequality constraints, we first want to figure out which inequality constraints are active. We can replace these constraints with equality constraints. Then we have an equality constrained optimisation problem which we know how to solve.
-
-However, for most problems, we do not know which constraints will be binding. So, we use a set of optimality conditions called Karush-Kuhn-Tucker (KKT) conditions to reflect the fact that in some cases inequality constraints are binding and in some cases they are not.
-
-Consider the general inequality and equality constrained optimisation problem written in standard form:
+Consider the following general inequality and equality constrained optimisation problem written in standard form:
 
 \begin{align}
     \text{min.} \; & f(x) \\
     \text{s.t.} \; & h_i(x) = 0 \quad (\lambda_i) \quad \forall i \in \{1,2,...,m\}  \\
     & g_j(x) \leq 0 \quad (\mu_j) \quad \forall j \in \{1,2,...,n\}
 \end{align}
+
 There are $m$ equality constraints associated with Lagrange multipliers $\lambda_i$ and $n$ inequality constraints associated with Lagrange multipliers $\mu_j$.
 
-:::{admonition} Standard Form
-:class: note
+## Lagrangian
 
-In standard form, the constraints are written separately with a zero on the right-hand side. For equality constraints, we have "= 0". For inequality constraints, we have "$\leq$ 0" (not "$\geq$ 0"). We will write all problems in standard form first so it is easier to write the Lagrangian and KKT conditions.
-:::
-
-The Lagrangian is:
 \begin{equation}
     \mathcal{L} = f(x) + \sum_{i=1}^m \lambda_i \cdot h_i(x) + \sum_{j=1}^{n} \mu_j \cdot g_j(x)
 \end{equation}
+
 The Lagrangian has three components: the original objective function, the equality constraints multiplied by their Lagrange multipliers, and the inequality constraints multiplied by their Lagrange multipliers.
 
-### KKT Conditions
-
-Then we derive the following set of equations that characterises the optimal solution. These are the KKT conditions.
+## KKT Conditions
 
 \begin{align}
     & \frac{\partial \mathcal{L}}{\partial x} = 0   \quad & (\text{Optimality conditions})\\
