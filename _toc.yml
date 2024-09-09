@@ -16,6 +16,10 @@ parts:
     - file: advanced/mixed-complementarity.md
     - file: advanced/nonlinear.md
     - file: advanced/parametric-uncertainty.md
+- caption: Appendices
+  chapters:
+   - file: appendix/duality-examples.md
+   - file: appendix/kkts-summary.md
 - caption: Reference
   chapters:
     - file: reference/reading.md

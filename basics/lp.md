@@ -291,6 +291,7 @@ $$a_{m1}x_1 + a_{m2}x_2 + a_{m3}x_3 + \ldots + a_{mn}x_n \leq b_m$$
 
 The largest or smallest value of the objective function is called the **optimal value**, and a collection of values $(x_1^*, x_2^*, x_3^*, \ldots, x_n^*)$ that gives the optimal value is called an **optimal solution**.
 
+(content:lp:standard-form)=
 ### Standard form
 
 When formulating or dealing with problems that are small enough to write down, it is often easier to first transform them into a **standard form**. We can write a standard form problem as an objective function $f$ together with inequality constraint functions $g$ and equality constraint functions $h$:
