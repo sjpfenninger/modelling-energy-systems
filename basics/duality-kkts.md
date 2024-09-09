@@ -250,7 +250,7 @@ We can find the optimal solution ($x^*, \lambda_i^*$) to the original optimisati
 :class: tip
 
 * In this section, we will use $h_i(x)$ to refer to equality constraints. In the rest of this reader, we used $g_i(x)$ to refer to equality constraints.
-* Note that we will write all constraints in a standard form with zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints below). This ensures that you don't make mistakes when you're constructing the Lagrangian. Note the difference with the approach above to construct the dual problem!
+* Note that we will write all constraints in a standard form with zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints below). This ensures that you don't make mistakes when you're constructing the Lagrangian. Note the difference with the approach above to construct the dual problem! This highlights that there is no generally "correct" approach to write a standard form, but it makes sense to go with an approach that works best for what you are doing.
 
 :::
 
