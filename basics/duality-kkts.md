@@ -456,6 +456,8 @@ In practice, we do not start from the general expression in Equation {eq}`eqn:du
 
 For more background on duality and to dive deeper into the mathematics, we suggest reading Chapter 5 of {cite:t}`boyd.vandenberghe_convex_2004` which is [freely available online](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf).
 
+For alternative introductions to duality and KKT conditions based on a vector/matrix formulation, see Appendix B in {cite:t}`morales.etal_integrating_2014` (possibly available for free as [an ebook](https://link.springer.com/book/10.1007/978-1-4614-9411-9) if you are connected to a university network).
+
 ## References
 
 ```{bibliography}
