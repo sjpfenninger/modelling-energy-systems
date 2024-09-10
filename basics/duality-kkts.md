@@ -416,7 +416,7 @@ Given this test solution, we know that $\mu_1$, $\mu_2$, $\mu_3$ $= 0$ and $\mu_
 
 The only unknown variables are $g_1$, $\lambda$, and $\mu_4$, which we can solve for. If we can find a solution, it is optimal. We can also ask ourselves "Does the solution make sense? Is there an alternative set of binding inequality constraints that would yield a better solution?" to check that indeed we have found the optimal solution. The new solution---orange dot in {numref}`fig:KKT_g2const_graphical`---satisfies the constraints but comes at a higher total operating cost than before.
 
-### Duality and KKT conditions
+## The connection between duality and KKT conditions
 
 Lastly, we will discuss the relationship between duality and KKT conditions. We know that for every primal problem, there exists a dual problem, but how do we formulate the dual problem?
 
