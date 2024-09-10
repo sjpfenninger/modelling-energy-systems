@@ -179,9 +179,9 @@ In the appendix chapter "{ref}`content:appendix:duality-examples`" you can find 
 
 ## Karush-Kuhn-Tucker (KKT) conditions
 
-In this section, we introduce the Karush-Kuhn-Tucker (KKT) conditions for convex optimization problems with equality and inequality constraints. For such convex problems, these conditions form a set of conditions that describe all optimal solutions to the problem at hand. They form the basis for many numerical methods to solve optimization problems and in simple cases allow determining the solution analytically. They also combine primal and dual variables, which offers additional insight in the solution (e.g., which constraints are active, or what is the electricity price in this system?).
+In this section, we introduce the Karush-Kuhn-Tucker (KKT) conditions for convex optimisation problems with equality and inequality constraints. For such convex problems, these conditions form a set of conditions that describe all optimal solutions to the problem at hand. They form the basis for many numerical methods to solve optimisation problems and in simple cases allow determining the solution analytically. They also combine primal and dual variables, which offers additional insight in the solution (e.g., which constraints are active, or what is the electricity price in this system?).
 
-We start from unconstrained optimization and gradually introduce equality and inequality constraints. We will use an economic dispatch example to illustrate our approach.
+We start from unconstrained optimisation and gradually introduce equality and inequality constraints. We will use an economic dispatch example to illustrate our approach.
 
 ### Unconstrained optimisation
 
