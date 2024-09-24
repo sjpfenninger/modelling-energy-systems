@@ -4,6 +4,8 @@ In this chapter we take a few steps back to consider some of the mathematical pr
 
 However, understanding duality and KKT conditions will be useful in various ways. Duality can be exploited to perform sensitivity analyses and is important when using optimisation methods to solve market problems ({numref}`content:milp`). An understanding of KKT conditions will become relevant particularly when we look at mixed complementarity ({numref}`content:mixed-complementarity`) and non-linear programming ({numref}`content:nonlinear`) problems. As you will see below, duality and KKT conditions are also related. Understanding one can help you understand the other, and vice versa.
 
+(content:duality-kkts:duality)=
+
 ## Duality
 
 ### Introduction to duality
