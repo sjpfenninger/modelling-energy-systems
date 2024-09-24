@@ -6,6 +6,7 @@ title: Changelog
 
 ## Version 2024-09-xx
 
+* Completed [Sensitivity analysis](basics/sensitivity-analysis.md)
 * Minor fixes to Dispatch/LP and duality content
 * Minor URL changes and fixes
 
