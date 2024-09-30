@@ -4,9 +4,10 @@ title: Changelog
 
 # Changelog
 
-## Version 2024-09-xx
+## Version 2024-09-30
 
 * Completed [Sensitivity analysis](basics/sensitivity-analysis.md)
+* Completed [Power markets and mixed-integer programming](basics/markets-milp.md)
 * Minor fixes to Dispatch/LP and duality content
 * Minor URL changes and fixes
 
