@@ -176,6 +176,12 @@ An overarching view of the actors and physical infrastructure in the (Dutch/Euro
 
 In the day-ahead market, electricity generating companies submit generating offers to the pool, while wholesale consumers submit consumption bids. These consumers are for example large industrial entities or companies that sell electricity to retail companies and consumers.
 
+:::{admonition} "Blocks" vs "offers and bids"
+:class: note
+
+In the literature, the offers and bids made by participants in the market are generally called "blocks". To make things easier to follow, here we use "offers" for the generators and "bids" for the demands. Elsewhere, both of these will be called blocks.
+:::
+
 A bid for either supply or demand consists of a price and a maximum amount of electricity, e.g. a consumer may be willing to pay a price of 3 EUR/MWh for up to 10 MW of power in the hour of the day for which the auction is taking place.
 
 As market operator, our goal is to maximise social welfare ({numref}`fig:markets-milp:markets_social_welfare`). To do so, we sort the bids from producers by increasing cost, and the bids from consumers by decreasing cost. Consumer surplus is the amount of money that consumers would have been willing to pay but did not have to pay, at the current market price and scheduled demand/supply. Producer surplus is the amount of money that producers receive on top of what they would have been willing to accept. The area between the demand and supply curves represents the social welfare - the sum of producer surplus and consumer surplus.
