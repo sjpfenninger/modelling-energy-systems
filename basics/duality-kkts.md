@@ -4,6 +4,8 @@ In this chapter we take a few steps back to consider some of the mathematical pr
 
 However, understanding duality and KKT conditions will be useful in various ways. Duality can be exploited to perform sensitivity analyses and is important when using optimisation methods to solve market problems ({numref}`content:milp`). An understanding of KKT conditions will become relevant particularly when we look at mixed complementarity ({numref}`content:mixed-complementarity`) and non-linear programming ({numref}`content:nonlinear`) problems. As you will see below, duality and KKT conditions are also related. Understanding one can help you understand the other, and vice versa.
 
+(content:duality-kkts:duality)=
+
 ## Duality
 
 ### Introduction to duality
@@ -164,7 +166,7 @@ The table in {numref}`fig:duality_conversion_table` shows you how what the rules
 :name: fig:duality_conversion_table
 :figwidth: 600 px
 
-How to convert a primal problem into a dual problem **CITE From the "SOB method": Benjamin (1995), SIAM Review 37(1): 85-87 as summarised in Hillier and Lieberman, 10th ed., Table 6.14**
+How to convert a primal problem into a dual problem From the "SOB method": Benjamin (1995), SIAM Review 37(1): 85-87 as summarised in {cite:p}`hillier_introduction_2021`, Table 6.14**
 ```
 
 ### Additional examples
@@ -179,9 +181,9 @@ In the appendix chapter "{ref}`content:appendix:duality-examples`" you can find 
 
 ## Karush-Kuhn-Tucker (KKT) conditions
 
-In this section, we introduce the Karush-Kuhn-Tucker (KKT) conditions for convex optimization problems with equality and inequality constraints. For such convex problems, these conditions form a set of conditions that describe all optimal solutions to the problem at hand. They form the basis for many numerical methods to solve optimization problems and in simple cases allow determining the solution analytically. They also combine primal and dual variables, which offers additional insight in the solution (e.g., which constraints are active, or what is the electricity price in this system?). 
+In this section, we introduce the Karush-Kuhn-Tucker (KKT) conditions for convex optimisation problems with equality and inequality constraints. For such convex problems, these conditions form a set of conditions that describe all optimal solutions to the problem at hand. They form the basis for many numerical methods to solve optimisation problems and in simple cases allow determining the solution analytically. They also combine primal and dual variables, which offers additional insight in the solution (e.g., which constraints are active, or what is the electricity price in this system?).
 
-We start from unconstrained optimization and gradually introduce equality and inequality constraints. We will use an economic dispatch example to illustrate our approach.
+We start from unconstrained optimisation and gradually introduce equality and inequality constraints. We will use an economic dispatch example to illustrate our approach.
 
 ### Unconstrained optimisation
 
@@ -328,7 +330,7 @@ Then we derive the following set of equations that characterises the optimal sol
 :::{admonition} Note on inequality signs in standard form
 :class: tip
 
-* Note that all constraints in a standard form have zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints below). 
+* Note that all constraints in a standard form have zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints below).
 * Inequality constraints are always of the form $g_j(x) \leq 0$, not $g_j(x) \geq 0$. Only if you write all inequality constraints as $g_j(x) \leq 0$, the signs of the Lagrangian above are correct!
 
 :::
@@ -416,7 +418,7 @@ Given this test solution, we know that $\mu_1$, $\mu_2$, $\mu_3$ $= 0$ and $\mu_
 
 The only unknown variables are $g_1$, $\lambda$, and $\mu_4$, which we can solve for. If we can find a solution, it is optimal. We can also ask ourselves "Does the solution make sense? Is there an alternative set of binding inequality constraints that would yield a better solution?" to check that indeed we have found the optimal solution. The new solution---orange dot in {numref}`fig:KKT_g2const_graphical`---satisfies the constraints but comes at a higher total operating cost than before.
 
-### Duality and KKT conditions
+## The connection between duality and KKT conditions
 
 Lastly, we will discuss the relationship between duality and KKT conditions. We know that for every primal problem, there exists a dual problem, but how do we formulate the dual problem?
 
@@ -455,6 +457,8 @@ In practice, we do not start from the general expression in Equation {eq}`eqn:du
 ## Further reading
 
 For more background on duality and to dive deeper into the mathematics, we suggest reading Chapter 5 of {cite:t}`boyd.vandenberghe_convex_2004` which is [freely available online](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf).
+
+For alternative introductions to duality and KKT conditions based on a vector/matrix formulation, see Appendix B in {cite:t}`morales.etal_integrating_2014` (possibly available for free as [an ebook](https://link.springer.com/book/10.1007/978-1-4614-9411-9) if you are connected to a university network).
 
 ## References
 

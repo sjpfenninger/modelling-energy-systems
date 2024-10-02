@@ -5,17 +5,17 @@ parts:
   numbered: true
   chapters:
     - file: basics/introduction.md
-    - file: basics/lp.md
+    - file: basics/dispatch-lp.md
     - file: basics/sensitivity-analysis.md
     - file: basics/duality-kkts.md
-    - file: basics/milp.md
-    - file: basics/modelling-languages.md
-- caption: Advanced topics
-  numbered: true
-  chapters:
-    - file: advanced/mixed-complementarity.md
-    - file: advanced/nonlinear.md
-    - file: advanced/parametric-uncertainty.md
+    - file: basics/markets-milp.md
+    # - file: basics/modelling-languages.md
+# - caption: Advanced topics
+#   numbered: true
+#   chapters:
+    # - file: advanced/mixed-complementarity.md
+    # - file: advanced/nonlinear.md
+    # - file: advanced/parametric-uncertainty.md
 - caption: Appendices
   chapters:
    - file: appendix/duality-examples.md

@@ -1,8 +1,8 @@
 # KKT conditions: summary
 
-## Problem in standard form
+## Standard form formulation
 
-Consider the following general inequality and equality constrained optimisation problem written in standard form:
+Consider the following general inequality and equality constrained optimisation problem written in a standard form:
 
 \begin{align}
     \text{min.} \; & f(x) \\
