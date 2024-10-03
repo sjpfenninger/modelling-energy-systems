@@ -158,6 +158,11 @@ The easiest approach to convert a primal problem to its dual problem, and the on
 * Rewrite the primal problem to standard form
 * Follow the (standard, always same) steps to convert the standard-form problem to its dual
 
+:::{admonition} Summary of the recommended approach
+:class: tip
+{ref}`content:appendix:duality-conversion-summary` in the appendix contains a summary of this recommended approach with a generic example.
+:::
+
 You do not have to rewrite to standard form first, however. There is a method called "SOB" which gives you a "map" on how to translate a primal problem into the corresponding dual problem, no matter what exact form it is in. In principle this also always works, but it can be a bit trickier to get your head around and it is easier to make mistakes.
 
 The table in {numref}`fig:duality_conversion_table` shows you how what the rules in the SOB method are.

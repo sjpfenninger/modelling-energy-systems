@@ -4,6 +4,10 @@ title: Changelog
 
 # Changelog
 
+## Version 2024-10-03
+
+* Added [duality conversion summary in appendix](appendix/duality-conversion.md)
+
 ## Version 2024-09-30
 
 * Completed [Sensitivity analysis](basics/sensitivity-analysis.md)
