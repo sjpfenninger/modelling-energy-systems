@@ -1,6 +1,6 @@
-# Parametric uncertainty
+# Dealing with parametric uncertainty: stochastic programming
 
-(content:uncert:introduction)=
+(content:uncert-stochastic:introduction)=
 
 ## Introduction: renewable energy variability and forecasting
 There are many sources of uncertainty in modelling. Uncertainty can be due to measurement errors (e.g. measurements of experiments or weather), prediction or estimation errors (e.g. predictions of future energy demand or prices), implementation errors, or inexact data (e.g. poor quality data). Renewable generation variability due to weather makes dealing with uncertainty in energy system optimisation important.
@@ -46,7 +46,7 @@ The optimisation problem we aim to solve is as follows:
 
 where $\mathbf{z}$ are the uncertain input parameters. $f(\mathbf{x},\mathbf{z})$ is the objective function with decision variables $\mathbf{x}$ which belong to the feasible region $\mathcal{X}(\mathbf{z})$ (constraints). In contrast to previously-studied optimisation problems, now the objective function is a function of the uncertain parameters $\mathbf{z}$ and the decision variables must belong to a feasible region that also depends on $\mathbf{z}$.
 
-(content:uncert:gen-exp-example)=
+(content:uncert-stochastic:gen-exp-example)=
 ### Example: generation expansion planning
 ```{figure} ../images/gep_toyproblem_wCon_wObj.jpg
 :name: fig:gen_exp
@@ -67,7 +67,7 @@ Let's consider the example of generation expansion planning. Energy is produced 
 
 In this case, $\mathbf{x} = (x_A, x_B, x_C, y_A, y_B, y_C)$ so there are six decision variables; and $\mathbf{z} = (d, \tau_A, \tau_B, \tau_C, f_A, f_B, f_C, c_A, c_B, c_C)$ are the ten uncertain parameters. The first constraint is the demand constraint. The second and third constraints are the generation limits. The last constraint represents the level of investment in each generator.
 
-(content:uncert:stochastic-programming)=
+(content:uncert-stochastic:stochastic-programming)=
 ## Stochastic programming
 One way of dealing with uncertainty in optimisation problems is **stochastic programming**. The key assumption in stochastic programming is that the probability distribution for the uncertain parameters can be estimated. We can simplify a stochastic model into a deterministic model by assuming that the uncertain parameters are certain (i.e. by replacing uncertain parameters with their expected values). We can also use stochastic programming to formulate a problem with "recourse", meaning we can delay decisions until we know more about as-yet uncertain parameters.
 
