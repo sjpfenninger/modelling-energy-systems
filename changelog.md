@@ -4,6 +4,10 @@ title: Changelog
 
 # Changelog
 
+## Version 2024-10-07
+
+* Fixed typos and minor errors in chapters [Economic dispatch as a linear optimisation problem](basics/dispatch-lp.md) and [Power markets and mixed-integer programming](basics/markets-milp.md)
+
 ## Version 2024-10-03
 
 * Added [duality conversion summary in appendix](appendix/duality-conversion.md)
