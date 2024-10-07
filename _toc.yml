@@ -20,6 +20,7 @@ parts:
   chapters:
    - file: appendix/duality-examples.md
    - file: appendix/kkts-summary.md
+   - file: appendix/parametric-uncertainty-appendix.md
 - caption: Reference
   chapters:
     - file: reference/reading.md
