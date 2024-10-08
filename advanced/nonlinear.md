@@ -77,7 +77,11 @@ TODO: Why necessary and sufficient conditions  for the optimality?
 
 Look at the following contour plots visualizing functions in 2 dimensions. Which of these are linear, which are non-linear? How many minima, maxima and saddle points do you see, and where are they?
 
-![[Pasted image 20241007170825.png]]
+```{figure} ../images-built/fig_contour_plots.jpg
+:name: fig:unit_commitment
+
+Contour plots for four different functions $f(x, y)$.
+```
 
 ## NLP with constraints
 
