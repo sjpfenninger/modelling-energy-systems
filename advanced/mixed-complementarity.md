@@ -74,10 +74,19 @@ The KKT conditions of the problem are the following :
 
 The set of KKTs described in equation {eq}`eqn:KKT` are an instance of a Mixed Complementarity Problem. Because for linear and convex quadratic (non-linear) optimization problems, the KKT pose both a sufficient and necessary condition for optimality, the solution of the MCP satisfies the KKTs of the original problem and therefore is a solution. In the following paragraphs, we will examine how MCPs can help us solve market clearing problems from the perspective of market actors.
 
-% TODO: Add mathematical definition of MCP
+```{note}
+According to {cite}`Gabriel_Conejo_Fuller_Hobbs_Ruiz_2013` a Non Linear Complementarity problem is defined as : If we have a function $F$ the pure Non Linear complementarity problem $NCP(F)$ is to find a $x \in R^n$ such that for all $i$:
 
+$$
+1. \quad F_i(x) \geq 0 \\
+2. \quad x_i \geq 0 \\
+3. \quad x_i \cdot F_i(x) = 0
+$$
 
-## Application of mixed complimentarity problems in electricity markets
+The Mixed Complementarity problem is a **generalization** of the NCP, as it allows for variables with both upper and lower limits
+```
+
+## Application of mixed complementarity problems in electricity markets
 
 Let's start with a simple market clearing problem. The market-clearing problem is relevant to pool-like market. In such a pool,  the market operator has to clear the auction and decide on a market price along with quantities from each producer. Once again, the market clearing problem is from the side of the pool/system operator, which aims at maximizing social welfare. The optimization problem is considered under given price-quantity pairs of supply and demand agents, $(P_i^s, Q_i^s), (P_j^d, Q_j^d)$. The optimization problem is formulated as :
 
@@ -172,11 +181,11 @@ The KKT conditions of the problem {eq}`demand_side` are :
 The two different optimization problems are connected through a common linking constraint, requiring supply and demand quantities to match. That is constraint (2) of the initial market clearing problem. To arrive at the equilibrium of the Nash game between demand and supply agents we need to **simultaneously** solve the supply-side problem {eq}`supply_side`, the demand-side problem {eq}`demand_side` and the linking constraint (2) of problem {eq}`market_clearing`.
 
 There are several ways to solve the new optimization problem. We can follow one of the three methods :
-* Concentate the optimality conditions from the KKTs of the individual problems ({eq}`supply_side`, {eq}`demand_side`) along with the linking constraint to form a Mixed Complimentarity Problem. We will later show, why by concentating the constraints we arrive at the MCP. Then the MCP can be solved either with dedicated solvers such as PATH or as a feasibility problem( NLP, MIPL, optimization problems).
+* Concatenate the optimality conditions from the KKTs of the individual problems ({eq}`supply_side`, {eq}`demand_side`) along with the linking constraint to form a Mixed Complimentarity Problem. We will later show, why by concentating the constraints we arrive at the MCP. Then the MCP can be solved either with dedicated solvers such as PATH or as a feasibility problem( NLP, MIPL, optimization problems).
 * Apply price-search algorithms and iterative methods, to find a solution that satisfies all costraints.
 * Derive an equivalent optimization problem (EOP) and solve it using optimization solvers, such as yalmip used during the course.
 
-But now let's prove why concentating the KKT conditions of problems ({eq}`supply_side`, {eq}`demand_side`) along with the linking constrait formulates an MCP.
+But now let's prove why concatenating the KKT conditions of problems ({eq}`supply_side`, {eq}`demand_side`) along with the linking constrait formulates an MCP.
 
 ```{math}
 :label: MCP_KKT
@@ -344,7 +353,10 @@ Finally, some remarks on the Equivalent Optimization Problem of the Nash-Cournot
 
 ## Remarks
 
-% TODO: To be completed
+With the introduction of the Mixed Complementarity problems as a way to solve the Nash and Nash-Cournot games, we have introduced a paradigm shift in the way we study the market interactions. Up to now, we were considering the market only from the side of a pool operator that aims to clear the market. Now, with the new tools available we can model the market clearing along with the interactions between different market actors. Specifically, through the Nash equilibrium we can model the participation of agents in a perfectly competitive market, where they have zero market power. Moreover, to formulate a problem that better describes modern market, we introduced the Nash-Cournot equilibrium. In a Nash-Cournot game, the actors have market-power and try to optimally set their actions, considering the actions of the other actors as granted.
+
+For both Nash and Nash-Cournot games, we demonstrated how through the formulation of a Mixed Complementarity Problem, which has equivalence of the KKT conditions, and then solve an Equivalent Optimization Problem, to find the equilibrium solution. For the Nash game, we showed that the Equivalent Optimization Problem is the maximization of the social welfare, as exactly in the market clearing problem. Finally, we also extracted the Equivalent Optimization Problem for the Nash-Cournot game, based on comparing the Nash-Cournot with the Nash game KKTs. All in all, through the use of equilibrium problems we can make relationships and interactions between market agents explicit, and have a more intuitive way of formalizing problem. Through the tools of MCP and EOP we can solve these equilibrium problems!
+
 
 ## References
 
