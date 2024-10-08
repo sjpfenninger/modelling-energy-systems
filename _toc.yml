@@ -10,11 +10,11 @@ parts:
     - file: basics/duality-kkts.md
     - file: basics/markets-milp.md
     # - file: basics/modelling-languages.md
-# - caption: Advanced topics
-#   numbered: true
-#   chapters:
+- caption: Advanced topics
+  numbered: true
+  chapters:
     # - file: advanced/mixed-complementarity.md
-    # - file: advanced/nonlinear.md
+    - file: advanced/nonlinear.md
     # - file: advanced/parametric-uncertainty.md
 - caption: Appendices
   chapters:
