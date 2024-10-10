@@ -1,9 +1,9 @@
 # Additional material on parametric uncertainty
 
-There is much uncertainty surrounding future developments in technology, economics, and policy. For example, think of the uncertainty involved in forecasting natural gas prices and the impact a global pandemic or regional war can have on prices {cite:p}`justinresearch`. It is important to account for uncertainty in modelling in order to make predictions of the future. This appendix gives a brief overview of uncertainty in energy system optimisation models, including: characterising (or quantifying) uncertainty, analysing uncertainty (sensitivity analysis and robustness analysis), and two additional approaches to optimisation under uncertainty (robust optimisation and modelling to generate alternatives).
+There is much uncertainty surrounding future developments in technology, economics, and policy. For example, think of the uncertainty involved in forecasting natural gas prices and the impact a global pandemic or regional war can have on prices. It is important to account for uncertainty in modelling in order to make predictions of the future. We already discussed one way to address uncertainty in {numref}`content:uncert:stochastic-programming`: stochastic programming. This appendix gives a brief overview of other aspects of uncertainty in energy system optimisation models, including: characterising (or quantifying) uncertainty, analysing uncertainty (sensitivity analysis and robustness analysis), and two additional approaches to optimisation under uncertainty (robust optimisation and modelling to generate alternatives).
 
 ## Optimisation problem with parametric uncertainty
-Recall the optimisation problem we aim to solve:
+Recall from {numref}`content:uncert:optimisation-problem` the optimisation problem we aim to solve:
 ```{math}
 :label: eqn:optimisation
 \begin{align}
@@ -16,8 +16,8 @@ Recall the optimisation problem we aim to solve:
 
 where $\mathbf{z}$ are the uncertain input parameters. $f(\mathbf{x},\mathbf{z})$ is the objective function with decision variables $\mathbf{x}$ which belong to the feasible region $\mathcal{X}(\mathbf{z})$ (constraints). Now the objective function is a function of the uncertain parameters $\mathbf{z}$ and the decision variables must belong to a feasible region that also depends on $\mathbf{z}$.
 
-## Static vs. Adaptive Problem Settings
-In a static problem setting, the decisions $\mathbf{x}$ are made before the uncertain parameters $\mathbf{z}$ are observed. The decisions cannot be changed after the uncertain parameters are revealed. This leads to a single-stage optimisation problem and this is the type of problem setting we will consider. In the generation expansion planning example in {numref}`content:uncert-stochastic:gen-exp-example`, the decisions of how much capacity investment to make in each generator have to be made before the uncertain parameters of demand, capacity factors, fixed costs, and variable costs are known. Once the uncertain parameters are revealed, the investment decision cannot be adjusted.
+## Static vs. adaptive problem settings
+In a static problem setting, the decisions $\mathbf{x}$ are made before the uncertain parameters $\mathbf{z}$ are observed. The decisions cannot be changed after the uncertain parameters are revealed. This leads to a single-stage optimisation problem. In the generation expansion planning example in {numref}`content:uncert:gen-exp-example`, the decisions of how much capacity investment to make in each generator have to be made before the uncertain parameters of demand, capacity factors, fixed costs, and variable costs are known. Once the uncertain parameters are revealed, the investment decision cannot be adjusted.
 
 In contrast, an adaptive setting involves multiple stages of decisions. First, decisions $\mathbf{x}_0$ are made, then uncertain parameters $\mathbf{z}_1$ are observed. Then, the decision maker adapts to $\mathbf{z}_1$ and makes decisions $\mathbf{x}_1$. $\mathbf{z}_2$ are observed, $\mathbf{x}_2$ are decided, and so forth. Optimisation problems with more than two stages are very difficult to manage {cite:p}`dantzig1961solution` and are outside the scope of this course.
 
@@ -25,17 +25,17 @@ In contrast, an adaptive setting involves multiple stages of decisions. First, d
 :name: fig:static
 :figwidth: 350 px
 
-Static problem setting
+Static problem setting {cite:p}`starreveld2024robustness`
 ```
 
 ```{figure} ../images/multistage_kstage_timeline.jpg
 :name: fig:adaptive
 :figwidth: 600 px
 
-Adaptive problem setting
+Adaptive problem setting {cite:p}`starreveld2024robustness`
 ```
 
-## Uncertainty Characterisation
+## Uncertainty characterisation
 Characterising uncertainty is an important, but tricky, process. The aim is to quantify the uncertainty surrounding the input parameters $\mathbf{z}$. We would like to know what range of values an uncertain parameter is in.
 
 There is no general best practice for quantifying uncertainty. It depends on the specific situation and can be "more of an art than a science." Uncertainty can be quantified based on historic data, external models, expert opinion, and/or subjective assumptions. Nevertheless, uncertainty characterisation can have a great impact on results, so it is a process not to be overlooked.
@@ -51,7 +51,7 @@ Uncertainty can also change over time. Here, we will consider three types shown 
 Uncertainty over time {cite:p}`moret2017strategic`
 ```
 
-## Analysis of Uncertainty
+## Analysis of uncertainty
 We will now turn to analysing the potential impact of uncertain input parameters. Analysing uncertainty means properly describing and understanding the impact of model parameter variations on the model prediction. Due to an uncertain parameter, the outcome of a model can be desirable in one scenario and completely undesirable in another scenario, depending on the value of the uncertain parameter. Analysing uncertainty is an essential part of assessing any model. In particular, we will focus on sensitivity analysis and robustness analysis.
 
 ### Sensitivity analysis
@@ -63,11 +63,10 @@ It is assumed that the solution is fully flexible and able to adapt to changes i
 :name: fig:sensitivity
 :figwidth: 400 px
 
-Sensitivity analysis timeline
+Sensitivity analysis timeline {cite:p}`starreveld2024robustness`
 ```
 
 Recall the optimisation problem in Equation {eq}`eqn:optimisation`. We input a set of scenarios, $S = \{ \mathbf{z}^1, ...,\mathbf{z}^N \}$, and evaluate the sensitivity of the model with respect to each scenario in $S$. For each scenario $i$, we determine the optimal solution $\mathbf{x}^*$ by re-solving the optimisation problem. Once we have the solution, we evaluate the objective function value $f(\mathbf{x}^*, \mathbf{z}^i)$. This algorithm can be described as follows:
-
 ```{prf:algorithm} Sensitivity Analysis
 :label: sensitivity-analysis-algorithm
 
@@ -87,11 +86,10 @@ In **robustness analysis**, we analyse the robustness of a _fixed_ solution unde
 :name: fig:robustness
 :figwidth: 400 px
 
-Robustness analysis timeline
+Robustness analysis timeline {cite:p}`starreveld2024robustness`
 ```
 
 Again, we consider a set of scenarios, $S = \{ \mathbf{z}^1, ...,\mathbf{z}^N \}$. Now we evaluate the robustness of a fixed solution $\bar{\mathbf{x}}$ with respect to each input scenario. For each scenario $i$, we first evaluate the feasibility by determining if the solution $\bar{\mathbf{x}}$ is in the feasible region $\mathcal{X}(\mathbf{z}^i)$. Then we compute the objective function value $f(\bar{\mathbf{x}}, \mathbf{z}^i)$. The algorithm is written as follows:
-
 ```{prf:algorithm} Robustness Analysis
 :label: robustness-analysis-algorithm
 
@@ -109,10 +107,10 @@ Note that unlike in sensitivity analysis, in robustness analysis, the model does
 ### Local vs. global analysis
 In local analysis, we evaluate how small perturbations in an input parameter affect the output of interest {cite:p}`trucano2006calibration`. Only one parameter, or a certain limited number of parameters, is altered at a time. By contrast, in global analysis, all the input parameters are varied simultaneously and they are varied over the whole domain of possible parameter values {cite:p}`Zhou2008`. There is a big difference in computational effort between local and global analysis when dealing with a large number of uncertain parameters.
 
-## Optimisation under Uncertainty
-It is important to assess uncertainty in energy system optimisation models. In {numref}`content:uncert-stochastic:stochastic-programming`) we already discussed stochastic programming. Two additional approaches we will now discuss are robust optimisation and modelling to generate alternatives.
+## Optimisation under uncertainty
+It is important to assess uncertainty in energy system optimisation models. In {numref}`content:uncert:stochastic-programming` we already discussed stochastic programming. Two additional approaches we will now discuss are robust optimisation and modelling to generate alternatives.
 
-### Robust optimisation
+### Robust optimisation {cite:p}`Bertsimas_Hertog_2022`
 Consider the optimisation problem
 \begin{align}
     \begin{split}
@@ -156,7 +154,7 @@ Now we assume the uncertain parameters $\mathbf{z}$ are contained within some ge
 :name: fig:uncertainty_set
 :figwidth: 450px
 
-Example geometric uncertainty set $\mathcal{U}$
+Example geometric uncertainty set $\mathcal{U}$ {cite:p}`cheramin2021uncertaintyset`
 ```
 
 Then we write the problem as:
@@ -171,7 +169,7 @@ The constraints must hold for all possible realisations of $\mathbf{z} \in \math
 To solve the robust optimisation problem, we consider the reformulation approach and the adversarial approach.
 
 #### Reformulation approach
-The idea behind the **reformulation approach** is to solve the robust optimisation problem by reformulating it into a deterministic and finite equivalent, called a "robust counterpart". Depending on the shape of the uncertainty set, we can write a corresponding robust counterpart.
+The idea behind the **reformulation approach** is to solve the robust optimisation problem by creating a deterministic and finite equivalent, called a "robust counterpart". Depending on the shape of the uncertainty set, we can write a corresponding robust counterpart {cite:p}`Bertsimas_Hertog_2022`.
 
 There are two important notes to make in the reformulation. The first is that $g(\mathbf{x}, \mathbf{z}) \leq 0, ~\forall \mathbf{z} \in \mathcal{U}$ is true if and only if $\max\limits_{\mathbf{z} \in \mathcal{U}}  g(\mathbf{x}, \mathbf{z}) \leq 0$. That is, if the constraint holds for the $\mathbf{z}$ that maximises $g$, then it holds for all other $\mathbf{z} \in \mathcal{U}$. Thus, we no longer have the issue of potentially an infinite number of constraints. Secondly, we can use duality to rewrite $\max\limits_{\mathbf{z} \in \mathcal{U}} \dots$ as $\min\limits_{\mathbf{y} \in \mathcal{Y}} \dots$. $\mathbf{y}$ are the dual variables. Now instead of a $\min\limits_{\mathbf{x}} \max\limits_{\mathbf{z}}$ problem, we have a $\min\limits_{\mathbf{x}} \min\limits_{\mathbf{y}}$ problem, which we can combine into a single $\min\limits_{\mathbf{x}, \mathbf{y}}$ problem.
 
@@ -208,7 +206,7 @@ The idea behind the **adversarial approach** is to solve the robust optimisation
     $\ast$ If the adversary finds a counter $\mathbf{z}_2$ such that $g(\mathbf{x}_1, \mathbf{z}_2) > 0$, we continue by finding a new optimal solution. Otherwise, if $g(\mathbf{x}_1, \mathbf{z}_2) \leq 0$, then $\mathbf{x}_1$ is a solution to the robust optimisation problem so the game stops.
 5.  The game continues with the decision maker reacting to the adversary's counter to obtain a new solution, then the adversary finding a worst possible counter, and so on. We continue until the adversary cannot find a counter that violates the constraint.
 
-The following table summarizes the pros and cons of the reformulation approach and adversarial approach. The best approach depends on the situation {cite:p}`bertsimas2016reformulation`.
+The following table summarises the pros and cons of the reformulation approach and adversarial approach. The best approach depends on the situation {cite:p}`bertsimas2016reformulation`.
 | **Reformulation approach** {cite:p}`ben1998robust` | **Adversarial approach** {cite:p}`mutapcic2009cutting` |
 | --- | --- |
 | + Single problem to solve | -- Iteratively solve multiple problems |
@@ -228,7 +226,7 @@ The key assumption in robust opimisation is that the uncertain parameters are co
 :::
 
 #### Distributionally robust optimisation
-The idea behind **distributionally robust optimisation** is to combine stochastic programming and robust optimisation. Recall the stochastic programming problem in Equation {eq}`eqn:stochastic` (repeated below):
+The idea behind **distributionally robust optimisation** is to combine stochastic programming and robust optimisation {cite:p}`Bertsimas_Hertog_2022` {cite:p}`delage2010distributionally`. Recall the stochastic programming problem in Equation {eq}`eqn:stochastic` (repeated below):
 \begin{align}
     \begin{split}
         \min_{\mathbf{x}}&~\mathbb{E}_{\mathbb{P}} \left[ f(\mathbf{x}, \tilde{\mathbf{z}}) \right] \\
@@ -241,7 +239,7 @@ $\mathbb{P}$ is the probability distribution of $\tilde{\mathbf{z}}$, which is o
 :name: fig:ambiguity_set
 :figwidth: 300px
 
-An ambiguity set $\mathcal{P}$ of probability distributions. The probability distribution $\mathbb{P}$ of $\tilde{\mathbf{z}}$ takes on one of these distributions, but we are uncertain as to which.
+An ambiguity set $\mathcal{P}$ of probability distributions. The probability distribution $\mathbb{P}$ of $\tilde{\mathbf{z}}$ takes on one of these distributions, but we are uncertain as to which. {cite:p}`shen2020ambiguityset`
 ```
 
 So we formulate a distributionally robust optimisation problem:
@@ -253,7 +251,7 @@ So we formulate a distributionally robust optimisation problem:
 \end{align}
 We optimise with respect to the worst-case distribution $\mathbb{P} \in \mathcal{P}$. It turns out that distributionally robust optimisation can in many cases be solved more efficiently than stochastic programming.
 
-### Modelling to generate alternatives
+### Modelling to generate alternatives {cite:p}`brill1982modeling` {cite:p}`lombardi2020policy`
 Real world problems are quite complex. They may not be captured realistically in a mathematical model. So instead of fixating on a single optimal solution, we can explore multiple near-optimal solutions. For example, we can make multiple scenarios for a carbon-neutral energy system {cite:p}`pickering2022diversity`. It is also helpful to provide policymakers with diverse solution options like a set of energy transition pathways.
 
 {numref}`fig:MGA` shows the concept of exploring the near-optimal solution space. The gray area depicts the feasible space of solutions. The red x represents the single optimal solution $\mathbf{x}^*$ with corresponding optimal objective value $f(\mathbf{x}^*)$. The green area represents the solution space if we allow an $\epsilon \%$ increase in the objective value. We see that there are many similar solutions between $\underline{\mathbf{x}}^\epsilon$ and $\bar{\mathbf{x}}^\epsilon$ which are near-optimal.
