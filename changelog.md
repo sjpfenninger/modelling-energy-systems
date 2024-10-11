@@ -4,6 +4,10 @@ title: Changelog
 
 # Changelog
 
+## Version 2024-10-11
+
+* Added [Mixed complementarity problems](advanced/mixed-complementarity.md)
+
 ## Version 2024-10-03
 
 * Added [duality conversion summary in appendix](appendix/duality-conversion.md)
