@@ -11,9 +11,9 @@ We start by looking at a simple problem. We are a power company that owns two po
 An illustrative economic dispatch problem with two power plants.
 ```
 
-We call this the economic dispatch (ED) problem. More generally, the problem is to distribute the total power demand among available power generators (also called "units" or "generating units") in a way that minimizes the total power generation cost. Each generating unit has different power generation costs based on how it generates power. What we usually consider in this kind of problem is the marginal cost, so, the cost of providing one additional unit of electricity. This implies that we do not consider the cost of building the power plant, only of operating it now that it exists.
+We call this the economic dispatch (ED) problem. More generally, the problem is to distribute the total power demand among available power generators (also called "units" or "generating units") in a way that minimises the total power generation cost. Each generating unit has different power generation costs based on how it generates power. What we usually consider in this kind of problem is the marginal cost, so, the cost of providing one additional unit of electricity. This implies that we do not consider the cost of building the power plant, only of operating it now that it exists.
 
-For a gas-fired power plant, for example, the main contributor to the power cost is the cost of gas. These costs can vary significantly across different units, for instance, the power generation costs for a nuclear unit and a gas-fired unit will differ widely. In addition, renewable generators like a wind farm have no or very small marginal generation costs, since their main resource - wind in the case of a wind farm - is free. We will return to that issue later.
+For a thermal power plant, for example, the main contributor to the power cost is the cost of fuel. These costs can vary significantly across different units, for instance, the power generation costs for a nuclear unit and a gas-fired unit will differ widely. In addition, renewable generators like a wind farm have no or very small marginal generation costs, since their main resource - wind in the case of a wind farm - is free. We will return to that issue later.
 
 ```{admonition} A note on terminology
 :class: tip
@@ -231,7 +231,7 @@ So far we looked at a simple case with only two dimensions, which allows us to r
 P_1 + P_2 \leq 500
 \end{equation}
 
-This does not necessarily make a lot of real-world sense - in our problem formulation we are minimising cost and so we would expect that electricity generation is as small as possible if there is no equality constraint that forces the model to deliver a certain demand. And indeed the new optimum is $J = 500$ ({numref}`fig-dispatchlp-modifieddemand`).
+This does not necessarily make a lot of real-world sense - in our problem formulation we are minimising cost and so we would expect that electricity generation is as small as possible if there is no equality constraint that forces the model to deliver a certain demand. And indeed the new optimum is $J = 550$ ({numref}`fig-dispatchlp-modifieddemand`).
 
 ```{figure} ../images-built/fig_dispatchlp_modifieddemand.jpg
 :name: fig-dispatchlp-modifieddemand
