@@ -42,11 +42,6 @@ The Nash equilibrium is generally used to describe perfectly-competitive markets
 The Pareto optimal strategy, named after the economist Vilfredo Pareto, corresponds to a strategy, where no alternative one exists, that benefits all actors. Therefore, it is the optimal solution for all actors jointly and represents the case for cooperative game theory.
 ```
 
-## Note to Stefan
-I edited the first section and committed my changes (and created a pull request). I'm not very versed in git, and I'm not able to get these changes back. In the file I'm now editing. Please accept all changes to the text above, and I'll continue to edit from this point onwards. I didn't check all the equations in detail - I assume the TA's copied these correctly from the slides, but I do see that they take a bit of liberty with the notation. It would be good to have them re-read this text, to see if I didn't make any obvious mistakes. I also noted they didn't include the numerical examples from the slides, but I guess that's ok - they're also part of the homework.
---------
-
-
 The games we will study can be represented as a set of optimization problems (describing the decision problems of each of the involved actors) that are linked together via a common coupling constraint (typically the market clearing constraint or demand supply balance). The associated mixed complementarity problem is given by the set of KKT conditions of the decision problems of the involved agents and the coupling constraint. Before we continue, we briefly revisit the KKT conditions.
 
 ## Reminder: KKT conditions
