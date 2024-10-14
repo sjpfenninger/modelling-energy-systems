@@ -179,7 +179,8 @@ where :
 \begin{align*}
 & WTP_j = \text{Willingness to pay of demand agent } j \\
 & \overline{Q^s_i} = \text{the maximum consumption capacity of generator } j \\
-\end{align*}
+\end{align*}[mixed-complementarity.md](https://github.com/user-attachments/files/17369779/mixed-complementarity.md)
+
 
 The KKT conditions of the problem {eq}`demand_side` are :
 
