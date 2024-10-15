@@ -12,7 +12,7 @@ Before we move on to this consideration of different market participants as sepa
 
 So far, we have considered the dispatch of power from the system perspective, i.e, how would a central planner dispatch the available power plants in the most cost-efficient way. This assumes that this central planner has full control of and information on these power plants.  Modern, liberalized electricity systems do not work in such a centralized manner, but are rather market-based, meaning that a large set of actors (e.g., producers, consumers) are involved. These actors act in a selfish manner to maximize their profits or utility.
 
-To model the behaviour of different actors in the market, we can use a mix of optimisation and game theory. Let's begin with one of the classic game theory examples, the Prisoner's Dilemma. Assume that two suspected bank robbers, Thelma & Louise, are captured by the police. They are separated and have the choice of whether or not to confess and implicate the other:
+To model the behaviour of different actors in the market, we can use a mix of optimisation and game theory. Let's begin with one of the classic game theory examples, the Prisoner's Dilemma. Assume that two suspected bank robbers, Thelma and Louise, are captured by the police. They are separated and have the choice of whether or not to confess and implicate the other:
 
 * if both confess, they both serve 10 years in jail;
 * if one confesses and implicates the other and the other doesn’t, she goes free, the other serves 20 years;
@@ -20,7 +20,7 @@ To model the behaviour of different actors in the market, we can use a mix of op
 
 The payoff matrix of the prisoner's dilemma can be seen in {numref}`fig-payoff-matrix`. Based on the payoff matrix, the optimal scenario is for neither Thelma nor Louise to confess, as this leads to less years in prison in total. This situation of the payoff matrix (1,1) is the Pareto-optimal outcome of the prisoner's dilemma.
 
-On the contrary, the Nash equilibrium of the dilemma is when both Thelma and Louise confess, and each serves 10 years in prison. The presented example is a case of a "non-cooperative game" where Thelma and Louise selfishly try to maximize their own utility $Π_α$ by selecting a strategy $χ_α$. In such a non-cooperative game, each agent selects its strategy simultaneously & independently, assuming that the strategy of the other players $χ_{-α}$ is given. In a state of Nash equilibrium (denoted with $*$) none of the players has an incentive to deviate from the equilibrium strategy $χ_α^*$ as no alternative feasible strategy $χ_α \in Φ_α$ exists that leads to more utility. Formally, the Nash equilibrium condition reads:
+On the contrary, the Nash equilibrium of the dilemma is when both Thelma and Louise confess, and each serves 10 years in prison. The presented example is a case of a "non-cooperative game" where Thelma and Louise selfishly try to maximize their own utility $Π_α$ by selecting a strategy $χ_α$. In such a non-cooperative game, each agent selects its strategy simultaneously and independently, assuming that the strategy of the other players $χ_{-α}$ is given. In a state of Nash equilibrium (denoted with $*$) none of the players has an incentive to deviate from the equilibrium strategy $χ_α^*$ as no alternative feasible strategy $χ_α \in Φ_α$ exists that leads to more utility. Formally, the Nash equilibrium condition reads:
 
 $$ Π(χ_α*, χ_{-α}*) \geq (χ_α, χ_{-α}*) \quad \forall χ_α \in Φ_α , α \in A $$
 
@@ -36,7 +36,7 @@ $$ Π(χ_α*, χ_{-α}*) \geq (χ_α, χ_{-α}*) \quad \forall χ_α \in Φ_α ,
 
 Linking this back to our example, the case where both Thelma and Louise confess is the Nash equilibrium point since Thelma has no utility if she changes her strategy unilaterally. If she chooses to not confess, instead of 10 years in prison, she will receive 20 years while Thelma will be released. In other terms, her utility will be lower than the Nash-equilibrium point. In summary, in Nash games, each actor chooses the strategy with the highest payoff for themselves, assuming that the other actors have done the same at the same time  {cite}`Gabriel_Conejo_Fuller_Hobbs_Ruiz_2013`.
 
-Such Nash games can be  used to describe perfectly competitive electricity markets, where the producers and consumers are price-takers. This means that the market actors do anticipate how their own actions will influence the market price. In contrast, in Nash-Cournot games, each firm anticipates its impact on the market through the knowledge of the inversion function {cite}`ruiz2014tutorial`. More specifically, in a Nash-Cournot game, the firms compete on production quantity and anticipate the impact of their own actions on the commodity price.
+Such Nash games can be  used to describe perfectly competitive electricity markets, where the producers and consumers are price-takers. This means that the market actors do not anticipate how their own actions will influence the market price. In contrast, in Nash-Cournot games, each firm anticipates its impact on the market through the knowledge of the inversion function {cite}`ruiz2014tutorial`. More specifically, in a Nash-Cournot game, the firms compete on production quantity and anticipate the impact of their own actions on the commodity price.
 
 ```{admonition} Pareto Optimal Outcome
 The Pareto optimal strategy, named after the economist Vilfredo Pareto, corresponds to a strategy, where no alternative one exists, that benefits all actors. Therefore, it is the optimal solution for all actors jointly.
@@ -50,7 +50,7 @@ Let's assume a general optimisation problem, as seen below :
 
 ```{math}
 \begin{align}
-    &\min_{x} \ f(x) \\
+    &\min f(x) \\
     &\text{subject to:} \nonumber \\
     &h_i(x) = 0 \quad (λ_{i}) \quad \forall  i \in = 1, \dots, m \nonumber \\
     &g_j(x) \leq 0 \quad (μ_{i}) \quad \forall  j \in = 1, \dots, n \nonumber \\
@@ -79,10 +79,10 @@ The KKT conditions of the problem are the following :
 \end{align}
 ```
 
-For linear and convex quadratic (non-linear) optimisation problems, the KKT conditions pose both sufficient and necessary conditions for optimality. In other words, any solution that satisfies these conditions is guaranteed to be an optimal solution to the optimisation problem. This system of equations is an example of a mixed complementarity problem (see box below). In the following paragraphs, we will examine how MCPs can help us solve market clearing problems from the perspective of market actors.
+For linear and convex quadratic (non-linear) optimisation problems, the KKT conditions pose both sufficient and necessary conditions for optimality. In other words, any solution that satisfies these conditions is guaranteed to be an optimal solution to the optimisation problem. This system of equations is an example of a mixed complementarity problem (see box below). In the following paragraphs, we will examine how Mixed Complementarity Problems (MCP) can help us solve market clearing problems from the perspective of market actors.
 
 ```{note}
-According to {cite}`Gabriel_Conejo_Fuller_Hobbs_Ruiz_2013` a Non Linear Complementarity problem is defined as : If we have a function $F$ the pure Non Linear complementarity problem $NCP(F)$ is to find a $x \in R^n$ such that for all $i$:
+According to {cite}`Gabriel_Conejo_Fuller_Hobbs_Ruiz_2013` a Non Linear Complementarity problem is defined as : If we have a function $F$ the pure Non Linear Complementarity problem $NCP(F)$ is to find a $x \in R^n$ such that for all $i$:
 
 $$
 1. \quad F_i(x) \geq 0 \\
@@ -99,7 +99,7 @@ We will first study a simple, single-time step market clearing problem. We start
 
 ### The market clearing problem from the perspective of the market operator
 
-Let's start with a simple market clearing problem. The market-clearing problem is relevant to a pool-like market. We start by formulating te market clearing problem  from the perspective of the market operator, which aims at maximizing social welfare. The optimisation problem is considered under given price-quantity pairs of supply and demand agents, $(P_i^s, Q_i^s), (P_j^d, Q_j^d)$. The optimisation problem is formulated as :
+Let's start with a simple market clearing problem. The market-clearing problem is relevant to a pool-like market. We start by formulating the market clearing problem  from the perspective of the market operator, which aims at maximizing social welfare. The optimisation problem is considered under given price-quantity pairs of supply and demand agents, $(P_i^s, Q_i^s), (P_j^d, Q_j^d)$. The optimisation problem is formulated as :
 
 ```{math}
 :label: market_clearing
@@ -217,11 +217,11 @@ By concatenating the KKTs of the individual problems ({eq}`supply_side`, {eq}`de
 ### Solving MCPs
 
 There are several ways to determine the equilibrium in this game. We can follow one of the three methods :
-* This MCP can be solved directly either with dedicated solvers such as PATH or as a feasibility problem (NLP or MILP) using optimisation solvers. In simple cases, you can determine the equilibrium solution analytically by deriving best response functions (see further in the Section on Nash-Cournot games). Larger problems, however, are very challenging to solve directly as we are - by definition, due to the complementarity conditions - dealing with non-linear problems.
+* This MCP can be solved directly either with dedicated solvers such as PATH or as a feasibility problem (NLP or MILP) using optimisation solvers. In simple cases, you can determine the equilibrium solution analytically by deriving best response functions (see further in the [Nash-Cournot Chapter](# Nash-Cournot games)). Larger problems, however, are very challenging to solve directly as we are - by definition, due to the complementarity conditions - dealing with non-linear problems.
 * Apply price-search algorithms and iterative methods. The general principle of such methods is as follows: we start by making an educated guess on what the equilibrium price $\lambda$ in the game is. We present this price to each of the agents in the game and solve their decision problems. Those solutions are optimal from their perspective, but may not ensure that demand and supply are matched (Eq. (2)). Based on the mismatch in demand and supply, we adjust the price $\lambda$ accordingly and repeat this process until we have found the equilibrium price $\lambda$. We will not cover these techniques here.
 * For some MCPs, we can derive an equivalent optimisation problem (EOP) and solve it like we do other problems - using mathematical programming languages such as YALMIP or Pyomo and solvers such as Gurobi. This builds on the notion that if we can find an optimisation problem that is described by the same set of KKT conditions as the MCP, solutions to that optimisation problem will -- by definition -- also be solutions to the MCP.
 
-Comparing the KKTs of the **concatenated problem {eq}`MCP_KKT`** with those of the **market-clearing problem {eq}`market_clearing`**, we can deduce that there is a difference in the following constraints :
+Comparing the KKTs of the **concatenated problem {eq}`KKT_market_clearing`** with those of the **market-clearing problem {eq}`market_clearing`**, we can deduce that there is a difference in the following constraints :
 
 \begin{align}
 & VC_i - λ - \underline{μ_i} + \overline{μ_i} =0 \tag{10a} \\
@@ -230,7 +230,7 @@ Comparing the KKTs of the **concatenated problem {eq}`MCP_KKT`** with those of t
 & -P^d_j + \lambda - \underline{\nu_j} + \overline{\nu_j} = 0 \quad \forall j \in J \tag{5a}
 \end{align}
 
-However, we know that in competitive electricity markets generators bid their capacity at variable cost and demand agents at their willigness to pay. Any other bid or offer would potentially lead to foregone profits (e.g., offering above variable cost may result in a generator not being cleared while it could have been operating profitably) or loss-making market outcomes (e.g., offering below variable cost may result in running at prices below variable cost, resulting in a los).
+However, we know that in competitive electricity markets generators bid their capacity at variable cost and demand agents at their willigness to pay. Any other bid or offer would potentially lead to foregone profits (e.g., offering above variable cost may result in a generator not being cleared while it could have been operating profitably) or loss-making market outcomes (e.g., offering below variable cost may result in running at prices below variable cost, resulting in a loss).
 
 Hence, we can conclude $VC_i = P^s_i$ and $WTP_j = P^d_j$. Therefore, constraint (10a) is equal to constraint (5b) and (13a) to (5a). Through this observation, we can conclude that the KKTs of the MCP are the same as those of the market-clearing problem. The main implication of this is that a solution that satisfies the KKTs of the market-clearing problem will also be a solution of the MCP. In summary, we have shown that the market-clearing problem is the **equivalent optimization problem (EOP)** of the MCP.
 
@@ -244,7 +244,7 @@ Another formulation of the Nash game above can be presented through the use of a
 ```{math}
 :label: linear demand
 \begin{align}
-$ λ = \overline{λ} - β \cdot \sum_{j \in J} q^d_j
+λ = \overline{λ} - β \cdot \sum_{j \in J} q^d_j
 \end{align}
 ```
 
@@ -257,12 +257,13 @@ Inverse demand function and supply curve, based on supply-side bid pairs.
 ```
 
 ```{math}
-:label : game inverse demand
+:label: game_inverse_demand
 \begin{align}
-& \forall i \in I: &\{\max (λ-VC_i) \cdot q^s_i \tag{8} \\
-& & \text{s.t} 0 \leq q^s_i \leq \overline{Q^s_i} \quad (\underline{μ_i}, \overline{μ_i}) \} \tag{9}\\
-& λ = \overline{λ} - β \cdot \sum_{i \in I} q^s_i \tag{14} & \\
+    & \max \{(\lambda - VC_i) \cdot q^s_i \quad \forall i \in I \tag{8} \\
+    & \text{s.t.} \quad 0 \leq q^s_i \leq \overline{Q^s_i} \quad (\underline{\mu_i}, \overline{\mu_i}) \} \tag{9} \\
+    &\lambda = \overline{\lambda} - \beta \cdot \sum_{i \in I} q^s_i \tag{14} \\ 
 \end{align}
+
 ```
 
 The KKT conditions of the decision problems of the suppliers and the inverse demand function jointly make up the MCP of this Nash game. Note that the inverse demand function participates as-is in the MCP, but is not part of the optimisation problem (it is outside of the curly brackets). That is the case since we are studying a Nash game, and therefore, the suppliers do not consider the impact of their actions on the price.
@@ -275,12 +276,13 @@ The KKT conditions of the decision problems of the suppliers and the inverse dem
 & -\underline{μ_i} \cdot q^s_i = 0 \tag{10b} \\
 & -\overline{μ_i} \cdot (q^s_i - \overline{Q^s_i}) = 0 \tag{10c} \\
 & \underline{μ_i}, \overline{μ_i} \geq 0 \tag{10d} \} \\
-& λ = \overline{λ} - β \cdot \sum_{i \in I} \tag{14} \\
+& λ = \overline{λ} - β \cdot \sum_{i \in I} q^s_i \tag{14} \\
 \end{align}
 ```
 With the MCP defined, we can now derive the Equivalent Optimization problem to determine the equilibrium solution to the {eq}`game inverse demand`. Remember here, that the KKT conditions of the EOP have to match the MCP in order for the EOP to provide a solution to the initial problem. To derive the EOP, we make use of the graphical interpretation of the problem show in {numref}`fig-inverse-demand`.
 
-From the discussion above, we know that the Nash game between suppliers and consumers in perfectly competitive electricity markets will maximize social welfare in that market. Hence, we can formulate a candidate EOP which aims to maximize social welfare. Based on {numref}`fig-inverse-demand-area` and the fact that  social welfare is the area between the demand and supply curve, social welfare can be computed as
+From the discussion above, we know that the Nash game between suppliers and consumers in perfectly competitive electricity markets will maximize social welfare in that market. Hence, we can formulate a candidate EOP which aims to maximize social welfare. Based on {numref}`fig-inverse-demand-area` and the fact that  social welfare is the area between the demand and supply curve, social welfare can be computed as :
+
 $$
 SW = (ABDE) - (ABC) - \text{Area of sketched polygon} = \overline{\lambda} \cdot \sum_{i} q^s_i - \frac{1}{2}\beta \sum_{i} \left(q^s_i\right)^2 - \sum_{i} VC_i \cdot q^s_i
 $$
@@ -314,9 +316,9 @@ To simplify notation, we will make use of an inverse demand curve to simulate th
 ```{math}
 :label: Nash_Cournot
 \begin{align}
-& \forall i \in I: & \{ \max (λ-VC_i) \cdot q^s_i \tag{8} \\
-& &\text{s.t} 0 \leq q^s_i \leq \overline{Q^s_i} \quad (\underline{μ_i}, \overline{μ_i}) \ \tag{9}\\
-&  λ = \overline{λ} - β \cdot \sum_{i \in I} \tag{14} \} & \\
+    &\max \{(\lambda - VC_i) \cdot q^s_i \quad &\forall i \in I \tag{8} \\
+    & & \text{s.t.} \quad 0 \leq q^s_i \leq \overline{Q^s_i} \quad (\underline{\mu_i}, \overline{\mu_i}) \tag{9} \\
+    &\lambda = \overline{\lambda} - \beta \cdot \sum_{i \in I} q^s_i \} \tag{14} \\ 
 \end{align}
 ```
 The MCP associated with the Nash-Cournot game {eq}`Nash_Cournot` can be obtained by deriving the KKT conditions of the optimisation problems that make up the game:
@@ -355,7 +357,7 @@ The resulting EOP for the Nash-Cournot game with $i \in I$ participants reads:
 ```{math}
 :label: EOP_Nash_Cournot
 \begin{align}
-& \max \overline{\lambda} \cdot \sum_{i} q^s_i - \frac{1}{2}\beta \sum_{i} \left(q^s_i\right)^2 - \frac{1}{2}\beta \sum_{i} (q^s_i)^2 - \sum_{i} VC_i \cdot q^s_i \tag{15'} \\
+& \max \overline{\lambda} \cdot \sum_{i} q^s_i - \frac{1}{2}\beta \sum_{i} \left(q^s_i\right)^2 - \frac{1}{2}\beta (\sum_{i} q^s_i)^2 - \sum_{i} VC_i \cdot q^s_i \tag{15'} \\
 & \text{s.t}\\
 & 0 \leq q^s_i \leq Q^s_i \quad (\underline{μ_i}, \overline{μ_i}) \quad \forall i \in I \tag{3} \\
 \end{align}
@@ -367,7 +369,7 @@ Note that the objective function of this EOP is no longer a measure of social we
 
 With the introduction of the Mixed Complementarity problems as a way to solve the Nash and Nash-Cournot games, we have introduced a paradigm shift in the way we study interactions between self-interested market participants. Up to now, we were considering the market only from the side of a central market operator that aims to clear the market. Now, with the techniques introduced in this section, we can study simple electricity markets as the interaction between different market actors. Specifically, through the Nash games, we can understand the participation of agents in a perfectly competitive market. To study how strategic behavior and market power change market outcomes, we introduced the Nash-Cournot equilibrium.
 
-For both Nash and Nash-Cournot games, we developed formulations of the game (i.e., the set of interrelated optimisation problems and the coupling constraint) and the corresponding a mixed complementarity problem (i.e., the KKT conditions of the decision problems of the involved actors and the coupling constraint). We discussed how we can determine the equilibria in such games, focusing on equivalent optimization problems. For the Nash game, we showed that the equivalent optimization problem is a maximization of social welfare. We also obtained an equivalent optimization problem for the Nash-Cournot game.
+For both Nash and Nash-Cournot games, we developed formulations of the game (i.e., the set of interrelated optimisation problems and the coupling constraint) and the corresponding Mixed Complementarity Problem (i.e., the KKT conditions of the decision problems of the involved actors and the coupling constraint). We discussed how we can determine the equilibria in such games, focusing on equivalent optimization problems. For the Nash game, we showed that the equivalent optimization problem is a maximization of social welfare. We also obtained an equivalent optimization problem for the Nash-Cournot game.
 
 These games allow making relationships and interactions between market agents explicit. In complex cases, for which the formulation of an optimisation problem is non-trivial, MCPs offer a more intuitive way of formalizing problems.
 
