@@ -1,8 +1,8 @@
 (content:sensitivity-analysis)=
 
-# Dealing with uncertainty: sensitivity analysis
+# Sensitivity analysis
 
-## Uncertainty
+## Introduction to uncertainty
 
 It is important that we do not just set up our model, pick values for our parameters, run our model and look at the results, and then call it a day. We need to consider uncertainty in our work.
 
