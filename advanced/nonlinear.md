@@ -1,8 +1,11 @@
 (content:nonlinear)=
 
-# Nonlinear problems
+# Non-Linear Programming (NLP)
 
-In this chapter, we extend what we have learned so far to situations where the objective function and/or at least one of the constraints are non-linear functions. You will learn about the necessary and sufficient condition for the optimal solution of non-linear problems, without and with equality constraints. For this, we will look at the classical economic dispatch (CED) as a nonlinear problem (NLP). Beyond analytical tools that help us find optimal solution to such problems when they are of limited complexity, we will present some algorithms that allow to solve more complex problems with many degrees of freedom numerically.
+In this chapter, we will extend what we have learned about optimisation problems to situations where the objective function and/or at least one of the constraints are non-linear functions. First, we will learn about the necessary and sufficient condition for the optimal solution of non-linear problems, without and with equality constraints. 
+For this, we will look at the classical economic dispatch (CED) as a nonlinear problem (NLP). Beyond analytical tools that help us find optimal solution to such problems when they are of limited complexity, we will present some algorithms that allow to solve more complex problems with many degrees of freedom numerically.
+
+## The Classic Economic Dispatch revisited
 
 We learned about linear optimization in the previous chapter **2.1**, with the example of economic dispatch, which we can model as a linear optimization problem. To do so, we had to abstract from a lot of real world detail to be able to define the problem with a linear objective function and constraints is a stark abstraction. However, many things in real world energy systems are not linear. For example, the efficiency of a power plant may depend on its production level, rather than being constant, which means that the amount of fuel used for the production of one unit of electricity depends on .
 
