@@ -161,7 +161,7 @@ The KKT conditions of the problem {eq}`supply_side` are the following :
 & VC_i - λ - \underline{μ_i} + \overline{μ_i} =0 \tag{10a} \\
 & 0 \leq q^s_i \leq \overline{Q^s_i} \quad (\underline{μ_i}, \overline{μ_i}) \tag{9} \\
 & -\underline{μ_i} \cdot q^s_i = 0 \tag{10b} \\
-& -\overline{μ_i} \cdot (q^s_i - \overline{Q^s_i}) = 0 \tag{10c} \\
+& \overline{μ_i} \cdot (q^s_i - \overline{Q^s_i}) = 0 \tag{10c} \\
 & \underline{μ_i}, \overline{μ_i} \geq 0 \tag{10d} \\
 \end{align}
 ```
@@ -261,7 +261,7 @@ Inverse demand function and supply curve, based on supply-side bid pairs.
 \begin{align}
     & \max \{(\lambda - VC_i) \cdot q^s_i \quad \forall i \in I \tag{8} \\
     & \text{s.t.} \quad 0 \leq q^s_i \leq \overline{Q^s_i} \quad (\underline{\mu_i}, \overline{\mu_i}) \} \tag{9} \\
-    &\lambda = \overline{\lambda} - \beta \cdot \sum_{i \in I} q^s_i \tag{14} \\ 
+    &\lambda = \overline{\lambda} - \beta \cdot \sum_{i \in I} q^s_i \tag{14} \\
 \end{align}
 
 ```
@@ -318,7 +318,7 @@ To simplify notation, we will make use of an inverse demand curve to simulate th
 \begin{align}
     &\max \{(\lambda - VC_i) \cdot q^s_i \quad &\forall i \in I \tag{8} \\
     & & \text{s.t.} \quad 0 \leq q^s_i \leq \overline{Q^s_i} \quad (\underline{\mu_i}, \overline{\mu_i}) \tag{9} \\
-    &\lambda = \overline{\lambda} - \beta \cdot \sum_{i \in I} q^s_i \} \tag{14} \\ 
+    &\lambda = \overline{\lambda} - \beta \cdot \sum_{i \in I} q^s_i \} \tag{14} \\
 \end{align}
 ```
 The MCP associated with the Nash-Cournot game {eq}`Nash_Cournot` can be obtained by deriving the KKT conditions of the optimisation problems that make up the game:
