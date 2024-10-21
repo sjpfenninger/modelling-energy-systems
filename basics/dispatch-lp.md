@@ -298,8 +298,8 @@ When formulating or dealing with problems that are small enough to write down, i
 
 \begin{align}
 \text{Min.} \; & f(x) \\
-\text{s.t.} \; & g_i(x) \leq 0, \quad i = 1, \ldots, n \\
-& h_j(x) = 0, \quad j = 1, \ldots, n
+\text{s.t.} \; & h_i(x) = 0, \quad i = 1, \ldots, n\\
+& g_j(x) \leq 0, \quad j = 1, \ldots, n
 \end{align}
 
 There is no universally agreed upon standard form. You will see slightly different formulations described as standard form elsewhere, for example a maximisation rather than a minimisation or different constraint notations.

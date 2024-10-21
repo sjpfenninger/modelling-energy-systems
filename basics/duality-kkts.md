@@ -1,8 +1,8 @@
 # Duality and KKT conditions
 
-In this chapter we take a few steps back to consider some of the mathematical properties of the types of problems we are looking at. Understanding these is not strictly necessary - you could just use a modelling language ({numref}`content:modelling-languages`) to formulate and let the computer solve your problem while ignoring everything in this chapter.
+In this chapter we take a few steps back to consider some of the mathematical properties of the types of problems we are looking at. Understanding these is not strictly necessary - you could just use a modelling language <!-- TODO ({numref}`content:modelling-languages`) --> to formulate and let the computer solve your problem while ignoring everything in this chapter.
 
-However, understanding duality and KKT conditions will be useful in various ways. Duality can be exploited to perform sensitivity analyses and is important when using optimisation methods to solve market problems ({numref}`content:milp`). An understanding of KKT conditions will become relevant particularly when we look at mixed complementarity ({numref}`content:mixed-complementarity`) and non-linear programming ({numref}`content:nonlinear`) problems. As you will see below, duality and KKT conditions are also related. Understanding one can help you understand the other, and vice versa.
+However, understanding duality and KKT conditions will be useful in various ways. Duality can be exploited to perform sensitivity analyses and is important when using optimisation methods to solve market problems ({numref}`content:milp`). An understanding of KKT conditions will become relevant particularly when we look at mixed complementarity ({numref}`content:mixed-complementarity`) and non-linear programming <!--TODO ADD CHAPTER REF TO NLP--> problems. As you will see below, duality and KKT conditions are also related. Understanding one can help you understand the other, and vice versa.
 
 (content:duality-kkts:duality)=
 
@@ -151,6 +151,9 @@ Notice that when there is a factor of $P_\mathbf{1}$ in a primal constraint, thi
 
 We can solve the dual problem to obtain the optimal solution ($X_1 = -1, X_2 = 0, X_3 = 0, X_4 = 0, X_5 = 4$). Recall that this solution to the dual problem gives the shadow prices of the primal problem. Looking at the shadow prices also reveals something about the primal constraints. When the shadow price is zero, that means the constraint is non-binding. In our example, only the first constraint ($P_1 \leq 300$, capacity limit on unit 1) and last constraint ($P_1 + P_2 = 500$, demand constraint) are active. If the right-hand side of the demand constraint is changed marginally (by one unit) then the optimal value of the objective function will change by $X_5 = 4$. The objective function value is 1700 in both the primal and dual solution. The optimal value of the objective function in the primal problem is always equal to the optimal value of the dual objective function.
 
+
+(content:duality-kkts:duality-conversion-strategy)=
+
 ### Strategies to convert a primal into its dual problem
 
 The easiest approach to convert a primal problem to its dual problem, and the one we use above, is:
@@ -178,11 +181,7 @@ How to convert a primal problem into a dual problem From the "SOB method": Benja
 
 In the appendix chapter "{ref}`content:appendix:duality-examples`" you can find additional examples of duality, including an example of how duality allows you to see the same problem from two perspectives (the buyer and the seller of ingredients for a lunch).
 
-<!--
-
-### Applications of duality
-
- TODO -->
+(content:duality-kkts:kkt-conditions)=
 
 ## Karush-Kuhn-Tucker (KKT) conditions
 
@@ -192,7 +191,7 @@ We start from unconstrained optimisation and gradually introduce equality and in
 
 ### Unconstrained optimisation
 
-Let's go back to basic optimisation (high school mathematics). Whenever you had to optimise (minimise or maximise) a function, you were doing unconstrained optimisation. To determine the maximum or minimum of a certain function, we should take the derivative of that function w.r.t. the decision variable $x$ and equate it to zero (necessary condition for optimality). Then we take the second order derivative to see if it is a minimum or maximum (sufficient condition). If there are multiple variables, we take partial derivatives.
+Let's go back to basic optimisation (high school mathematics). Whenever you had to optimise (minimise or maximise) a function, you were doing unconstrained optimisation. To determine the maximum or minimum of a certain function, we should take the derivative of that function with respect to (w.r.t.) the decision variable $x$ and equate it to zero (necessary condition for optimality). Then we take the second order derivative to see if it is a minimum or maximum (sufficient condition). If there are multiple variables, we take partial derivatives.
 
 \begin{align}
     \min f(x) & \rightarrow & \frac{\partial f(x)}{\partial x} =  0 \quad \text{(necessary condition)} \\
@@ -205,9 +204,18 @@ A point that satisfies the necessary condition for optimality ($\frac{\partial f
 
 ### Equality constrained optimisation
 
-In energy systems, unfortunately we do not deal with many unconstrained optimisation problems---usually there are at least a few constraints. Consider the example of economic dispatch that we have studied. We will build up the complexity of the problem throughout this document to illustrate how we can use duality and KKT conditions to solve such problems and interpret their solutions.
+In energy systems, unfortunately we do not deal with many unconstrained optimisation problems---usually there are at least a few constraints. Consider the example of economic dispatch from {numref}`content:lp:economic-dispatch`. We will again use an economic dispatch example, and build up the complexity of the problem throughout this chapter to illustrate how we can use KKT conditions and duality to solve such problems and interpret their solutions.
 
-Consider two generators $G_1$ and $G_2$ with cost structures $C_1(g_1) = a_1 + b_1 \cdot g_1^2$ and $C_2(g_2) = a_2 + b_2 \cdot g_2^2$. Note that the cost functions are quadratic _not_ linear. This is quite typical in power systems. So we have a quadratic programming problem, but it is still a convex programming problem. Therefore, the techniques we use here also apply to linear programming problems. We need to dispatch the generators to meet a load $L$ at minimal cost. We will ignore the capacity constraints of the generators for now. Thus, we have the following optimisation problem:
+Consider two generators $G_1$ and $G_2$ with cost structures $C_1(g_1) = a_1 + b_1 \cdot g_1^2$ and $C_2(g_2) = a_2 + b_2 \cdot g_2^2$. Note that the cost functions here are quadratic, _not_ linear. This is quite typical in power systems.
+
+Unlike before, we now have a **quadratic programming (QP)** problem. This is still a convex optimisation problem. Therefore, the techniques we use here also apply to linear programming problems.
+
+```{admonition} Reminder: convex optimisation
+:class: tip
+[Convex optimisation](https://en.wikipedia.org/wiki/Convex_optimization) means that we are dealing with convex functions over convex regions. Both linear and quadratic optimisation problems are convex. In general, however, many kinds of non-linear optimisation problems are non-convex, and we cannot apply the techniques we discuss here to them.
+```
+
+We need to dispatch the generators to meet a load $L$ at minimal cost. We will ignore the capacity constraints of the generators for now. Thus, we have the following optimisation problem:
 
 \begin{align}
     & \text{min.} \quad a_1 + b_1 \cdot g_1^2+ a_2 + b_2 \cdot g_2^2 \\
@@ -239,7 +247,7 @@ Now we will generalise the Lagrangian to any equality constrained optimisation p
     \text{min.} \; & f(x) \\
     \text{s.t.} \; & h_i(x) = 0 \quad (\lambda_i) \quad \forall i \in \{1,2,...,m\}
 \end{align}
-The equality constraints are written in standard form (as introduced in {numref}`content:lp:economic-dispatch`), so we have "= 0" on the right-hand side. There are $m$ equality constraints. We associate a Lagrange multiplier $\lambda_i$ to each constraint.
+The equality constraints are written in standard form (as introduced in {numref}`content:lp:standard-form`), so we have "= 0" on the right-hand side. There are $m$ equality constraints. We associate a Lagrange multiplier $\lambda_i$ to each constraint.
 
 The Lagrangian is then:
 \begin{equation}
@@ -253,11 +261,10 @@ We can find the optimal solution ($x^*, \lambda_i^*$) to the original optimisati
     & \frac{\partial \mathcal{L}}{\partial \lambda_i} = h_i(x) = 0 \quad \forall i \in  \{1,2,...,m\}
 \end{align}
 
-:::{admonition} Note on notation and standard form
+:::{admonition} Notation and standard form
 :class: tip
 
-* In this section, we will use $h_i(x)$ to refer to equality constraints. In the rest of this reader, we used $g_i(x)$ to refer to equality constraints.
-* Note that we will write all constraints in a standard form with zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints below). This ensures that you don't make mistakes when you're constructing the Lagrangian. Note the difference with the approach above to construct the dual problem! This highlights that there is no generally "correct" approach to write a standard form, but it makes sense to go with an approach that works best for what you are doing.
+You will notice that in this section, we write all constraints in a standard form with zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints below). This ensures that you don't make mistakes when you're constructing the Lagrangian. In {numref}`content:duality-kkts:duality` above we used a different standard form that makes it easier to construct the dual problem. This highlights that there is no generally "correct" approach to write a standard form. It makes sense to go with an approach that works best for what you are doing.
 
 :::
 
@@ -270,14 +277,14 @@ The equality constrained optmisation problem also has a graphical interpretation
 Graphical representation of the equality constrained economic dispatch problem
 ```
 
-$g_1$ and $g_2$ are on the axes. The red contour lines are constant values of the objective function, or total operating cost. The total operating cost increases as $g_1$ and $g_2$ increase. The blue line is the equality constraint. The green dot is the optimal solution. At this point, the gradient of the objective function $\nabla f(x)$ (red arrow) is 1) perpendicular to the constraint and 2) parallel to the gradient of the constraint $\nabla h(x)$ (blue arrow). This can be expressed as:
+$g_1$ and $g_2$ are on the axes. The red contour lines are constant values of the objective function (total operating cost). The total operating cost increases as $g_1$ and $g_2$ increase. The blue line is the equality constraint. The green dot is the optimal solution. At this point, the gradient of the objective function $\nabla f(x)$ (red arrow) is (1) perpendicular to the constraint and (2) parallel to the gradient of the constraint $\nabla h(x)$ (blue arrow). This can be expressed as:
 \begin{equation}
     \nabla f(x) + \lambda \cdot \nabla h(x) = 0
 \end{equation}
 
 ### Inequality and equality constrained optimisation
 
-In energy systems, we not only have equality constraints, but also inequality constraints. For example, returning to the economic dispatch example, the generators have capacity constraints $\overline{G_1}$ and $\overline{G_2}$ and cannot run at negative output (lower bound of zero). The optimisation problem becomes:
+In energy systems, we not only have equality constraints, but also inequality constraints. For example, returning to the economic dispatch example, the generators have maximum generation capacity constraints $\overline{G_1}$ and $\overline{G_2}$ and cannot run at negative output (lower bound of zero). The optimisation problem becomes:
 
 \begin{align}
     \text{min.} \; & a_1 + b_1 \cdot g_1^2+ a_2 + b_2 \cdot g_2^2 \\
@@ -286,7 +293,7 @@ In energy systems, we not only have equality constraints, but also inequality co
     & 0 \leq g_2 \leq \overline{G_2}
 \end{align}
 
-To solve the problem with equality and inequality constraints, we extend our graphical interpretation. The grey area in {numref}`fig:KKT_eqconst_ineqconst_graphical` is the feasible region because it represents the feasible range of output of $g_1$ and $g_2$. The set of feasible solutions---the values of $g_1$ and $g_2$ that satisfy both the equality and inequality constraints---lie on the blue line within the grey area.
+To solve the problem with equality and inequality constraints, we extend our graphical interpretation. The grey area in {numref}`fig:KKT_eqconst_ineqconst_graphical` is the feasible region because it represents the feasible range of output of $g_1$ and $g_2$. The set of feasible solutions---the values of $g_1$ and $g_2$ that satisfy both the equality and inequality constraints---lie on the blue line within the grey area. This is exactly what we already did in {numref}`content:lp:economic-dispatch`, just with different notation for our generation and demand constraints - and as will become clear in FIGURE, a key difference in where the optimal solution lies, since we are dealing with a quadratic rather than a linear problem.
 
 ```{figure} ../images/KKT_eqconst_ineqconst_graphical.png
 :name: fig:KKT_eqconst_ineqconst_graphical
@@ -297,7 +304,14 @@ Graphical representation of the equality and inequality constrained economic dis
 
 The optimal solution needs to be part of the feasible solution set. In this case, we see that the optimal solution (green dot) is indeed in the feasible area. Thus the inequality constraints $0 \leq g_1 \leq \overline{G_1}$ and $0 \leq g_2 \leq \overline{G_2}$ actually do not play a role in this particular example.
 
-However, this is not always the case. What if the capacity limits on $g_1$ and $g_2$ do play a role? Then we want to figure out which inequality constraints are active. If we can identify the active constraints, we can replace these constraints with equality constraints (e.g., $g_1 \leq \overline{G_1}$ becomes $g_1 = \overline{G_1}$) and ignore all inactive constraints (because they don't influence the solution). Then we are left with an equality constrained optimisation problem which we know how to solve.
+:::{admonition} From linear to quadratic problems
+:class: tip
+
+Recall that in {numref}`content:lp:economic-dispatch`, we were able to say that an optimal solution (if it exists) would _always_ lie at one of the corners of the feasible region. Here, however, we now have a solution in the interior of the feasible region. You can see why when you look at the contour lines: they are no longer linear. We are dealing with a quadratic problem here.
+
+:::
+
+However, it will not always be the case that none of the inequality constraints play a role. What if the capacity limits on $g_1$ and $g_2$ do play a role? Then we want to figure out which inequality constraints are active. If we can identify the active constraints, we can replace these constraints with equality constraints (e.g., $g_1 \leq \overline{G_1}$ becomes $g_1 = \overline{G_1}$) and ignore all inactive constraints (because they don't influence the solution). Then we are left with an equality constrained optimisation problem which we know how to solve.
 
 For most problems, we do not know which constraints will be active/binding. Luckily, we can use a set of optimality conditions called Karush-Kuhn-Tucker (KKT) conditions to reflect the fact that in some cases inequality constraints are binding and in some cases they are not.
 
@@ -312,21 +326,21 @@ There are $m$ equality constraints associated with Lagrange multipliers $\lambda
 
 The Lagrangian is:
 ```{math}
-:label: eqn:Lagrangian
+:label: eqn:kkts-Lagrangian
 \begin{equation}
     \mathcal{L} = f(x) + \sum_{i=1}^m \lambda_i \cdot h_i(x) + \sum_{j=1}^{n} \mu_j \cdot g_j(x)
 \end{equation}
 ```
 To formulate the Lagrangian, we followed the same logic as before: elevate the equality _and_ inequality constraints to the Lagrangian. The Lagrangian has three components: the original objective function, the equality constraints multiplied by their Lagrange multipliers, and the inequality constraints multiplied by their Lagrange multipliers.
 
-Then we derive the following set of equations that characterises the optimal solution. These are the KKT conditions.
+Then, with the help of the Lagrangian, we derive the following set of equations that characterises the optimal solution. These are the KKT conditions.
 
 ```{math}
-:label: eqn:KKT
+:label: eqn:kkts-KKT
 \begin{align}
     & \frac{\partial \mathcal{L}}{\partial x} = 0   \quad & (\text{Optimality conditions})\\
     & \frac{\partial \mathcal{L}}{\partial \lambda_i} = h_i(x) = 0 \quad \forall i \in  \{1,2,...,m\}  \quad &  (\text{Primal feasibility}) \\
-    & g_j(x) \leq 0 \quad \forall j \in  \{1,2,...,n\}  \quad & (\text{Primal feasibility}) \\
+    & \frac{\partial \mathcal{L}}{\partial \mu_j} = g_j(x) \leq 0 \quad \forall j \in  \{1,2,...,n\}  \quad & (\text{Primal feasibility}) \\
     & \mu_j \cdot g_j(x) =  0 \quad \forall j \in  \{1,2,...,n\}  \quad & (\text{Complementary slackness conditions}) \\
     & \mu_j \geq 0 \quad \forall j \in  \{1,2,...,n\} & (\text{Dual feasibility})
 \end{align}
@@ -347,7 +361,7 @@ Let's look at each of these equations in a little more detail. We have:
 4. The multiplication of a Lagrange multiplier with its associated inequality constraint is zero $\rightarrow$ complementary slackness conditions (indicates that in some cases the inequality constraints might not be binding)
 5. Lagrange multipliers $\mu_j$ need to be positive or zero $\rightarrow$ dual feasibility
 
-Let's look more carefully at the interpretation of the complementary slackness conditions---the last two constraints in Equation {eq}`eqn:KKT`:
+Let's look more carefully at the interpretation of the complementary slackness conditions---the last two constraints in Equation {eq}`eqn:kkts-KKT`:
 
 \begin{align}
     & \mu_j \cdot g_j(x) =  0 \quad \forall j \in  \{1,2,...,n\}  \\
@@ -356,16 +370,22 @@ Let's look more carefully at the interpretation of the complementary slackness c
 
 If a constraint is binding, we can replace the inequality sign with an equality sign, so we have $g_j(x) = 0$. Then, the Lagrange multiplier $\mu_j$ may take on any non-zero value ($\mu_j \geq 0$). Since $g_j(x) = 0$ in this case, the constraint $\mu_j \cdot g_j(x) = 0$ will be satisfied no matter the value of $\mu_j$. On the other hand, if the constraint is non-binding ($g_j(x) < 0$), the Lagrange multiplier will equal zero ($\mu_j = 0$). Otherwise the constraint $\mu_j \cdot g_j(x) = 0$ would be violated. This shows that an inequality constraint can only affect the optimal solution if it is binding. Note that these constraints are non-linear.
 
-Now we want to find a solution to the set of equations (values for $x$, $\lambda_i$, and $\mu_j$). For most, but not all, convex problems, these conditions are sufficient and necessary conditions for optimality, so the obtained solution would be an optimal solution.
+Now we want to find a solution to the set of equations (values for $x$, $\lambda_i$, and $\mu_j$). For most, but not all, convex problems, these conditions are sufficient and necessary conditions for optimality, so the obtained solution would be an optimal solution (note once again, that KKT conditions can only be formulated for convex problems - this includes the kinds of problems we discuss here, purely linear problems and problems with a quadratic (nonlinear) objective function).
+
+:::{admonition} Condensed form of KKT conditions
+:class: tip
 
 Note that sometimes KKT conditions are written in condensed form:
+
 \begin{align}
     & \nabla f(x) + \sum_{i=1}^m \lambda_i \cdot \nabla h_i(x) + \sum_{j=1}^{n} \mu_j \cdot \nabla g_j(x) = 0  \\
     & \mu_j \cdot g_j(x) =  0 \quad \forall j \in  \{1,2,...,n\}  \\
     & \mu_j \geq 0 \quad \forall j \in  \{1,2,...,n\}
 \end{align}
 
-Let's revisit the economic dispatch example and apply KKT conditions. In standard form, the constraints are written separately with a zero on the right-hand sign and "=" or "$\leq$" signs:
+:::
+
+Let's revisit the economic dispatch example and apply KKT conditions. In the standard form we want to use here, the constraints are written separately with a zero on the right-hand sign and "=" or "$\leq$" signs:
 \begin{align}
     \text{min.} \; & a_1 + b_1 \cdot g_1^2+ a_2 + b_2 \cdot g_2^2 &  \\
     \text{s.t.} \; & g_1 + g_2 - L = 0 \quad &(\lambda) \\
@@ -375,7 +395,7 @@ Let's revisit the economic dispatch example and apply KKT conditions. In standar
     &  g_2 - \overline{G_2} \leq 0 \quad &(\mu_4)
 \end{align}
 
-This makes it easy to write the Lagrangian following Equation {eq}`eqn:Lagrangian`:
+This makes it easy to write the Lagrangian, following Equation {eq}`eqn:kkts-Lagrangian`:
 \begin{align}
     \mathcal{L} = & a_1 + b_1 \cdot g_1^2+ a_2 + b_2 \cdot g_2^2 + \lambda \cdot ( g_1 + g_2 - L ) \\
     & + \mu_1 \cdot ( - g_1) + \mu_2 \cdot ( g_1 - \overline{G_1})  \\
@@ -423,9 +443,11 @@ Given this test solution, we know that $\mu_1$, $\mu_2$, $\mu_3$ $= 0$ and $\mu_
 
 The only unknown variables are $g_1$, $\lambda$, and $\mu_4$, which we can solve for. If we can find a solution, it is optimal. We can also ask ourselves "Does the solution make sense? Is there an alternative set of binding inequality constraints that would yield a better solution?" to check that indeed we have found the optimal solution. The new solution---orange dot in {numref}`fig:KKT_g2const_graphical`---satisfies the constraints but comes at a higher total operating cost than before.
 
+Ok, you might ask: what is this all good for? KKT conditions can help us find the optimal solutions to nonlinear problems (we don't need them for linear problems), and we will apply them when looking at mixed complementarity problems in {numref}`content:mixed-complementarity`. But they also give us a different view on duality, and this is what we want to turn our attention to last.
+
 ## The connection between duality and KKT conditions
 
-Lastly, we will discuss the relationship between duality and KKT conditions. We know that for every primal problem, there exists a dual problem, but how do we formulate the dual problem?
+We know that for every primal problem, there exists a dual problem, but how do we formulate the dual problem?
 
 Recall the general formulation of a primal problem:
 \begin{align}
@@ -445,7 +467,7 @@ The Lagrangian dual function, or dual function, is the minimum of the Lagrangian
 \end{equation}
 with "inf" a generalisation of the "min" operator.
 
-The dual function defines a lower bound on the optimal value of the primal problem $p^*$: $\mathcal{D}(\lambda,\mu) \leq p^*$ for any $\mu \geq 0$ and any $\lambda$. We want to find the best possible lower bound of the primal problem, which means maximising the lower bound:
+The dual function defines a lower bound on the optimal value $p^*$ of the primal problem: $\mathcal{D}(\lambda,\mu) \leq p^*$ for any $\mu \geq 0$ and any $\lambda$. We want to find the best possible lower bound of the primal problem, which means maximising the lower bound:
 ```{math}
 :label: eqn:dual
 \begin{align}
@@ -455,9 +477,11 @@ The dual function defines a lower bound on the optimal value of the primal probl
 ```
 This is the dual problem. We denote the optimal value of this problem as $d^*$.
 
-As mentioned at the beginning, strong duality is when the optimal value of the primal equals the optimal value of the dual. In our new terminology, this is written as $d^* = p^*$. Strong duality can be used to show that a solution that satisfies the KKT conditions must be an optimal solution to the primal and dual problems. Meaning, the KKT conditions are necessary and sufficient conditions for optimality. Weak duality is when $d^* \leq p^*$. This holds even for non-convex problems. $p^* - d^*$ is referred to as the duality gap.
+As mentioned at the beginning, strong duality is when the optimal value of the primal equals the optimal value of the dual. In our new terminology, this is written as $d^* = p^*$. Strong duality can be used to show that a solution that satisfies the KKT conditions must be an optimal solution to the primal and dual problems. In other words, the KKT conditions are necessary and sufficient conditions for optimality.
 
-In practice, we do not start from the general expression in Equation {eq}`eqn:dual` to derive the dual problem. Instead, we write the primal problem in standard form, for which we know the relation between the dual and the primal problem, or we use the tables introduced above.
+Weak duality is when $d^* \leq p^*$. This holds even for non-convex problems. In such problems, $p^* - d^*$ is referred to as the duality gap.
+
+In practice, we do not need to start from the general expression in Equation {eq}`eqn:dual` to derive the dual problem. Instead, we can simply follow the steps introduced above ({numref}`content:duality-kkts:duality-conversion-strategy`): write the primal problem in standard form and then mechanistically translate it into its dual counterpart.
 
 ## Further reading
 

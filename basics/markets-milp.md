@@ -163,6 +163,8 @@ The full problem we end up with looks like this, with most of the components ref
     * Ramping constraint: $P_{Gi, t-1} - P_{Git} \leq R_{Gi}^{down}$ and $P_{Git} - P_{Gi, t-1} \leq R_{Gi}^{up} \quad \forall i, \forall t$
     * Binary variable constraint: $u_{it} \in \{0, 1\} \quad \forall i, \forall t$
 
+(content:milp:power-markets)=
+
 ## Power markets
 
 So far we've only looked at the generation side, by solving economic dispatch and unit commitment problems. Now we will extend our view slightly to consider the coordination between the producers and consumers of electricity ({numref}`fig:markets-milp:markets_actors_overview`). This means taking a step into power markets. We will focus on modelling a day-ahead wholesale market auction, such as the one operated by [EPEX SPOT](https://www.epexspot.com/en/basicspowermarket) in Europe.
