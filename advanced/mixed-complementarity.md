@@ -197,7 +197,7 @@ By concatenating the KKTs of the individual problems (Eqs. {eq}`supply_side`, {e
 & VC_i - λ - \underline{μ_i} + \overline{μ_i} =0 \tag{10a} \\
 & 0 \leq q^s_i \leq \overline{Q^s_i} \quad (\underline{μ_i}, \overline{μ_i}) \tag{9} \\
 & -\underline{μ_i} \cdot q^s_i = 0 \tag{10b} \\
-& -\overline{μ_i} \cdot (q^s_i - \overline{Q^s_i}) = 0 \tag{10c} \\
+& \overline{μ_i} \cdot (q^s_i - \overline{Q^s_i}) = 0 \tag{10c} \\
 & \underline{μ_i}, \overline{μ_i} \geq 0 \tag{10d} \\
 & -WTP_j + λ - \underline{ν_j} + \overline{ν_j} = \tag{13a} \\
 & 0 \leq q^d_j \leq \overline{Q^d_j} \quad (\underline{ν_j},  \overline{ν_j}) \tag{12}\\
@@ -268,7 +268,7 @@ The KKT conditions of the decision problems of the suppliers and the inverse dem
 & \{ VC_i - λ - \underline{μ_i} + \overline{μ_i} = 0 \tag{10a} \\
 & 0 \leq q^s_i \leq \overline{Q^s_i} \quad (\underline{μ_i}, \overline{μ_i}) \tag{9} \\
 & -\underline{μ_i} \cdot q^s_i = 0 \tag{10b} \\
-& -\overline{μ_i} \cdot (q^s_i - \overline{Q^s_i}) = 0 \tag{10c} \\
+& \overline{μ_i} \cdot (q^s_i - \overline{Q^s_i}) = 0 \tag{10c} \\
 & \underline{μ_i}, \overline{μ_i} \geq 0 \tag{10d} \} \\
 & λ = \overline{λ} - β \cdot \sum_{i \in I} q^s_i \tag{14} \\
 \end{align}
@@ -291,7 +291,7 @@ The EOP should furthermore consider the constraints of the suppliers, resulting 
 ```{math}
 :label: EOP_Nash
 \begin{align}
-& \max \overline{\lambda} \cdot \sum_{i} q^s_i - \frac{1}{2}\beta \sum_{i} \left(q^s_i\right)^2 - \sum_{i} VC_i \cdot q^s_i \tag{15} \\
+& \max \overline{\lambda} \cdot \sum_{i} q^s_i - \frac{1}{2}\beta \left( \sum_{i} \left(q^s_i\right)^2 \right) - \sum_{i} VC_i \cdot q^s_i \tag{15} \\
 & \text{s.t}\\
 & 0 \leq q^s_i \leq Q^s_i \quad (\underline{μ_i}, \overline{μ_i}) \quad \forall i \in I \tag{3} \\
 \end{align}
@@ -325,7 +325,7 @@ The MCP associated with the Nash-Cournot game in Eq. {eq}`Nash_Cournot` can be o
 & \{ -\overline{λ} + β \cdot \sum_{i \in I} q^s_i + β \cdot q^s_i + VC_i - \underline{μ_i} + \overline{μ_i} = 0 \tag{10a'} \\
 & 0 \leq q^s_i \leq \overline{Q^s_i} \quad (\underline{μ_i}, \overline{μ_i}) \tag{9} \\
 & -\underline{μ_i} \cdot q^s_i = 0 \tag{10b} \\
-& -\overline{μ_i} \cdot (q^s_i - \overline{Q^s_i}) = 0 \tag{10c} \\
+& \overline{μ_i} \cdot (q^s_i - \overline{Q^s_i}) = 0 \tag{10c} \\
 & \underline{μ_i}, \overline{μ_i} \geq 0 \tag{10d} \}
 \end{align}
 ```
