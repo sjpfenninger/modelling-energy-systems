@@ -362,7 +362,7 @@ Nash-Cournot games can be solved with similar methods to Nash games, by either:
 * through iterative price search algorithms;
 * through the derivation of an equivalent optimization problem, which can be solved through optimisation algorithms.
 
-How can the EOP be obtained in the case of a Nash-Cournot game? As always, this entails finding an optimisation problem that has the same KKT conditions as the MCP {eq}`KKT Nash Cournot`. In contrast to the Nash game, we cannot leverage any knowledge related to the equilibrium solution: Nash-Cournot equilibria are *not* welfare-maximizing. Comparing the MCP of the Nash game and the Nash-Cournot game, however, shows that they are identical with the exception of Eq. (10a) and Eq. (10a').
+How can the EOP be obtained in the case of a Nash-Cournot game? As always, this entails finding an optimisation problem that has the same KKT conditions as the MCP {eq}`KKT_Nash_Cournot`. In contrast to the Nash game, we cannot leverage any knowledge related to the equilibrium solution: Nash-Cournot equilibria are *not* welfare-maximizing. Comparing the MCP of the Nash game and the Nash-Cournot game, however, shows that they are identical with the exception of Eq. (10a) and Eq. (10a').
 
 ```{math}
 \begin{align}
