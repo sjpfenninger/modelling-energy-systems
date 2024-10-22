@@ -17,7 +17,7 @@ We have already covered sensitivity analysis in {numref}`content:sensitivity-ana
 
 What about methods that allow us to incorporate uncertainty already when we formulate a model? There are two widely-used approaches for doing that.
 
-First, there is stochastic programming. In stochastic programming, we explicitly model the fact that some parameters are uncertain, and we assume that we know the probabilities of certain outcomes for these parameters. We can set up several scenarios with known probabilities and formulate our problem such that all scenarios are considered, along with their probabilities, in solving the optimisation problem. As a result, stochastic programming can tell us what decisions to make based on our uncertainty quantification in the form of scenarios and their probabilities. Its usefulness depends heavily on how well these scenarios represent the uncertainties they represent.
+First, there is stochastic programming. In stochastic programming, we explicitly model the fact that some parameters are uncertain, and we assume that we know the probabilities of specific outcomes for these parameters. We can set up several scenarios with known probabilities and formulate our problem such that all scenarios are considered, along with their probabilities, in solving the optimisation problem. As a result, stochastic programming can tell us what decisions to make based on our uncertainty quantification in the form of scenarios and their probabilities. Its usefulness depends heavily on how well these scenarios represent the uncertainties they represent.
 
 Second, there is robust optimisation. Here also, we explicitly model the fact that some parameters are uncertain. There are different kinds of robust optimisation, but most commonly, problems are formulated so that the worst-case realisation of uncertain parameters is accounted for (and thus optimised for). At the same time, robust optimisation ensures that the solution is feasible for all possible realisations of the uncertain parameters. So we have a solution that is guaranteed to work, based on our assessment of the uncertainty in parameters, and works best in their worst-case realisation.
 
@@ -106,7 +106,7 @@ So, we have two scenarios with 50\% probability each. We can see that $\omega_1$
 
 We want to decide how much electricity to consume $u_{t\omega}$ during time period $t = 1, ..., T$. Because we have two scenarios, and one certain time period, there are seven optimisation variables: $u_1, u_{21}, u_{31}, u_{41}, u_{22}, u_{32}, u_{42}$ (the consumption at $t=1$ and the scenario-dependent consumption at $t=2,3,4$).
 
-In other words, and this is the **first key aspect of stochastic programming**, we simultaneously consider (and make decisions about) several alternative futures (=scenarios). For each of these futures, we have a full set of decision variables, i.e. for scenario 1, $u_{21}, u_{31}, u_{41}$.
+In other words, and this is the **first key aspect of stochastic programming**, we simultaneously consider (and make decisions about) several alternative futures (=scenarios). For each of these futures, we have a full set of decision variables, i.e. for scenario 1: $u_{21}, u_{31}, u_{41}$.
 
 ### {{ labeled_circle_obj }}
 
@@ -121,9 +121,9 @@ Our objective is to maximise welfare (minimise costs minus benefits):
 
 The objective function consists of three parts, and this is the **second key aspect of stochastic programming**:
 
-* Blue, the certain part, where $t=1$.
-* Orange, the summing up of each uncertain scenario weighted (multiplied) by its probability.
-* Green, the uncertain part, where $t\gt1$. For each scenario, we sum up over all timesteps inside the scenario (from $t=2$ through $t=4$).
+* Blu:, the certain part, where $t=1$.
+* Orange: the summing up of each uncertain scenario weighted (multiplied) by its probability.
+* Green: the uncertain part, where $t\gt1$. For each scenario, we sum up over all timesteps inside the scenario (from $t=2$ through $t=4$).
 
 ### {{ labeled_circle_constr }}
 
@@ -179,7 +179,7 @@ In our example, we end up with the following optimisation problem:
 
 ### Optimal solution
 
-This is a simple linear (LP) optimisation problem that we can solve with the usual methods, e.g. by formulating and solving it with a mathematical programming language and solver.
+This is a simple linear optimisation problem (LP) that we can solve with the usual methods, e.g. by formulating and solving it with a mathematical programming language and solver.
 
 The optimal solution is:
 
@@ -188,7 +188,7 @@ The optimal solution is:
 | 1 | 0.25 | 1.75 | 1.25 | 2.75 | 6 |
 | 2 | 0.25 | 1.75 | 3 | 3 | 8 |
 
-Notice that the total consumption is exactly at the limit in both scenarios. In the scenario with high prices (scenario 1), we consume as little as possible, at the minimum limit. In the scenario with low prices (scenario 2), we consume the maximum possible. This shows how important the total consumption constraint is in this example - it is always binding.
+Notice that the total consumption is exactly at the limit in both scenarios. In the scenario with high prices (scenario 1), we consume as little as possible, at the minimum limit. In the scenario with low prices (scenario 2), we consume the maximum possible. This shows how important the total consumption constraint is in this example -- it is always binding.
 
 ### Interpreting the optimal solution
 
@@ -253,7 +253,7 @@ What is happening here? The first observation is that the decisions taken withou
 
 The decisions taken without consideration of uncertainty are more "bold" or "risky": we "know" with certainty (at least our problem is set up that way) what the price will be in all four hours. We therefore know that we will be making a profit in hours 2 and 4 when the price is low, and we will already "get in position" in hour 1 to ramp up to a higher demand in hour 2.
 
-The decisions taken in the stochastic formulation are more cautious at the start, with a smaller demand at $t=1$, in order to be able to react to either high or low prices later: if the price rises, it is best to limit consumption (to 6) while maximising it in the last time period with the lowest price. In contrast if the price falls later, consumption can ramp up through $t=2$ and $t=3$. The decision for $t=1$ accounts for both of these possibilities. Note also that the ramping limits influence all these decisions: we cannot go from from 0 to 3 and back to 3 to consume only in the more beneficial hours.
+The decisions taken in the stochastic formulation are more cautious at the start, with a smaller demand at $t=1$, in order to be able to react to either high or low prices later: if the price rises, it is best to limit consumption (to 6) while maximising it in the last time period with the lowest price. In contrast, if the price falls later, consumption can ramp up through $t=2$ and $t=3$. The decision for $t=1$ accounts for both of these possibilities. Note also that the ramping limits influence all these decisions: we cannot go from 0 to 3 and back to 0 to consume only in the more beneficial hours.
 
 {numref}`fig:stochastic_with_no_uncert` shows an overview of the decisions taken in both the stochastic formulation and the formulation without uncertainty.
 
@@ -267,20 +267,20 @@ Optimal solution for electricity consumption during each time period, for the tw
 Finally, let's look at the objective function values. Remember, we are minimising, so the smaller the value, the better. In the stochastic problem, the optimal objective function value is $-174$. This is made up of both decision branches in the uncertain part of the problem, so for it to be comparable to the formulation without uncertainty, we need to break it up into a part for just $u_{1}$ and $u_{t1}$, and another for $u_{1}$ and $u_{t2}$. So for the former, we take only the relevant decisions from the objective function and drop the multiplication with probability:
 
 \begin{equation}
-(120-100) \cdot 0.25 + (105-100) \cdot 1.75 + (154-100) \cdot 1.25 + (84-100) \cdot 2.75 = 37.5
+(120-100) \cdot 0.25 + (105-100) \cdot 1.75 + (154-100) \cdot 1.25 + (84-100) \cdot 2.75 = 37.25
 \end{equation}
 
-We end up with the following across all cases. Note that the performance of the stochastic problem is better (=lower objective function value) than that of the case without uncertainty, in the high price scenario:
+We end up with the following across all cases:
 
 * Stochastic problem ($u_{t1}$, high price scenario): $37.25$
 * Stochastic problem ($u_{t2}$, low price scenario): $-385.25$
-* No uncertainty: $92.5$
-* No uncertainty (in the high price scenario): $40.5$
+* No uncertainty: $-147.5$
+* No uncertainty (in the high price scenario): $65.5$
 
-This last entry in the list comes from a small **robustness analysis** (see {numref}`parametric-uncertainty-methods-table`): we are taking the decisions from the case without uncertainty (bottom row in {numref}`stochastic-three-results-comparison`) but the prices from scenario 1 (high prices):
+Note that the performance of the stochastic problem is better (=lower objective function value) than that of the case without uncertainty in the high price scenario. This last entry in the list comes from a small **robustness analysis** (see {numref}`parametric-uncertainty-methods-table`). We take a solution, in this instance the decisions from the case without uncertainty (bottom row in {numref}`stochastic-three-results-comparison`), and investigate how well it performs when parameters change, in this instance using the prices from scenario 1 (high prices).
 
 \begin{equation}
-(120-100) \cdot 1 - (105-100) \cdot 2.5 + (154-100) \cdot 1.5 + (84-100) \cdot 3 = 40.5
+(120-100) \cdot 1 - (105-100) \cdot 2.5 + (154-100) \cdot 1.5 + (84-100) \cdot 3 = 65.5
 \end{equation}
 
 Not surprisingly, if the prices are higher than expected in the case with no uncertainty, the modelled decisions do not perform so well. The objective function which we are trying to minimise is objectively worse than in the other cases.
