@@ -121,7 +121,7 @@ Our objective is to maximise welfare (minimise costs minus benefits):
 
 The objective function consists of three parts, and this is the **second key aspect of stochastic programming**:
 
-* Blu:, the certain part, where $t=1$.
+* Blue: the certain part, where $t=1$.
 * Orange: the summing up of each uncertain scenario weighted (multiplied) by its probability.
 * Green: the uncertain part, where $t\gt1$. For each scenario, we sum up over all timesteps inside the scenario (from $t=2$ through $t=4$).
 
