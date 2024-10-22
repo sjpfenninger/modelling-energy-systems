@@ -27,6 +27,8 @@ latex:
     targetname: book.tex
 
 sphinx:
+  extra_extensions:
+    - sphinx_proof
   config:
     bibtex_reference_style: author_year
     html_show_copyright: false

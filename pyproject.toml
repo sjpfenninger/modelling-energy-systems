@@ -24,6 +24,7 @@ seaborn = "0.13.2.*"
 
 [tool.pixi.pypi-dependencies]
 modelling_energy_systems = { path = ".", editable = true }
+sphinx-proof = "==0.2.0"
 
 [project.scripts]
 modelling_energy_systems = "modelling_energy_systems.cli:run"

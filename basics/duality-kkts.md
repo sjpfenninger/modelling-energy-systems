@@ -325,6 +325,7 @@ Consider the general inequality and equality constrained optimisation problem wr
 There are $m$ equality constraints associated with Lagrange multipliers $\lambda_i$ and $n$ inequality constraints associated with Lagrange multipliers $\mu_j$.
 
 The Lagrangian is:
+
 ```{math}
 :label: eqn:kkts-Lagrangian
 \begin{equation}
