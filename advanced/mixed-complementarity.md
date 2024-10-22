@@ -51,7 +51,7 @@ Let's assume a general optimisation problem, as seen below :
 ```{math}
 \begin{align}
     &\min f(x) \\
-    &\text{subject to:} \nonumber \\
+    &\text{s.t:} \nonumber \\
     &h_i(x) = 0 \quad (λ_{i}) \quad \forall  i \in = 1, \dots, m \nonumber \\
     &g_j(x) \leq 0 \quad (μ_{i}) \quad \forall  j \in = 1, \dots, n \nonumber \\
 \end{align}
@@ -99,12 +99,13 @@ Let's start with a simple market clearing problem. The market-clearing problem i
 :label: market_clearing
 \begin{align}
 & \max \sum_{j \in J} P^d_j \cdot q^d_j - \sum_{i \in I} P^s_i \cdot q^s_i \tag{1} \\
-& \text{subject to:}\\
+& \text{s.t:}\\
 & \sum_{j \in J} q^d_j - \sum_{i \in I} q^s_i = 0 \quad (\lambda)  \tag{2}\\
 & 0 \leq q^s_i \leq Q^s_i \quad (\underline{μ_i}, \overline{μ_i}) \quad \forall i \in I \tag{3}\\
 & 0 \leq q^d_j \leq Q^d_j \quad (\underline{ν_j}, \overline{ν_j}) \quad \forall j \in J \tag{4}\\
 \end{align}
 ```
+
 This market clearing problem allows for determining the demand served $q^d_j$ and supply cleared $q^s_i$ in the market. The market clearing price $\lambda$ is the dual variable associated with the supply-demand balance.
 
 The KKT conditions of the market-clearing problem in Eq. {eq}`market_clearing` are :
@@ -125,6 +126,7 @@ The KKT conditions of the market-clearing problem in Eq. {eq}`market_clearing` a
 & \underline{\nu_j}, \overline{\nu_j} \geq 0 \quad \forall j \in J \tag{7b} \\
 \end{align}
 ```
+
 ### The market clearing problem from the perspective of the market participants and the resulting MCP
 
 Now let's look at the issue from the perspective of the supply and demand agents participating in the electricity market. Contrary to what is presented up to now, supply and demand agents now have to decide on how much to generate or consume. So what is the optimisation problem faced by the suppliers (generators) and the demand agents (customers, retailers) that aim to maximize their profit or utility?
@@ -137,10 +139,11 @@ The optimisation problem of each agents $i$ in Eq. {eq}`supply_side` reads:
 :label: supply_side
 \begin{align}
 & \max (λ - VC_i) \cdot q^s_i \tag{8} \\
-& \text{subject to:}\\
+& \text{s.t:}\\
 & 0 \leq q^s_i \leq \overline{Q^s_i} \quad (\underline{\mu_i}, \overline{\mu_i}) \tag{9} \\
 \end{align}
 ```
+
 where :
 \begin{align*}
 & VC_i = \text{Variable Cost of generator } i \\
@@ -159,16 +162,18 @@ The KKT conditions of the problem in Eq. {eq}`supply_side` are the following :
 & \underline{μ_i}, \overline{μ_i} \geq 0 \tag{10d} \\
 \end{align}
 ```
+
 Secondly, the demand agents aim to maximize their utility, again by using the assumption that their actions do not influence the market price. Therefore, the optimisation problem faced by the demand-side agents is :
 
 ```{math}
 :label: demand_side
 \begin{align}
 & \max (WTP_j - λ) \cdot q^d_j \tag{11} \\
-& \text{subject to:}\\
+& \text{s.t:}\\
 & 0 \leq q^d_j \leq \overline{Q^d_j} \quad (\underline{ν_j}, \overline{ν_j}) \tag{12} \\
 \end{align}
 ```
+
 where :
 \begin{align*}
 & WTP_j = \text{Willingness to pay of demand agent } j \\
@@ -224,7 +229,7 @@ Comparing the KKTs of the **concatenated problem in Eq. {eq}`KKT_market_clearing
 & -P^d_j + \lambda - \underline{\nu_j} + \overline{\nu_j} = 0 \quad \forall j \in J \tag{5a}
 \end{align}
 
-However, we know that in competitive electricity markets generators bid their capacity at variable cost and demand agents at their willigness to pay. Any other bid or offer would potentially lead to foregone profits (e.g., offering above variable cost may result in a generator not being cleared while it could have been operating profitably) or loss-making market outcomes (e.g., offering below variable cost may result in running at prices below variable cost, resulting in a loss).
+However, we know that in competitive electricity markets generators bid their capacity at variable cost and demand agents at their willingness to pay. Any other bid or offer would potentially lead to foregone profits (e.g., offering above variable cost may result in a generator not being cleared while it could have been operating profitably) or loss-making market outcomes (e.g., offering below variable cost may result in running at prices below variable cost, resulting in a loss).
 
 Hence, we can conclude $VC_i = P^s_i$ and $WTP_j = P^d_j$. Therefore, constraint (10a) is equal to constraint (5b) and (13a) to (5a). Through this observation, we can conclude that the KKTs of the MCP are the same as those of the market-clearing problem. The main implication of this is that a solution that satisfies the KKTs of the market-clearing problem will also be a solution of the MCP. In summary, we have shown that the market-clearing problem is the **equivalent optimization problem (EOP)** of the MCP.
 
@@ -307,20 +312,21 @@ Up to now, we have assumed a perfectly competitive market, meaning firms have ze
 
 ### A simple Nash-Cournot game
 
-To simplify notation, we will make use of an inverse demand curve to simulate the demand side. To allow agents to strategically anticipate how their actions influence the price, the inverse curve now **is part of the optimisation problem** (note the position of the curly bracket). The Nash-Cournot game is presented below:
+To simplify notation, we will make use of an inverse demand curve to simulate the demand side. To allow agents to strategically anticipate how their actions influence the price, the inverse demand curve (14, below) now **is part of the optimisation problem** (note the position of the curly bracket). The Nash-Cournot game is:
 
 ```{math}
 :label: Nash_Cournot
 \begin{align}
-    &\max \{(\lambda - VC_i) \cdot q^s_i \quad &\forall i \in I \tag{8} \\
-    & & \text{s.t.} \quad 0 \leq q^s_i \leq \overline{Q^s_i} \quad (\underline{\mu_i}, \overline{\mu_i}) \tag{9} \\
-    &\lambda = \overline{\lambda} - \beta \cdot \sum_{i \in I} q^s_i \} \tag{14} \\
+&\max \{(\lambda - VC_i) \cdot q^s_i \quad &\forall i \in I \tag{8} \\
+& \text{s.t.} \quad 0 \leq q^s_i \leq \overline{Q^s_i} \quad (\underline{\mu_i}, \overline{\mu_i}) \tag{9} \\
+&\lambda = \overline{\lambda} - \beta \cdot \sum_{i \in I} q^s_i \} \tag{14} \\
 \end{align}
 ```
+
 The MCP associated with the Nash-Cournot game in Eq. {eq}`Nash_Cournot` can be obtained by deriving the KKT conditions of the optimisation problems that make up the game:
 
 ```{math}
-:label: KKT Nash Cournot
+:label: KKT_Nash_Cournot
 \begin{align}
 & \{ -\overline{λ} + β \cdot \sum_{i \in I} q^s_i + β \cdot q^s_i + VC_i - \underline{μ_i} + \overline{μ_i} = 0 \tag{10a'} \\
 & 0 \leq q^s_i \leq \overline{Q^s_i} \quad (\underline{μ_i}, \overline{μ_i}) \tag{9} \\
@@ -329,6 +335,24 @@ The MCP associated with the Nash-Cournot game in Eq. {eq}`Nash_Cournot` can be o
 & \underline{μ_i}, \overline{μ_i} \geq 0 \tag{10d} \}
 \end{align}
 ```
+
+To understand the derivation of (10a') in Eq. {eq}`KKT_Nash_Cournot`, we can say that the Lagrangian of {eq}`Nash_Cournot` is:
+
+$$
+\mathcal{L} = -(λ - VC_i) \cdot q^s_i - \underline{\mu_i}q^s_i + \overline{\mu_i}(q^s_i - \overline{Q^s_i})
+$$
+
+Substituting equation (14) from Eq. {eq}`Nash_Cournot`, which defines the inverse demand function, into the Lagrangian, yields:
+
+$$
+\mathcal{L} = -\overline{λ}q^s_i + β \cdot q^s_i \cdot \sum_{i} q_i^s + VC_i \cdot q_i^s - \underline{\mu_i}q^s_i + \overline{\mu_i}(q^s_i - \overline{Q^s_i})
+$$
+
+Finally, differentiating the Lagrangian with respect to $q^s_i$ yields (10a') in {eq}`KKT_Nash_Cournot`:
+
+$$
+\frac{\partial \mathcal{L}}{\partial q_i^s} = -\overline{\lambda} + \beta \cdot \sum_{i} q_i^s + \beta \cdot q^s_i + VC_i - \underline{\mu_i} + \overline{\mu_i}
+$$
 
 ### Obtaining Nash-Cournot Equilibria via equivalent optimization problems
 
