@@ -4,6 +4,11 @@ title: Changelog
 
 # Changelog
 
+## Version 2024-10-22
+
+* Added [Stochastic programming](advanced/stochastic-programming.md)
+* Improved [Mixed complementarity problems](advanced/mixed-complementarity.md)
+
 ## Version 2024-10-11
 
 * Added [Mixed complementarity problems](advanced/mixed-complementarity.md)
