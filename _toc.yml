@@ -13,11 +13,12 @@ parts:
 - caption: Advanced topics
   numbered: true
   chapters:
-    # - file: advanced/mixed-complementarity.md
     # - file: advanced/nonlinear.md
+    - file: advanced/mixed-complementarity.md
     - file: advanced/stochastic-programming.md
 - caption: Appendices
   chapters:
+   - file: appendix/duality-conversion.md
    - file: appendix/duality-examples.md
    - file: appendix/kkts-summary.md
 - caption: Reference

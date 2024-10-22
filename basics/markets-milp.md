@@ -58,8 +58,8 @@ So our full unit commitment problem is the following:
 * {{circle_obj}} Objective (total generation cost, to be minimised): $C = 3 P_{G1} + 4 P_{G2}$
 * {{circle_constr}} Constraints:
     * Demand balance constraint: $P_{G1} + P_{G2} = 500$
-    * Operational constraints for unit 1: $u_1*100 \leq P_{G1} \leq u_1*400$
-    * Operational constraints for unit 2: $u_2*50 \leq P_{G2} \leq u_2*300$
+    * Operational constraints for unit 1: $u_1*50 \leq P_{G1} \leq u_1*300$
+    * Operational constraints for unit 2: $u_2*100 \leq P_{G2} \leq u_2*400$
     * Binary variable constraints: $u_{i} \in \{0, 1\} \quad \forall i$
 
 To solve this problem, we need an approach to deal with the newly-introduced binary (integer) variables.
@@ -68,7 +68,7 @@ To solve this problem, we need an approach to deal with the newly-introduced bin
 
 If we add binary (0/1) or integer (..., -1, 0, 1, 2, ...) variables to our problem, we turn it from an LP (linear programming) to MILP (mixed-integer linear programming) problem.
 
-We cons consider a simple example (from {cite:t}`hillier_introduction_2021`). Consider this linear optimisation problem:
+We consider a simple example (from {cite:t}`hillier_introduction_2021`). Consider this linear optimisation problem:
 
 \begin{align}
     \max &~ Z = x_1 + 5x_2 \\
@@ -114,7 +114,7 @@ So far, we only considered a single isolated time period (for example, a single 
 
 One way to do this is to consider ramping constraints. These constraints limit the change in power output of any unit between two consecutive time periods. You can imagine that there are physical limits to how fast a power plant can change its output: we cannot instantaneously change from outputting minimum power to outputting maximum power.
 
-In the problem formulation below, $t$ indicates the time period and $j$ indicates the generating unit.
+In the problem formulation below, $t$ indicates the time period and $i$ indicates the generating unit.
 
 :::{admonition} Choice of time period
 :class: note
@@ -122,7 +122,7 @@ In the problem formulation below, $t$ indicates the time period and $j$ indicate
 We are considering time as discrete steps. The choice of how large such an individual time step is has a dramatic impact on our problem formulation. For example, here we are modelling hourly time steps. In that context, thinking about ramping limits makes sense. If we were to consider daily or monthly time steps, ramping limits would likely not be relevant. But we might then still consider other ways in which the system state is connected across time periods, for example, storage levels in batteries or water levels in hydropower dams.
 :::
 
-In principle, our problem formulation remains almost the same as above. We simply make most of our model components time-dependent by adding the index $t$. For example, we want to consider power generation and the on/off state of each unit $i$ at time $t$: our variables become $P_{Git}$ and $u_{Dit}$.
+In principle, our problem formulation remains almost the same as above. We simply make most of our model components time-dependent by adding the index $t$. For example, we want to consider power generation and the on/off state of each unit $i$ at time $t$: our variables become $P_{Git}$ and $u_{it}$.
 
 ### Additional {{ labeled_circle_constr }} and {{ labeled_circle_params }}
 
@@ -163,6 +163,8 @@ The full problem we end up with looks like this, with most of the components ref
     * Ramping constraint: $P_{Gi, t-1} - P_{Git} \leq R_{Gi}^{down}$ and $P_{Git} - P_{Gi, t-1} \leq R_{Gi}^{up} \quad \forall i, \forall t$
     * Binary variable constraint: $u_{it} \in \{0, 1\} \quad \forall i, \forall t$
 
+(content:milp:power-markets)=
+
 ## Power markets
 
 So far we've only looked at the generation side, by solving economic dispatch and unit commitment problems. Now we will extend our view slightly to consider the coordination between the producers and consumers of electricity ({numref}`fig:markets-milp:markets_actors_overview`). This means taking a step into power markets. We will focus on modelling a day-ahead wholesale market auction, such as the one operated by [EPEX SPOT](https://www.epexspot.com/en/basicspowermarket) in Europe.
@@ -184,13 +186,13 @@ In the literature, the offers and bids made by participants in the market are ge
 
 A bid for either supply or demand consists of a price and a maximum amount of electricity, e.g. a consumer may be willing to pay a price of 3 EUR/MWh for up to 10 MW of power in the hour of the day for which the auction is taking place.
 
-As market operator, our goal is to maximise social welfare ({numref}`fig:markets-milp:markets_social_welfare`). To do so, we sort the bids from producers by increasing cost, and the bids from consumers by decreasing cost. Consumer surplus is the amount of money that consumers would have been willing to pay but did not have to pay, at the current market price and scheduled demand/supply. Producer surplus is the amount of money that producers receive on top of what they would have been willing to accept. The area between the demand and supply curves represents the social welfare - the sum of producer surplus and consumer surplus.
+As market operator, our goal is to maximise social welfare ({numref}`fig:markets-milp:markets_social_welfare`). To do so, we sort the offers from producers by increasing cost, and the bids from consumers by decreasing cost. Consumer surplus is the amount of money that consumers would have been willing to pay but did not have to pay, at the current market price and scheduled demand/supply. Producer surplus is the amount of money that producers receive on top of what they would have been willing to accept. The area between the demand and supply curves represents the social welfare - the sum of producer surplus and consumer surplus.
 
 ```{figure} ../images/markets_social_welfare.jpg
 :name: fig:markets-milp:markets_social_welfare
 :figwidth: 600 px
 
-Social welfare as the sum of producer surplus and consumer surplus.
+Social welfare as the sum of producer surplus and consumer surplus. Note that since we are considering a single hour, we can consider the scheduled generation or consumption either in terms of MWh (energy) or MW (power), with the same numerical values.
 ```
 
 We are looking for both the market price of electricity and the scheduled demand/supply for the hour we are considering ({numref}`fig:markets-milp:markets_clearing_price`). Because we are maximising social welfare, this is the point at which the demand (consumer) and supply (producer) curves meet.
@@ -281,11 +283,11 @@ Each generator distributes their possible generation across three offers, while 
 | Max power $P^{\max}_{Djk}$ (MW) | 8 | 5 | 5 | 3 | 7 | 4 | 4 | 3 |
 | Price $\lambda_{Djk}$ (EUR/MWh) | 20 | 15 | 7 | 4 | 18 | 16 | 11 | 3 |
 
-We introduced the parameters, variables and objective function above. We should still briefly touch upon the constraints.
+We introduced the parameters, variables, objective function, and constraints above. We will still briefly explain the constraints further.
 
 #### {{ labeled_circle_constr }}
 
-We have two constraints to consider.
+There are two types of constraints.
 
 First, the supply offers and demand bids must be within their maximum sizes submitted to the market operator:
 
@@ -317,7 +319,7 @@ If we formulate and solve the optimisation problem from equations {eq}`eqn:marke
 
 ### Considering physical limits through additional constraints
 
-Let's have a closer look at this solution. We can see that in the optimal solution, all bids from generator 1 are accepted (5 + 12 + 13 = 30 MW, purple in {numref}`fig:markets-milp:fig_markets_acceptedbids`), and one bid from generator 2 is partially accepted (3 MW, yellow in the figure).
+Let's have a closer look at this solution. We can see that in the optimal solution, all offers from generator 1 are accepted (5 + 12 + 13 = 30 MW, purple in {numref}`fig:markets-milp:fig_markets_acceptedbids`), and one bid from generator 2 is partially accepted (3 MW, yellow in the figure).
 
 ```{figure} ../images-built/fig_markets_acceptedbids.jpg
 :name: fig:markets-milp:fig_markets_acceptedbids
@@ -378,7 +380,7 @@ We can solve the above problem easily (or rather, let the computer solve it for 
 
 * First, we solve the MILP problem.
 * Then we fix the binary variables to their values from the optimal solution to the MILP problem. We thus turn them from variables into parameters.
-* Then we re-solve the resulting continuous (LP) problem. Now we can obtain the shadow price of the market-clearing constraint in the LP problem will via the usual route (the dual problem, as solved automatically by the computer) - that will be the market-clearing price.
+* Then we re-solve the resulting continuous (LP) problem. Now we can obtain the shadow price of the market-clearing constraint in the LP problem via the usual route (the dual problem, as solved automatically by the computer) - that will be the market-clearing price.
 
 However, these are the shadow prices of a different problem - a version of the original market auction where we have fixed the binary variables. So this market-clearing price may result in individual generators or consumers making a loss. There are various solutions to this in practice: we can introduce additional constraints, or use the market clearing price from the "trick" above while providing additional out-of-market payments to market participants that are forced to make a loss.
 
