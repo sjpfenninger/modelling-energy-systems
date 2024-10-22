@@ -25,12 +25,15 @@ Robust optimisation is very different from how stochastic programming deals with
 
 The following table gives a high-level overview of some methods to deal with parametric uncertainty:
 
+(parametric-uncertainty-methods-table)=
+:::{table} Overview of parametric uncertainty methods
 |  | Stochastic programming | Robust optimisation | Sensitivity analysis | Robustness analysis |
 | --- | --- | --- | --- | --- |
 | When to do it | When formulating the model | When formulating the model | After we solve the model | After we solve the model |
 | What you need | Explicit quantification of scenarios with their probability for uncertain variables | Specification of an uncertainty set for uncertain variables | Access to shadow prices, or a set of scenarios for parameter values to test | A model solution to test under different scenarios |
 | What you get | Solution that includes the possibility for recourse---choosing one of several alternatives once we know more about the realisation of uncertain parameters | Solution that is feasible for any possible realisation of the uncertain parameters, and optimal for the worst case | Effect of changes in limited numbers of parameters on the optimal solution (e.g. by looking at shadow prices), but only for small perturbations around the optimal solution | Effect of changes in limited numbers of parameters on the feasibility of a fixed solution, but only for small perturbations in parameters |
 | Where to read more | Below in this chapter | In a future version of this reader | {numref}`content:sensitivity-analysis` | {cite:p}`starreveld2024robustness` |
+:::
 
 For the remainder of this chapter, we will focus on stochastic programming.
 
@@ -261,6 +264,26 @@ The decisions taken in the stochastic formulation are more cautious at the start
 Optimal solution for electricity consumption during each time period, for the two scenarios, and including the case without uncertainty.
 ```
 
+Finally, let's look at the objective function values. Remember, we are minimising, so the smaller the value, the better. In the stochastic problem, the optimal objective function value is $-174$. This is made up of both decision branches in the uncertain part of the problem, so for it to be comparable to the formulation without uncertainty, we need to break it up into a part for just $u_{1}$ and $u_{t1}$, and another for $u_{1}$ and $u_{t2}$. So for the former, we take only the relevant decisions from the objective function and drop the multiplication with probability:
+
+\begin{equation}
+(120-100) \cdot 0.25 + (105-100) \cdot 1.75 + (154-100) \cdot 1.25 + (84-100) \cdot 2.75 = 37.5
+\end{equation}
+
+We end up with the following across all cases. Note that the performance of the stochastic problem is better (=lower objective function value) than that of the case without uncertainty, in the high price scenario:
+
+* Stochastic problem ($u_{t1}$, high price scenario): $37.25$
+* Stochastic problem ($u_{t2}$, low price scenario): $-385.25$
+* No uncertainty: $92.5$
+* No uncertainty (in the high price scenario): $40.5$
+
+This last entry in the list comes from a small **robustness analysis** (see {numref}`parametric-uncertainty-methods-table`): we are taking the decisions from the case without uncertainty (bottom row in {numref}`stochastic-three-results-comparison`) but the prices from scenario 1 (high prices):
+
+\begin{equation}
+(120-100) \cdot 1 - (105-100) \cdot 2.5 + (154-100) \cdot 1.5 + (84-100) \cdot 3 = 40.5
+\end{equation}
+
+Not surprisingly, if the prices are higher than expected in the case with no uncertainty, the modelled decisions do not perform so well. The objective function which we are trying to minimise is objectively worse than in the other cases.
 
 ## References
 
