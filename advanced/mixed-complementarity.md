@@ -312,7 +312,7 @@ Up to now, we have assumed a perfectly competitive market, meaning firms have ze
 
 ### A simple Nash-Cournot game
 
-To simplify notation, we will make use of an inverse demand curve to simulate the demand side. To allow agents to strategically anticipate how their actions influence the price, the inverse curve now **is part of the optimisation problem** (note the position of the curly bracket). The Nash-Cournot game is presented below:
+To simplify notation, we will make use of an inverse demand curve to simulate the demand side. To allow agents to strategically anticipate how their actions influence the price, the inverse demand curve (14, below) now **is part of the optimisation problem** (note the position of the curly bracket). The Nash-Cournot game is:
 
 ```{math}
 :label: Nash_Cournot
@@ -323,10 +323,10 @@ To simplify notation, we will make use of an inverse demand curve to simulate th
 \end{align}
 ```
 
-The MCP associated with the Nash-Cournot game in Eq. {eq}`Nash_Cournot` can be obtained by deriving the KKT conditions of the optimisation problems that make up the game: 
+The MCP associated with the Nash-Cournot game in Eq. {eq}`Nash_Cournot` can be obtained by deriving the KKT conditions of the optimisation problems that make up the game:
 
 ```{math}
-:label: KKT Nash Cournot
+:label: KKT_Nash_Cournot
 \begin{align}
 & \{ -\overline{λ} + β \cdot \sum_{i \in I} q^s_i + β \cdot q^s_i + VC_i - \underline{μ_i} + \overline{μ_i} = 0 \tag{10a'} \\
 & 0 \leq q^s_i \leq \overline{Q^s_i} \quad (\underline{μ_i}, \overline{μ_i}) \tag{9} \\
@@ -336,22 +336,22 @@ The MCP associated with the Nash-Cournot game in Eq. {eq}`Nash_Cournot` can be o
 \end{align}
 ```
 
-To further explain the derivation of equation (10a') we can say that the Lagrangian of {eq}`KKT Nash Cournot` is :
+To understand the derivation of (10a') in Eq. {eq}`KKT_Nash_Cournot`, we can say that the Lagrangian of {eq}`Nash_Cournot` is:
 
 $$
-\mathcal{L} = -(λ - VC_i) \cdot q^s_i + \overline{mu_i}(q^s_i - \overline{Q^s_i}) - \underline{mu_i}q^s_i
+\mathcal{L} = -(λ - VC_i) \cdot q^s_i - \underline{\mu_i}q^s_i + \overline{\mu_i}(q^s_i - \overline{Q^s_i})
 $$
 
-Substituting equation (14), which defines the inverse demand function, yields : 
+Substituting equation (14) from Eq. {eq}`Nash_Cournot`, which defines the inverse demand function, into the Lagrangian, yields:
 
 $$
-\mathcal{L} = -\overline{λ}q^s_i + β \cdot q^s_i \cdot \sum_{i} q_i^s + overline{mu_i}(q^s_i - \overline{Q^s_i}) - \underline{mu_i}q^s_i
+\mathcal{L} = -\overline{λ}q^s_i + β \cdot q^s_i \cdot \sum_{i} q_i^s + VC_i \cdot q_i^s - \underline{\mu_i}q^s_i + \overline{\mu_i}(q^s_i - \overline{Q^s_i})
 $$
 
-Finally, differentiating the Lagrangian with respect to $q^s_i$ yields equation (10a') : 
+Finally, differentiating the Lagrangian with respect to $q^s_i$ yields (10a') in {eq}`KKT_Nash_Cournot`:
 
 $$
-\frac{\partial \mathcal{L}}{\partial q_i^s} = --\overline{λ} + βsum_{i} q_i^s + βq^s_i + overline{mu_i} - underline{mu_i} tag
+\frac{\partial \mathcal{L}}{\partial q_i^s} = -\overline{\lambda} + \beta \cdot \sum_{i} q_i^s + \beta \cdot q^s_i + VC_i - \underline{\mu_i} + \overline{\mu_i}
 $$
 
 ### Obtaining Nash-Cournot Equilibria via equivalent optimization problems
