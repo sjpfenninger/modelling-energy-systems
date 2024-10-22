@@ -60,3 +60,15 @@ button.btn.navbar-btn.search-button-field.search-button__button:hover {
 .constraints {
     color: #d41876;
 }
+
+.color-certain {
+    background-color: rgb(203,231,255);
+}
+
+.color-summing {
+    background-color: rgb(255,237,201);
+}
+
+.color-uncertain {
+    background-color: rgb(224,247,217);
+}

@@ -21,6 +21,7 @@ parse:
     - replacements
     - smartquotes
     - substitution
+    - attrs_inline
 
 latex:
   latex_documents:
