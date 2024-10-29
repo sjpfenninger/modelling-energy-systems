@@ -283,7 +283,7 @@ With the MCP defined, we can now derive the Equivalent Optimization problem to d
 From the discussion above, we know that the Nash game between suppliers and consumers in perfectly competitive electricity markets will maximize social welfare in that market. Hence, we can formulate a candidate EOP which aims to maximize social welfare. Based on {numref}`fig-inverse-demand-area` and the fact that  social welfare is the area between the demand and supply curve, social welfare can be computed as :
 
 $$
-SW = (ABDE) - (ABC) - \text{Area of sketched polygon} = \overline{\lambda} \cdot \sum_{i} q^s_i - \frac{1}{2}\beta \sum_{i} \left(q^s_i\right)^2 - \sum_{i} VC_i \cdot q^s_i
+SW = (ABDE) - (ABC) - \text{Area of sketched polygon} = \overline{\lambda} \cdot \sum_{i} q^s_i - \frac{1}{2}\beta(\sum_{i} q^s_i)^2 - \sum_{i} VC_i \cdot q^s_i
 $$
 
 ```{figure} ../images/area_inv_demand.jpg
@@ -296,7 +296,7 @@ The EOP should furthermore consider the constraints of the suppliers, resulting 
 ```{math}
 :label: EOP_Nash
 \begin{align}
-& \max \overline{\lambda} \cdot \sum_{i} q^s_i - \frac{1}{2}\beta \left( \sum_{i} \left(q^s_i\right)^2 \right) - \sum_{i} VC_i \cdot q^s_i \tag{15} \\
+& \max \overline{\lambda} \cdot \sum_{i} q^s_i - \frac{1}{2}\beta (\sum_{i} q^s_i)^2 - \sum_{i} VC_i \cdot q^s_i \tag{15} \\
 & \text{s.t}\\
 & 0 \leq q^s_i \leq Q^s_i \quad (\underline{μ_i}, \overline{μ_i}) \quad \forall i \in I \tag{3} \\
 \end{align}
