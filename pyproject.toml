@@ -11,12 +11,12 @@ platforms = ["osx-arm64", "linux-64", "win-64"]
 figures = "modelling_energy_systems"
 html = "jupyter-book build ."
 clean = "jupyter-book clean ."
-build = {depends_on = ["figures", "html"] }
+build = {depends-on = ["figures", "html"] }
 
 [tool.pixi.dependencies]
 python = "3.12.*"
-jupyter-book = "1.0.0.*"
-sphinx-book-theme = "1.1.2.*"
+jupyter-book = "1.0.4.post1.*"
+sphinx-book-theme = "1.1.4.*"
 numpy = "1.26.4.*"
 matplotlib = "3.8.4.*"
 click = "8.1.*"
