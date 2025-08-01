@@ -35,14 +35,14 @@ sphinx:
     html_show_copyright: false
     html_js_files: [ ['https://cdn.usefathom.com/script.js', {'defer': 'defer', 'data-site': 'QUYIGXRL'}] ]
     myst_substitutions:
-      circle_params: '<span class="circ circ-params">0</span>'
-      circle_vars: '<span class="circ circ-variables">1</span>'
-      circle_obj: '<span class="circ circ-objective">2</span>'
-      circle_constr: '<span class="circ circ-constraints">3</span>'
-      labeled_circle_params: '<span class="circ circ-params">0</span> <span class="circ-text params">Parameters</span>'
-      labeled_circle_vars: '<span class="circ circ-variables">1</span> <span class="circ-text variables">Variables</span>'
-      labeled_circle_obj: '<span class="circ circ-objective">2</span> <span class="circ-text objective">Objective</span>'
-      labeled_circle_constr: '<span class="circ circ-constraints">3</span> <span class="circ-text constraints">Constraints</span>'
+      circle_params: '<span class="circ circ-params">P</span>'
+      circle_vars: '<span class="circ circ-variables">V</span>'
+      circle_obj: '<span class="circ circ-objective">O</span>'
+      circle_constr: '<span class="circ circ-constraints">C</span>'
+      labeled_circle_params: '<span class="circ circ-params">P</span> <span class="circ-text params">Parameters</span>'
+      labeled_circle_vars: '<span class="circ circ-variables">V</span> <span class="circ-text variables">Variables</span>'
+      labeled_circle_obj: '<span class="circ circ-objective">O</span> <span class="circ-text objective">Objective</span>'
+      labeled_circle_constr: '<span class="circ circ-constraints">C</span> <span class="circ-text constraints">Constraints</span>'
 
 exclude_patterns: [.pixi, Thumbs.db, .DS_Store, README.md, "**.ipynb_checkpoints", "**BUILD-IGNORE**", "_assets"]
 
