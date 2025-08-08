@@ -68,15 +68,15 @@ The specifics of our two units are:
 
 We want to decide how to operate our units, so our variables - the unknown quantities that we want to optimise - are the power generated in each unit $i$:
 
-$P_i$
+$P_Gi$
 
 ### {{ labeled_circle_obj }}
 
-Our objective is to minimise our cost of generating power. Given the cost per unit, $C_i$, and the power generated in each unit, $P_i$, we can formulate the total cost as follows:
+Our objective is to minimise our cost of generating power. Given the cost per unit, $C_i$, and the power generated in each unit, $P_Gi$, we can formulate the total cost as follows:
 
 \begin{equation}
 \label{eq:ed_cost}
-C = \sum_{i=1}^{n} C_i * P_{i}
+C = \sum_{i=1}^{n} C_i * P_Gi
 \end{equation}
 
 ### {{ labeled_circle_constr }}
@@ -87,14 +87,14 @@ First, our units must operate within their physical limits - their generated pow
 
 \begin{equation}
 \label{eq:ed_min}
-P_{min,i} \leq P_{i} \leq P_{max,i}
+P_{Gi}^{min} \leq P_Gi \leq P_{Gi}^{max}
 \end{equation}
 
 Second, the amount of electricity generated must exactly match the demand for electricity:
 
 \begin{equation}
 \label{eq:ed_balance}
-\sum_{i=1}^{n} P_{i} = P_{demand}
+\sum_{i=1}^{n} P_{Gi} = P_{D}
 \end{equation}
 
 Note this implies that we ignore many practical matters, for example:
@@ -106,15 +106,15 @@ Note this implies that we ignore many practical matters, for example:
 
 In our example, with two power plants, we end up with the following linear optimisation or linear programming (LP) problem:
 
-* Variables: $P_1$ and $P_2$
-* Objective (to be minimised): $C = C_1 * P_1 + C_2 * P_2 = 3P_1 + 4P_2$
-* Demand balance constraint: $P_1 + P_2 = 500$
-* Operational constraint for unit 1: $50 \leq P_1 \leq 300$
-* Operational constraint for unit 2: $100 \leq P_2 \leq 400$
+* Variables: $P_G1$ and $P_G2$
+* Objective (to be minimised): $C = C_1 * P_G1 + C_2 * P_G2 = 3P_G1 + 4P_G2$
+* Demand balance constraint: $P_G1 + P_G2 = P_D = 500$
+* Operational constraint for unit 1: $50 \leq P_G1 \leq 300$
+* Operational constraint for unit 2: $100 \leq P_G2 \leq 400$
 
 ## Graphical solution
 
-Since this is a two-dimensional problem, with our two decision variables $P_1$ and $P_2$, we can visualise the solution graphically. In principle, we are looking for a value for $P_1$ and $P_2$, so a point in the two-dimensional decision space seen in {numref}`fig-dispatchlp-decisionspace`.
+Since this is a two-dimensional problem, with our two decision variables $P_G1$ and $P_G2$, we can visualise the solution graphically. In principle, we are looking for a value for $P_G1$ and $P_G2$, so a point in the two-dimensional decision space seen in {numref}`fig-dispatchlp-decisionspace`.
 
 To find the best solution, we first need to identify the **feasible region**. This region includes all feasible points, that is, points that meet the constraints of the problem.
 
@@ -173,13 +173,13 @@ Similarly, we can use contour lines to visualise the "third dimension" represent
 To draw contour lines, we set the objective function to a given value (since we already know that 1700 is the optimum, let's start with that). We can transform the objective function equation into a two-dimensional function. Thus,
 
 \begin{equation}
-C = 1700 = 3 P_1 + 4 P_2
+C = 1700 = 3 P_G1 + 4 P_G2
 \end{equation}
 
 becomes
 
 \begin{equation}
-P_2 = 425 - 0.75 P_1
+P_G2 = 425 - 0.75 P_G1
 \end{equation}
 
 To draw further lines we increase and decrease the value by a constant value and repeat the process. In {numref}`fig-dispatchlp-contourlines` we can see what this looks like. In the direction towards the upper right of the plot, the objective function value decreases, in the direction of the lower left of the plot, it decreases. Looking at teh contour lines, we can imagine that we are walking "downhill" in a direction perpendicular to the parallel contour lines (since we are minimising) inside the feasible space, until we hit the edge of the feasible space and cannot go downhill any further - this is the optimum.
@@ -194,7 +194,7 @@ Contour lines of the economic dispatch problem.
 What if we change our objective function slightly so that both coefficients are $4$? The objective function becomes:
 
 \begin{equation}
-C = 4 P_1 + 4 P_2
+C = 4 P_G1 + 4 P_G2
 \end{equation}
 
 Drawing the contour lines of this revised objective function, we can see that they are parallel to the feasible space ({numref}`fig-dispatchlp-contourlines-parallel`). If we go "downhill" along these lines, we cannot end up in a single point - any point along the contour line overlapping with the feasible space is an equally good solution. This illustrates that depending on how the constraints and objective function are set up, a problem may have not just one but an infinite number of optimal solutions.
@@ -210,7 +210,7 @@ Contour lines of the economic dispatch problem with revised objective function.
 
 Finally, let's look at the **active constraints**. These are the constraints that "force" the objective function to the value it takes in the optimum. In other words, they are the binding constraints. In our example, two constraints are active / binding (see {numref}`fig-dispatchlp-activeconstraints`):
 
-* the maximum output constraint for $P_1$: $P_1 <= 300$
+* the maximum output constraint for $P_G1$: $P_G1 <= 300$
 * the demand constraint (note that by definition, equality constraints are *always* active)
 
 ```{figure} ../images-built/fig_dispatchlp_activeconstraints.jpg
@@ -228,7 +228,7 @@ So far we looked at a simple case with only two dimensions, which allows us to r
 
 \begin{equation}
 \label{eq:ed_balance_modified}
-P_1 + P_2 \leq 500
+P_G1 + P_G2 \leq 500
 \end{equation}
 
 This does not necessarily make a lot of real-world sense - in our problem formulation we are minimising cost and so we would expect that electricity generation is as small as possible if there is no equality constraint that forces the model to deliver a certain demand. And indeed the new optimum is $J = 550$ ({numref}`fig-dispatchlp-modifieddemand`).
