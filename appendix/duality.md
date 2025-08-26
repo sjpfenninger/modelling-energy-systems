@@ -1,68 +1,35 @@
-(content:appendix:duality-examples)=
+# More on duality
 
-# Duality: additional examples
+(content:appendix:duality-conversion-summary)=
 
-## Maximisation problem
+## Duality: conversion summary
 
-The primal problem is given by:
+This is a summary of the recommended approach to convert a primal problem into its dual problem.
 
-$$\text{Max. } J(\mathbf{x}) = x_1 + 4x_2$$
+First, you convert the primal problem to a standard form:
 
-subject to:
+* Minimisation.
+* All constraints of the form $ax \leq b$.
+* All variables with bound $\geq 0 $.
 
-\begin{align}
-    x_1 + 2x_2 \leq 5 \\
-    2x_1 + x_2 = 4 \\
-    x_1 - x_2 \geq 1 \\
-    x_1, x_2 \geq 0 \\
-\end{align}
+Second, you convert the standard-form primal problem into the dual problem, as illustrated in {numref}`fig:generic_primal_dual_conversion` and written out in the bullet point list below:
 
-Note that the constraint $x_1 - x_2 \geq 1$ is the same as $-x_1 + x_2 \leq -1$.
+```{figure} ../images/primal_dual.jpg
+:name: fig:generic_primal_dual_conversion
 
-Since there are three primal constraints (one equality and two inequalities), there are three dual variables for the problem. We will call them $\lambda_1$, $\mu_1$, and $\mu_2$ (again, we could use whatever variable names we want).
+Illustration of the conversion from standard form primal problem to dual problem.
+```
 
-The dual problem is:
+* The primal objective function coefficients, $c_n$, are the dual constraint parameters.
+* The primal constraint parameters, $b_m$, are the dual objective function coefficients.
+* The primal constraints in $\leq$ form lead to dual variables $y_m \leq 0$.
+* The primal constraints in $=$ form lead to dual variables $y_m$ which are unconstrained / free.
+* The primal variables $x_n \geq 0$ lead to dual constraints of $\leq$ form.
+* The constraint coefficient $a_{mn}$ corresponds to the m-th constraint and n-th variable in the primal problem. It corresponds to the n-th constraint and m-th variable in the dual problem.
 
-$$\text{Min. } F(\lambda, \mu) = 5\mu_1 + 4\lambda_1 - \mu_2$$
+(content:appendix:duality-example)=
 
-subject to:
-\begin{align}
-    \mu_1 + 2\lambda_1 - \mu_2 \geq 1 \\
-    2\mu_1 + \lambda_1 + \mu_2 \geq 4 \\
-    \mu_1, \mu_2 \geq 0 \\
-\end{align}
-The variable $\lambda_1$ is unrestricted in sign (free).
-
-The solution to the primal problem is:
-
-$$x_1^{*} = 1.666667$$
-
-$$x_2^{*} = 0.666667$$
-
-$$J(\mathbf{x}^{*}) = 4.33333$$
-
-The active constraints are $2x_1 + x_2 = 4$ and $-x_1 + x_2 = -1$.
-
-The shadow prices (Lagrange multipliers) for these active constraints are: $\lambda_1 = 1.666667$ and $\mu_2 = 2.333333$.
-
-The solution to the dual problem is:
-
-$$\mu_1 = 0$$
-
-$$\mu_2 = 2.333333$$
-
-$$\lambda_1 = 1.666667$$
-
-$$F(\mathbf{\lambda^{*}}, \mathbf{\mu^{*}}) = 4.333333$$
-
-
-Conclusions:
-
-* The optimum value of the primal and the dual objective function is equal to 4.333333.
-* The optimal values of the decision variables of the dual problem are equal to the Lagrange multipliers of the primal problem.
-* Likewise, the shadow prices (Lagrange multipliers) of the dual problem are equal to the solution of the primal problem.
-
-## Illustrative example of the perspective switch in duality (lunch ingredients)
+## Lunch ingredients: an illustrative example of the perspective switch in duality
 
 An illustrative small example of the relationship between primal and
 dual linear programs will show that these two problems arise from two
