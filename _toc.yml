@@ -9,18 +9,23 @@ parts:
     - file: basics/sensitivity-analysis.md
     - file: basics/duality-kkts.md
     - file: basics/markets-milp.md
-    # - file: basics/modelling-languages.md
+- caption: Tools and frameworks
+  numbered: true
+  chapters:
+    - file: tools/modelling-languages.md
+    - file: tools/pyomo.ipynb
+    # - file: tools/calliope.ipynb
 - caption: Advanced topics
   numbered: true
   chapters:
-    # - file: advanced/nonlinear.md
     - file: advanced/mixed-complementarity.md
     - file: advanced/stochastic-programming.md
 - caption: Appendices
   chapters:
-   - file: appendix/duality-conversion.md
-   - file: appendix/duality-examples.md
-   - file: appendix/kkts-summary.md
+    - file: appendix/installing-python.md
+    - file: appendix/python-basics.md
+    - file: appendix/duality.md
+    - file: appendix/kkts-summary.md
 - caption: Reference
   chapters:
     - file: reference/reading.md
