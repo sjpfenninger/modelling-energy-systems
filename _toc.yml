@@ -9,7 +9,7 @@ parts:
     - file: basics/sensitivity-analysis.md
     - file: basics/duality-kkts.md
     - file: basics/markets-milp.md
-- caption: Tools and frameworks
+- caption: Modelling tools and larger models
   numbered: true
   chapters:
     - file: tools/modelling-languages.md
