@@ -206,6 +206,8 @@ Clearing price and scheduled demand/supply at the point where the supply and dem
 
 Clearly, we can implement this procedure in a way that does not require optimisation at all: we can simply look for the point where the two curves meet. But as we will see, if we want to consider aspects like minimum generator outputs, the problem is not so easy to solve any more.
 
+(content:milp:day-ahead-auction)=
+
 ## Modelling a single-period day-ahead market auction
 
 For now, we deal with a simple situation: an auction where we consider just a single time period. This means that we do not yet consider how what happened in the previous hour influences the current hour, or how the current hour affects subsequent hours. In a real market, this may well result in an infeasible solution.
