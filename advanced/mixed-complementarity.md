@@ -304,7 +304,7 @@ By concatenating the KKTs of the individual problems (Eqs. {eq}`supply_side`, {e
 
 ## Nash-Cournot games
 
-Up to now, we have assumed a perfectly competitive market, meaning firms have zero market power and act as pure price-takers. This was a Nash game. Contrary, in Nash-Cournot games agents strategically anticipate how their own quantity decisions influence the price (and hence their profit or utility). Each agent takes the decisions of the other players as given, as in a Nash game. In this Section, we will describe how the optimisation problem changes, when agents anticipate the impact of their actions on price.
+Up to now, we have assumed a **perfectly competitive market**, meaning firms have zero market power and act as pure price-takers. This is demonstrated by the example in {numref}`content:appendix:game-theory`. This was a **Nash game**. Contrary, in Nash-Cournot games agents strategically anticipate how their own quantity decisions influence the price (and hence their profit or utility). Each agent takes the decisions of the other players as given, as in a Nash game. In this Section, we will describe how the optimisation problem changes, when agents anticipate the impact of their actions on price.
 
 ### A simple Nash-Cournot game
 

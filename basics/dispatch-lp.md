@@ -72,11 +72,11 @@ $P_Gi$
 
 ### {{ labeled_circle_obj }}
 
-Our objective is to minimise our cost of generating power. Given the cost per unit, $C_i$, and the power generated in each unit, $P_Gi$, we can formulate the total cost as follows:
+Our objective is to minimise our cost of generating power $J$. Given the cost per unit, $C_i$, and the power generated in each unit, $P_Gi$, we can formulate the total cost as follows:
 
 \begin{equation}
 \label{eq:ed_cost}
-C = \sum_{i=1}^{n} C_i * P_Gi
+J = \sum_{i=1}^{n} C_i * P_G_i
 \end{equation}
 
 ### {{ labeled_circle_constr }}
@@ -87,14 +87,14 @@ First, our units must operate within their physical limits - their generated pow
 
 \begin{equation}
 \label{eq:ed_min}
-P_{Gi}^{min} \leq P_Gi \leq P_{Gi}^{max}
+P_{G_i}^{min} \leq P_G_i \leq P_{G_i}^{max}
 \end{equation}
 
 Second, the amount of electricity generated must exactly match the demand for electricity:
 
 \begin{equation}
 \label{eq:ed_balance}
-\sum_{i=1}^{n} P_{Gi} = P_{D}
+\sum_{i=1}^{n} P_{G_i} = P_{D}
 \end{equation}
 
 Note this implies that we ignore many practical matters, for example:
@@ -106,15 +106,15 @@ Note this implies that we ignore many practical matters, for example:
 
 In our example, with two power plants, we end up with the following linear optimisation or linear programming (LP) problem:
 
-* Variables: $P_G1$ and $P_G2$
-* Objective (to be minimised): $C = C_1 * P_G1 + C_2 * P_G2 = 3P_G1 + 4P_G2$
-* Demand balance constraint: $P_G1 + P_G2 = P_D = 500$
-* Operational constraint for unit 1: $50 \leq P_G1 \leq 300$
-* Operational constraint for unit 2: $100 \leq P_G2 \leq 400$
+* Variables: $P_G_1$ and $P_G_2$
+* Objective (to be minimised): $J = C_1 * P_G_1 + C_2 * P_G_2 = 3P_G_1 + 4P_G_2$
+* Demand balance constraint: $P_G_1 + P_G_2 = P_D = 500$
+* Operational constraint for unit 1: $50 \leq P_G_1 \leq 300$
+* Operational constraint for unit 2: $100 \leq P_G_2 \leq 400$
 
 ## Graphical solution
 
-Since this is a two-dimensional problem, with our two decision variables $P_G1$ and $P_G2$, we can visualise the solution graphically. In principle, we are looking for a value for $P_G1$ and $P_G2$, so a point in the two-dimensional decision space seen in {numref}`fig-dispatchlp-decisionspace`.
+Since this is a two-dimensional problem, with our two decision variables $P_G_1$ and $P_G_2$, we can visualise the solution graphically. In principle, we are looking for a value for $P_G_1$ and $P_G_2$, so a point in the two-dimensional decision space seen in {numref}`fig-dispatchlp-decisionspace`.
 
 To find the best solution, we first need to identify the **feasible region**. This region includes all feasible points, that is, points that meet the constraints of the problem.
 
@@ -173,7 +173,7 @@ Similarly, we can use contour lines to visualise the "third dimension" represent
 To draw contour lines, we set the objective function to a given value (since we already know that 1700 is the optimum, let's start with that). We can transform the objective function equation into a two-dimensional function. Thus,
 
 \begin{equation}
-C = 1700 = 3 P_G1 + 4 P_G2
+J = 1700 = 3 P_G1 + 4 P_G2
 \end{equation}
 
 becomes
@@ -194,7 +194,7 @@ Contour lines of the economic dispatch problem.
 What if we change our objective function slightly so that both coefficients are $4$? The objective function becomes:
 
 \begin{equation}
-C = 4 P_G1 + 4 P_G2
+J = 4 P_G1 + 4 P_G2
 \end{equation}
 
 Drawing the contour lines of this revised objective function, we can see that they are parallel to the feasible space ({numref}`fig-dispatchlp-contourlines-parallel`). If we go "downhill" along these lines, we cannot end up in a single point - any point along the contour line overlapping with the feasible space is an equally good solution. This illustrates that depending on how the constraints and objective function are set up, a problem may have not just one but an infinite number of optimal solutions.
