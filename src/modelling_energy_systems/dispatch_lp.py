@@ -38,8 +38,8 @@ def setup_fig_dispatchlp_decisionspace(min_coord, max_coord):
 
     ax.set_xlim(MIN_COORD, MAX_COORD)
     ax.set_ylim(MIN_COORD, MAX_COORD)
-    ax.set_xlabel("$\\mathbf{P_1}$: Power from coal power plant [MW]")
-    ax.set_ylabel("$\\mathbf{P_2}$: Power from gas power plant [MW]")
+    ax.set_xlabel("$\\mathbf{P_G_1}$: Power from coal power plant [MW]")
+    ax.set_ylabel("$\\mathbf{P_G_2}$: Power from gas power plant [MW]")
     ax.grid(True)
     return fig, ax
 
