@@ -149,7 +149,19 @@ The left-hand side of the primal and dual constraints can be understood as a rot
 Notice that when there is a factor of $P_\mathbf{1}$ in a primal constraint, this leads to a term in the **first** dual constraint. When there is a factor of $P_\mathbf{2}$, it leads to a term in the **second** dual constraint. The **first** primal constraint leads to a factor of $X_\mathbf{1}$ in the dual constraint, the **second** primal constraint leads to a factor of $X_\mathbf{2}$ in the dual constraint, the **third** primal constraint leads to a factor of $X_\mathbf{3}$ in the dual constraint, and so on.
 :::
 
-We can solve the dual problem to obtain the optimal solution ($X_1 = -1, X_2 = 0, X_3 = 0, X_4 = 0, X_5 = 4$). Recall that this solution to the dual problem gives the shadow prices of the primal problem. Looking at the shadow prices also reveals something about the primal constraints. When the shadow price is zero, that means the constraint is non-binding. In our example, only the first constraint ($P_1 \leq 300$, capacity limit on unit 1) and last constraint ($P_1 + P_2 = 500$, demand constraint) are active. If the right-hand side of the demand constraint is changed marginally (by one unit) then the optimal value of the objective function will change by $X_5 = 4$. The objective function value is 1700 in both the primal and dual solution. The optimal value of the objective function in the primal problem is always equal to the optimal value of the dual objective function.
+(content:duality-kkts:duality-practical-applications)=
+
+### Practical applications of duality
+
+We can solve the dual problem to obtain the optimal solution ($X_1 = -1, X_2 = 0, X_3 = 0, X_4 = 0, X_5 = 4$). Recall that this solution to the dual problem gives the shadow prices of the primal problem.
+
+Looking at the shadow prices also reveals something about the primal constraints. When the shadow price is zero, that means the constraint is non-binding. In our example, only the first constraint ($P_1 \leq 300$, capacity limit on unit 1) and last constraint ($P_1 + P_2 = 500$, demand constraint) are active. If the right-hand side of the demand constraint is changed marginally (by one unit) then the optimal value of the objective function will change by $X_5 = 4$.
+
+As we can see in this example, duality allows us to easily obtain the shadow prices of the primal problem, and this opens up many practical insights into our models. The two most important practical applications of duality that we care about are:
+
+* **Sensitivity analysis**: We already discussed the use of shadow prices in sensitivity analysis in the section {ref}`content:sensitivity-analysis:shadow-prices`.
+
+* **Marginal costs**: When we obtain a solution in a model of a resource-constrained system, we are often interested in the marginal costs or marginal benefits of changing a parameter, such as increasing electricity demand in a dispatch model. We will use this to calculate the market clearing price in an electricity market in the section {ref}`content:milp:power-markets`.
 
 (content:duality-kkts:duality-conversion-strategy)=
 

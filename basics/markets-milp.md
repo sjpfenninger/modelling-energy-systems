@@ -304,7 +304,7 @@ Second, the amount of electricity generated must exactly match the demand for el
 
 #### Solving the auction problem
 
-Once again, we could simply solve this problem graphically by sorting the demand bids and supply offers and looking for the point where the two curves meet ({numref}`fig:markets-milp:market_clearing`).
+This problem is still simple enough to solve graphically by sorting the demand bids and supply offers and looking for the point where the two curves meet ({numref}`fig:markets-milp:market_clearing`).
 
 ```{figure} ../images-built/fig_market_clearing.jpg
 :name: fig:markets-milp:market_clearing
@@ -315,7 +315,23 @@ Graphically clearing the power market.
 
 The market-clearing price is 4.5 EUR/MWh, the scheduled generation/demand is 33 MW, and the social welfare is 404 EUR.
 
-If we formulate and solve the optimisation problem from equations {eq}`eqn:markets-milp:simple_auction_objective` and {eq}`eqn:markets-milp:simple_auction_constraints` above with the data from the tables above, we will find exactly these values for the scheduled generation/demand and for the objective function value. But how do we determine the market-clearing price mathematically? When solving this as an optimisation problem, we can use duality here: if only the market-clearing equality constraint (total accepted demand = total accepted generation) is active, then the market-clearing price is equal to the shadow price of that constraint. It represents the marginal cost of electricity.
+If we formulate and solve the optimisation problem from equations {eq}`eqn:markets-milp:simple_auction_objective` and {eq}`eqn:markets-milp:simple_auction_constraints` above with the data from the tables above, we will find exactly these values for the scheduled generation/demand and for the objective function value (but in {ref}`content:milp:considering-physical-limits` below, we will see that introducing additional constraints makes it impossible to still solve the problem graphically).
+
+#### Determining the market-clearing price
+
+How do we determine the market-clearing price mathematically when solving the optimisation problem rather than using a graphical approach? For this we can return to one of our [practical applications of duality](content:duality-kkts:duality-practical-applications).
+
+In the optimal solution, if only the market-clearing equality constraint (total accepted demand = total accepted generation) is active, then the shadow price of that constraint is the marginal cost of electricity.
+
+In an ideal market, the market-clearing price is equal to this marginal electricity cost. Duality allows us to easily obtain this value even in a very large model.
+
+:::{admonition} Market prices in optimisation models
+:class: note
+
+The use of duality to obtain market prices is an important and widely used practical application of duality theory.
+:::
+
+(content:milp:considering-physical-limits)=
 
 ### Considering physical limits through additional constraints
 

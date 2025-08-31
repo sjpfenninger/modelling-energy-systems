@@ -68,6 +68,8 @@ What if we increase the power demand even more, say to 800? So  $P_1 + P_2 = 800
 Changing the demand constraint to such a high value that the problem becomes infeasible.
 ```
 
+(content:sensitivity-analysis:shadow-prices)=
+
 ## Shadow prices: effect of changing active constraints
 
 As a part of sensitivity analysis, we want to calculate the effect that changing a parameter in an active constraint has on the optimal solution (non-active constraints have no effect on the solution, since they are not constraining us at the moment). To do so we can analyse small changes of the parameters.

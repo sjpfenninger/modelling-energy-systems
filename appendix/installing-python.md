@@ -7,9 +7,9 @@
 These instructions should be equally valid for macOS, Linux, and Windows.
 
 1. Follow the official instructions to download and install the [Anaconda Python distribution](https://www.anaconda.com/docs/getting-started/anaconda/install).
-2. Download the environment file <a href="../_static/environment.yml">environment.yml</a>. This is a text file (feel free to have a closer look at it) that defines the version of Python and a set of third-party Python packages to install. Defining an environment this way makes it easy to ensure that you have exactly the correct Python components installed.
+2. Download the environment file <a href="../_static/environment.yml">environment.yml</a>. This is a text file (feel free to have a closer look at it) that defines the version of Python and a set of third-party Python packages to install. Defining an environment this way makes it easy to ensure that you have the correct versions of all Python components installed.
 3. [Launch Anaconda Navigator](https://www.anaconda.com/docs/tools/anaconda-navigator/getting-started#starting-navigator) (included with the Anaconda Python distribution)
-4. Create a new environment in Anaconda Navigator by importing the file `environment.yml` file that you downloaded in step 2, [as per the official documentation](https://www.anaconda.com/docs/tools/anaconda-navigator/tutorials/manage-environments#importing-an-environment). After this step is completed, you can delete the downloaded `environment.yml` file.
+4. Create a new environment in Anaconda Navigator by importing the `environment.yml` file that you downloaded in step 2, [as per the official documentation](https://www.anaconda.com/docs/tools/anaconda-navigator/tutorials/manage-environments#importing-an-environment). Once this step is completed, you can delete the downloaded `environment.yml` file.
 
 After these installation steps, you can use Anaconda Navigator to launch Jupyter Lab whenever you want to work in Python:
 
