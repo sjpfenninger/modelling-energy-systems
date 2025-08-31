@@ -151,17 +151,36 @@ Notice that when there is a factor of $P_\mathbf{1}$ in a primal constraint, thi
 
 We can solve the dual problem to obtain the optimal solution ($X_1 = -1, X_2 = 0, X_3 = 0, X_4 = 0, X_5 = 4$). Recall that this solution to the dual problem gives the shadow prices of the primal problem. Looking at the shadow prices also reveals something about the primal constraints. When the shadow price is zero, that means the constraint is non-binding. In our example, only the first constraint ($P_1 \leq 300$, capacity limit on unit 1) and last constraint ($P_1 + P_2 = 500$, demand constraint) are active. If the right-hand side of the demand constraint is changed marginally (by one unit) then the optimal value of the objective function will change by $X_5 = 4$. The objective function value is 1700 in both the primal and dual solution. The optimal value of the objective function in the primal problem is always equal to the optimal value of the dual objective function.
 
-
 (content:duality-kkts:duality-conversion-strategy)=
 
 ### Strategies to convert a primal into its dual problem
 
-The easiest approach to convert a primal problem to its dual problem, and the one we use above, is:
+The easiest approach to convert a primal problem to its dual problem, and the one we use above, consists of two steps: first rewrite the problem to [standard form](content:lp:standard-form), then follow the (standard, always same) steps to convert the standard-form problem to its dual.
 
-* Rewrite the primal problem to standard form
-* Follow the (standard, always same) steps to convert the standard-form problem to its dual
+**Step one**: Rewrite to standard form:
 
-You do not have to rewrite to standard form first, however. There is a method called "SOB" which gives you a "map" on how to translate a primal problem into the corresponding dual problem, no matter what exact form it is in. In principle this also always works, but it can be a bit trickier to get your head around and it is easier to make mistakes.
+* Minimisation.
+* All constraints of the form $ax \leq b$.
+* All variables with bound $\geq 0 $.
+
+**Step two**: Convert the standard-form primal problem into the dual problem, as illustrated in {numref}`fig:generic_primal_dual_conversion` and written out in the bullet point list below:
+
+```{figure} ../images/primal_dual.jpg
+:name: fig:generic_primal_dual_conversion
+
+Illustration of the conversion from standard form primal problem to dual problem.
+```
+
+* The primal objective function coefficients, $c_n$, are the dual constraint parameters.
+* The primal constraint parameters, $b_m$, are the dual objective function coefficients.
+* The primal constraints in $\leq$ form lead to dual variables $y_m \leq 0$.
+* The primal constraints in $=$ form lead to dual variables $y_m$ which are unconstrained / free.
+* The primal variables $x_n \geq 0$ lead to dual constraints of $\leq$ form.
+* The constraint coefficient $a_{mn}$ corresponds to the m-th constraint and n-th variable in the primal problem. It corresponds to the n-th constraint and m-th variable in the dual problem.
+
+#### More general approach
+
+For the above strategy, you do not have to rewrite to standard form first. There is a method called "SOB" which gives you a "map" on how to translate a primal problem into the corresponding dual problem, no matter what exact form it is in. In principle this also always works, but it can be a bit trickier to get your head around and it is easier to make mistakes.
 
 The table in {numref}`fig:duality_conversion_table` shows you how what the rules in the SOB method are.
 
