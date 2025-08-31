@@ -14,7 +14,7 @@ parts:
   chapters:
     - file: tools/modelling-languages.md
     - file: tools/pyomo.ipynb
-    # - file: tools/calliope.ipynb
+    - file: tools/calliope.md
 - caption: Advanced topics
   numbered: true
   chapters:

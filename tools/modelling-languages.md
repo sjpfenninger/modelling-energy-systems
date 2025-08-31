@@ -21,6 +21,8 @@ We are interested in open-source mathematical languages built inside existing ge
 
 In this reader, we will focus on Pyomo and Python. The next section, {ref}`content:pyomo-basics`, introduces the functionality of Pyomo. To install Python and Pyomo, see the [installation instructions in the appendix](../appendix/installing-python.md). For some pointers on learning the basics of Python, see the [Python basics section](../appendix/python-basics.md) in the appendix.
 
+(content:modelling-languages:frameworks)=
+
 ## Model frameworks
 
 When you often deal with similar problem structures, it makes sense to introduce another layer of abstraction: a model framework ({numref}`fig-frameworks`). In the energy sector, for example, a mathematical model will typically deal with the supply of electricity by different power plants and the demand for electricity by different customers. So rather than writing the equations that deal with this - for example the  supply and demand balance - from scratch, we use a domain-specific tool that does this for us: a model framework that provides building blocks such as "power plants" and builds a mathematical problem based on how we as users configure these building blocks.
