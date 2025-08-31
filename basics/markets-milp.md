@@ -16,11 +16,11 @@ We once again return to the economic dispatch problem from {numref}`content:lp:e
 Our economic dispatch problem with two power plants.
 ```
 
-### Additional {{ circle_vars }}
+### Additional {{ labeled_circle_vars }}
 
 We want to decide how to operate our units, so we still have the power generated in each unit as variables: $P_{Gi}$. We also want to decide whether a unit is on or off, and we can represent this with an additional set of variables: $u_i$. $u_i$ is a binary variable where 0 means the unit is off and 1 means the unit is on.
 
-### Additional {{ circle_constr }}
+### Additional {{ labeled_circle_constr }}
 
 We need to modify the constraints that enforce the minimum and maximum generation limits for each unit. We include the binary variables $u_i$ as follows:
 
@@ -124,7 +124,7 @@ We are considering time as discrete steps. The choice of how large such an indiv
 
 In principle, our problem formulation remains almost the same as above. We simply make most of our model components time-dependent by adding the index $t$. For example, we want to consider power generation and the on/off state of each unit $i$ at time $t$: our variables become $P_{Git}$ and $u_{it}$.
 
-### Additional {{ circle_constr }} and {{ circle_params }}
+### Additional {{ labeled_circle_constr }} and {{ labeled_circle_params }}
 
 The main addition is that we add constraints to represent the ramping limits between time periods. We need to know, for each of our power plants (units), how fast they can increase and decrease their power output: the ramping rates $R_{Gi}^{up}$ and $R_{Gi}^{down}$. For example, $R_{Gi}^{up}$ may be 10 MW/hour for a 50 MW unit: this would mean that it takes that unit 5 hours to go from zero to maximum output.
 
