@@ -62,13 +62,13 @@ Weak duality means that the solution to any primal minimisation problem is alway
 We will now revisit the economic dispatch problem from {numref}`content:lp:economic-dispatch` and formulate the corresponding dual problem. Recall our economic dispatch problem:
 
 \begin{align}
-    \text{Min.} \; & J = 3P_G1 + 4P_G2 \\
-    \text{s.t.} \; & 50 \leq P_G1 \leq 300 \\
-    & 100 \leq P_G2 \leq 400 \\
-    & P_G1 + P_G2 = 500 \\
+    \text{Min.} \; & J = 3P_{G_1} + 4P_{G_2} \\
+    \text{s.t.} \; & 50 \leq P_{G_1} \leq 300 \\
+    & 100 \leq P_{G_2} \leq 400 \\
+    & P_{G_1} + P_{G_2} = 500 \\
 \end{align}
 
-We also have the variable bounds: $P_G1 \geq 0$ and $P_G2 \geq 0$ (this comes from the physical nature of our system: power plants produce electricity; their power production has to be a positive value).
+We also have the variable bounds: $P_{G_1} \geq 0$ and $P_{G_2} \geq 0$ (this comes from the physical nature of our system: power plants produce electricity; their power production has to be a positive value).
 
 Now, to make our life easier, we will rewrite this problem into the standard form that we introduced in {numref}`content:lp:standard-form`. We separate out the upper and lower limits on generation which are technically separate constraints, and give all the constraints the same sign.
 
@@ -80,23 +80,23 @@ Modifying our economic dispatch example into a standard form.
 So our problem now looks like this:
 
 \begin{align}
-    \text{Min.} \; & J = 3P_G1 + 4P_G2 \\
-    \text{s.t.} \; & P_G1 \leq 300 \\
-    & P_G2 \leq 400 \\
-    & -P_G1 \leq -50 \\
-    & -P_G2 \leq -100 \\
-    & P_G1 + P_G2 = 500 \\
+    \text{Min.} \; & J = 3P_{G_1} + 4P_{G_2} \\
+    \text{s.t.} \; & P_{G_1} \leq 300 \\
+    & P_{G_2} \leq 400 \\
+    & -P_{G_1} \leq -50 \\
+    & -P_{G_2} \leq -100 \\
+    & P_{G_1} + P_{G_2} = 500 \\
 \end{align}
 
 It is up to us to pick the naming for the new variables in the dual problem. Often we write down the variable name we'll use in the dual problem next to the corresponding constraint in the primal problem, which in the above example would look like this:
 
 \begin{align}
-    \text{Min.} \; & J = 3P_G1 + 4P_G2 \\
-    \text{s.t.} \; & P_G1 \leq 300 \quad &(X_1) \\
-    & P_G2 \leq 400 \quad &(X_2) \\
-    & -P_G1 \leq -50 \quad &(X_3) \\
-    & -P_G2 \leq -100 \quad &(X_4) \\
-    & P_G1 + P_G2 = 500 \quad &(X_5) \\
+    \text{Min.} \; & J = 3P_{G_1} + 4P_{G_2} \\
+    \text{s.t.} \; & P_{G_1} \leq 300 \quad &(X_1) \\
+    & P_{G_2} \leq 400 \quad &(X_2) \\
+    & -P_{G_1} \leq -50 \quad &(X_3) \\
+    & -P_{G_2} \leq -100 \quad &(X_4) \\
+    & P_{G_1} + P_{G_2} = 500 \quad &(X_5) \\
 \end{align}
 
 Now, we can use the rules in {numref}`table:standard_duality_conversion`:
@@ -139,17 +139,17 @@ Our new variables are $X_1 \leq 0, X_2 \leq 0, X_3 \leq 0, X_4 \leq 0$, and $X_5
 :class: tip
 
 The left-hand side of the primal and dual constraints can be understood as a rotation of each other. In the context of the economic dispatch example:
-* $P_G1$ in the first primal constraint leads to $X_1$ in the first dual constraint
-* $P_G2$ in the second primal constraint leads to $X_2$ in the second dual constraint
-* $-P_G1$ in the third primal constraint leads to $-X_3$ in the first dual constraint
-* $-P_G2$ in the fourth primal constraint leads to $-X_4$ in the second dual constraint
-* $P_G1$ in the fifth primal constraint leads to $X_5$ in the first dual constraint
-* $P_G2$ in the fifth primal constraint leads to $X_5$ in the second dual constraint
+* $P_{G_1}$ in the first primal constraint leads to $X_1$ in the first dual constraint
+* $P_{G_2}$ in the second primal constraint leads to $X_2$ in the second dual constraint
+* $-P_{G_1}$ in the third primal constraint leads to $-X_3$ in the first dual constraint
+* $-P_{G_2}$ in the fourth primal constraint leads to $-X_4$ in the second dual constraint
+* $P_{G_1}$ in the fifth primal constraint leads to $X_5$ in the first dual constraint
+* $P_{G_2}$ in the fifth primal constraint leads to $X_5$ in the second dual constraint
 
 Notice that when there is a factor of $P_\mathbf{1}$ in a primal constraint, this leads to a term in the **first** dual constraint. When there is a factor of $P_\mathbf{2}$, it leads to a term in the **second** dual constraint. The **first** primal constraint leads to a factor of $X_\mathbf{1}$ in the dual constraint, the **second** primal constraint leads to a factor of $X_\mathbf{2}$ in the dual constraint, the **third** primal constraint leads to a factor of $X_\mathbf{3}$ in the dual constraint, and so on.
 :::
 
-We can solve the dual problem to obtain the optimal solution ($X_1 = -1, X_2 = 0, X_3 = 0, X_4 = 0, X_5 = 4$). Recall that this solution to the dual problem gives the shadow prices of the primal problem. Looking at the shadow prices also reveals something about the primal constraints. When the shadow price is zero, that means the constraint is non-binding. In our example, only the first constraint ($P_G1 \leq 300$, capacity limit on unit 1) and last constraint ($P_G1 + P_G2 = 500$, demand constraint) are active. If the right-hand side of the demand constraint is changed marginally (by one unit) then the optimal value of the objective function will change by $X_5 = 4$. The objective function value is 1700 in both the primal and dual solution. The optimal value of the objective function in the primal problem is always equal to the optimal value of the dual objective function.
+We can solve the dual problem to obtain the optimal solution ($X_1 = -1, X_2 = 0, X_3 = 0, X_4 = 0, X_5 = 4$). Recall that this solution to the dual problem gives the shadow prices of the primal problem. Looking at the shadow prices also reveals something about the primal constraints. When the shadow price is zero, that means the constraint is non-binding. In our example, only the first constraint ($P_{G_1} \leq 300$, capacity limit on unit 1) and last constraint ($P_{G_1} + P_{G_2} = 500$, demand constraint) are active. If the right-hand side of the demand constraint is changed marginally (by one unit) then the optimal value of the objective function will change by $X_5 = 4$. The objective function value is 1700 in both the primal and dual solution. The optimal value of the objective function in the primal problem is always equal to the optimal value of the dual objective function.
 
 
 (content:duality-kkts:duality-conversion-strategy)=
@@ -208,7 +208,7 @@ A point that satisfies the necessary condition for optimality ($\frac{\partial f
 
 In energy systems, a constrained optimisation is most common. Consider the example of economic dispatch from {numref}`content:lp:economic-dispatch`. We will again use an economic dispatch example, and build up the complexity of the problem throughout this chapter, to illustrate how we can use KKT conditions and duality to solve such problems and interpret their solutions.
 
-Consider two generators able to produce $P_G1$ and $P_G2$. Each generator has a quadratic cost function: $C_1 = a_1 + b_1 \cdot P_G1^2$ and $C_2 = a_2 + b_2 \cdot P_G2^2$. Note that the cost functions here are quadratic, _not_ linear. This is quite typical in power systems. $C_i$ denotes the total operating cost of powerplant $i$, while $a_i$ is a fixed cost and $b_i$ is the cost in €/MW.
+Consider two generators able to produce $P_{G_1}$ and $P_{G_2}$. Each generator has a quadratic cost function: $C_1 = a_1 + b_1 \cdot P_{G_1}^2$ and $C_2 = a_2 + b_2 \cdot P_{G_2}^2$. Note that the cost functions here are quadratic, _not_ linear. This is quite typical in power systems. $C_i$ denotes the total operating cost of powerplant $i$, while $a_i$ is a fixed cost and $b_i$ is the cost in €/MW.
 
 Unlike the linear dispatch problem in {numref}`content:lp:economic-dispatch`, we now have a **quadratic programming (QP)** problem. This is still a convex optimisation problem. Therefore, the techniques we use here also apply to linear programming problems.
 
@@ -220,29 +220,29 @@ Unlike the linear dispatch problem in {numref}`content:lp:economic-dispatch`, we
 We need to dispatch the generators to meet a demand $P_D$ at minimal cost. We will ignore the capacity constraints of the generators for now. Thus, we have the following optimisation problem:
 
 \begin{align}
-    & \text{min.} \quad a_1 + b_1 \cdot P_G1^2+ a_2 + b_2 \cdot P_G2^2 \\
-    & \text{s.t.} \quad P_G1 + P_G2 = P_D
+    & \text{min.} \quad a_1 + b_1 \cdot P_{G_1}^2+ a_2 + b_2 \cdot P_{G_2}^2 \\
+    & \text{s.t.} \quad P_{G_1} + P_{G_2} = P_D
 \end{align}
 
-If we do not consider the equality constraint $P_G1 + P_G2 = P_D$ then the optimal solution to this problem (what minimises operating cost of the system) is $P_G1^* = 0$, $P_G2^*=0$, i.e. not run the generators at all. You can easily confirm this with the necessary condition for optimality: take the derivative of the objective function w.r.t. $P_G1$ and $P_G2$, equate those expressions to zero, and solve for $P_G1$ and $P_G2$. This is the unconstrained optimisation previously discussed.
+If we do not consider the equality constraint $P_{G_1} + P_{G_2} = P_D$ then the optimal solution to this problem (what minimises operating cost of the system) is $P_{G_1}^* = 0$, $P_{G_2}^*=0$, i.e. not run the generators at all. You can easily confirm this with the necessary condition for optimality: take the derivative of the objective function w.r.t. $P_{G_1}$ and $P_{G_2}$, equate those expressions to zero, and solve for $P_{G_1}$ and $P_{G_2}$. This is the unconstrained optimisation previously discussed.
 
 To deal with the constraint in our optimisation problem, we introduce the Lagrangian. The Lagrangian integrates the constraint to the objective function.
 
 \begin{equation}
-    \mathcal{L} = (a_1 + b_1 \cdot P_G1^2+ a_2 + b_2 \cdot P_G2^2) + \lambda \cdot (P_D - P_G1 - P_G2)
+    \mathcal{L} = (a_1 + b_1 \cdot P_{G_1}^2+ a_2 + b_2 \cdot P_{G_2}^2) + \lambda \cdot (P_D - P_{G_1} - P_{G_2})
 \end{equation}
 
-The first part of the Lagrangian is the original objective function. Then we add the constraint multiplied by a Lagrange multiplier $\lambda$. We want to find an optimal value of $\lambda$ that coordinates the decision of $P_G1$ and $P_G2$ to ensure that the constraint $P_D = P_G1^* + P_G2^*$ is met at minimum cost.
+The first part of the Lagrangian is the original objective function. Then we add the constraint multiplied by a Lagrange multiplier $\lambda$. We want to find an optimal value of $\lambda$ that coordinates the decision of $P_{G_1}$ and $P_{G_2}$ to ensure that the constraint $P_D = P_{G_1}^* + P_{G_2}^*$ is met at minimum cost.
 
-To do this, we draw on our knowledge of unconstrained optimisation, since now we have a single function, the Lagrangian, to minimise. Thus, we take the first derivative of the Lagrangian w.r.t. $P_G1$ and $P_G2$ and $\lambda$:
+To do this, we draw on our knowledge of unconstrained optimisation, since now we have a single function, the Lagrangian, to minimise. Thus, we take the first derivative of the Lagrangian w.r.t. $P_{G_1}$ and $P_{G_2}$ and $\lambda$:
 
 \begin{align}
-    & \frac{\partial \mathcal{L}}{\partial P_G1} = 2 \cdot b_1 \cdot P_G1 - \lambda = 0  \\
-    & \frac{\partial \mathcal{L}}{\partial P_G2} = 2 \cdot b_2 \cdot P_G2 - \lambda = 0  \\
-    & \frac{\partial \mathcal{L}}{\partial \lambda} =P_D - P_G1 - P_G2 = 0
+    & \frac{\partial \mathcal{L}}{\partial P_{G_1}} = 2 \cdot b_1 \cdot P_{G_1} - \lambda = 0  \\
+    & \frac{\partial \mathcal{L}}{\partial P_{G_2}} = 2 \cdot b_2 \cdot P_{G_2} - \lambda = 0  \\
+    & \frac{\partial \mathcal{L}}{\partial \lambda} =P_D - P_{G_1} - P_{G_2} = 0
 \end{align}
 
-Notice that now we have three equations and three unknowns. So, we can solve for $P_G1$, $P_G2$, and $\lambda$, which gives the optimal solution to the original optimisation problem. Note that the last equation is identical to our original constraint. A solution to the system of equations above will hence be as such that $g_1$ and $g_2$ jointly meet the load $L$.
+Notice that now we have three equations and three unknowns. So, we can solve for $P_{G_1}$, $P_{G_2}$, and $\lambda$, which gives the optimal solution to the original optimisation problem. Note that the last equation is identical to our original constraint. A solution to the system of equations above will hence be as such that $g_1$ and $g_2$ jointly meet the load $L$.
 
 Now we will generalise the Lagrangian to any equality constrained optimisation problem. Consider the following minimisation problem with equality constraints $h_i(x)$:
 \begin{align}
@@ -279,23 +279,23 @@ The equality constrained optmisation problem also has a graphical interpretation
 Graphical representation of the equality constrained economic dispatch problem
 ```
 
-$P_G1$ and $P_G2$ are on the axes. The red contour lines are constant values of the objective function (total operating cost). The total operating cost increases as $P_G1$ and $P_G2$ increase. The blue line is the equality constraint. The green dot is the optimal solution. At this point, the gradient of the objective function $\nabla f(x)$ (red arrow) is (1) perpendicular to the constraint and (2) parallel to the gradient of the constraint $\nabla h(x)$ (blue arrow). This can be expressed as:
+$P_{G_1}$ and $P_{G_2}$ are on the axes. The red contour lines are constant values of the objective function (total operating cost). The total operating cost increases as $P_{G_1}$ and $P_{G_2}$ increase. The blue line is the equality constraint. The green dot is the optimal solution. At this point, the gradient of the objective function $\nabla f(x)$ (red arrow) is (1) perpendicular to the constraint and (2) parallel to the gradient of the constraint $\nabla h(x)$ (blue arrow). This can be expressed as:
 \begin{equation}
     \nabla f(x) + \lambda \cdot \nabla h(x) = 0
 \end{equation}
 
 ### General optimisation
 
-In energy systems, we have both equality and inequality constraints. For example, in the economic dispatch example of {numref}`content:lp:economic-dispatch`, the generators have maximum generation capacity constraints. These maximum constraints are notated as $P_{G1}^{max}$ and $P_{G2}^{max}$ and cannot run at negative output (lower bound of zero). The optimisation problem becomes:
+In energy systems, we have both equality and inequality constraints. For example, in the economic dispatch example of {numref}`content:lp:economic-dispatch`, the generators have maximum generation capacity constraints. These maximum constraints are notated as $P_{G_1}^{max}$ and $P_{G_2}^{max}$ and cannot run at negative output (lower bound of zero). The optimisation problem becomes:
 
 \begin{align}
-    \text{min.} \; & a_1 + b_1 \cdot P_G1^2+ a_2 + b_2 \cdot P_G2^2 \\
-    \text{s.t.} \; & P_G1 + P_G2 = P_D  \\
-    & 0 \leq P_G1 \leq P_{G1}^{max}  \\
-    & 0 \leq P_G2 \leq P_{G2}^{max}
+    \text{min.} \; & a_1 + b_1 \cdot P_{G_1}^2+ a_2 + b_2 \cdot P_{G_2}^2 \\
+    \text{s.t.} \; & P_{G_1} + P_{G_2} = P_D  \\
+    & 0 \leq P_{G_1} \leq P_{G_1}^{max}  \\
+    & 0 \leq P_{G_2} \leq P_{G_2}^{max}
 \end{align}
 
-To solve the problem with equality and inequality constraints, we extend our graphical interpretation. The grey area in {numref}`fig:KKT_eqconst_ineqconst_graphical` is the feasible region because it represents the feasible range of output of $P_G1$ and $P_G2$. The set of feasible solutions---the values of $P_G1$ and $P_G2$ that satisfy both the equality and inequality constraints---lie on the blue line within the grey area. This is exactly what we already did in {numref}`content:lp:economic-dispatch`, just with different notation for our generation and demand constraints - and as will become clear in {numref}`fig:KKT_eqconst_ineqconst_graphical`, a key difference in where the optimal solution lies, since we are dealing with a quadratic rather than a linear problem.
+To solve the problem with equality and inequality constraints, we extend our graphical interpretation. The grey area in {numref}`fig:KKT_eqconst_ineqconst_graphical` is the feasible region because it represents the feasible range of output of $P_{G_1}$ and $P_{G_2}$. The set of feasible solutions---the values of $P_{G_1}$ and $P_{G_2}$ that satisfy both the equality and inequality constraints---lie on the blue line within the grey area. This is exactly what we already did in {numref}`content:lp:economic-dispatch`, just with different notation for our generation and demand constraints - and as will become clear in {numref}`fig:KKT_eqconst_ineqconst_graphical`, a key difference in where the optimal solution lies, since we are dealing with a quadratic rather than a linear problem.
 
 ```{figure} ../images/KKT_eqconst_ineqconst_graphical.png
 :name: fig:KKT_eqconst_ineqconst_graphical
@@ -304,7 +304,7 @@ To solve the problem with equality and inequality constraints, we extend our gra
 Graphical representation of the equality and inequality constrained economic dispatch problem
 ```
 
-The optimal solution needs to be part of the feasible solution set. In this case, we see that the optimal solution (green dot) is indeed in the feasible area. Thus the inequality constraints $0 \leq P_G1 \leq P_{G1}^{max}$ and $0 \leq P_G2 \leq P_{G2}^{max}$ actually do not play a role in this particular example.
+The optimal solution needs to be part of the feasible solution set. In this case, we see that the optimal solution (green dot) is indeed in the feasible area. Thus the inequality constraints $0 \leq P_{G_1} \leq P_{G_1}^{max}$ and $0 \leq P_{G_2} \leq P_{G_2}^{max}$ actually do not play a role in this particular example.
 
 :::{admonition} From linear to quadratic problems
 :class: tip
@@ -313,7 +313,7 @@ Recall that in {numref}`content:lp:economic-dispatch`, we were able to say that 
 
 :::
 
-However, in the general case the inequality constraints can influence the optimisation problem. Such a case is when the generators produce at their capacity limits. Then we want to define which inequality constraints are active. If we can identify the active constraints, we can replace them with equality constraints (e.g., $P_G1 \leq P_{G1}^{max}$ becomes $P_G1 = P_{G1}^{max}$). Hence, we can ignore all inactive constraints, as they don't influence the solution. Then we are left with an equality constrained optimisation problem which we know how to solve.
+However, in the general case the inequality constraints can influence the optimisation problem. Such a case is when the generators produce at their capacity limits. Then we want to define which inequality constraints are active. If we can identify the active constraints, we can replace them with equality constraints (e.g., $P_{G_1} \leq P_{G_1}^{max}$ becomes $P_{G_1} = P_{G_1}^{max}$). Hence, we can ignore all inactive constraints, as they don't influence the solution. Then we are left with an equality constrained optimisation problem which we know how to solve.
 
 In a general optimisation problem with both equality and inequality constraints, we do not know in advance which constraints will be active. In that case, the Karush-Kuhn-Tucker (KKT) are useful in identifying the optimal solution. Consider the general optimisation problem written in standard form:
 
@@ -388,40 +388,40 @@ Note that sometimes KKT conditions are written in condensed form:
 
 Let's revisit the economic dispatch example with the quadratic cost functions, as defined in {numref}`content:duality-kkt:economic-dispatch` and apply KKT conditions. In the standard form we want to use here, the constraints are written separately with a zero on the right-hand sign and "=" or "$\leq$" signs:
 \begin{align}
-    \text{min.} \; & a_1 + b_1 \cdot P_G1^2+ a_2 + b_2 \cdot P_G2^2 &  \\
-    \text{s.t.} \; & P_G1 + P_G2 - P_D = 0 \quad &(\lambda) \\
-    &  - P_G1 \leq 0 \quad &(\mu_1) \\
-    &  P_G1 - P_{G1}^{max} \leq 0 \quad &(\mu_2) \\
-    &  - P_G2 \leq 0 \quad &(\mu_3)  \\
-    &  P_G2 - P_{G2}^{max} \leq 0 \quad &(\mu_4)
+    \text{min.} \; & a_1 + b_1 \cdot P_{G_1}^2+ a_2 + b_2 \cdot P_{G_2}^2 &  \\
+    \text{s.t.} \; & P_{G_1} + P_{G_2} - P_D = 0 \quad &(\lambda) \\
+    &  - P_{G_1} \leq 0 \quad &(\mu_1) \\
+    &  P_{G_1} - P_{G_1}^{max} \leq 0 \quad &(\mu_2) \\
+    &  - P_{G_2} \leq 0 \quad &(\mu_3)  \\
+    &  P_{G_2} - P_{G_2}^{max} \leq 0 \quad &(\mu_4)
 \end{align}
 
 This makes it easy to write the Lagrangian, following Equation {eq}`eqn:kkts-Lagrangian`:
 \begin{align}
-    \mathcal{L} = & a_1 + b_1 \cdot P_G1^2+ a_2 + P_G2 \cdot P_G2^2 + \lambda \cdot ( P_G1 + P_G2 - P_D ) \\
-    & + \mu_1 \cdot ( - P_G1) + \mu_2 \cdot ( P_G1 - P_{G1}^{max})  \\
-    & + \mu_3 \cdot ( - P_G2 ) + \mu_4 \cdot ( P_G2 - P_{G2}^{max})
+    \mathcal{L} = & a_1 + b_1 \cdot P_{G_1}^2+ a_2 + P_{G_2} \cdot P_{G_2}^2 + \lambda \cdot ( P_{G_1} + P_{G_2} - P_D ) \\
+    & + \mu_1 \cdot ( - P_{G_1}) + \mu_2 \cdot ( P_{G_1} - P_{G_1}^{max})  \\
+    & + \mu_3 \cdot ( - P_{G_2} ) + \mu_4 \cdot ( P_{G_2} - P_{G_2}^{max})
 \end{align}
 
 Then we derive the KKT conditions:
 \begin{align}
-    & \frac{\partial \mathcal{L}}{\partial P_G1} = 2 \cdot b_1 \cdot P_G1 + \lambda - \mu_1 + \mu_2 = 0 \quad & (\text{Optimality conditions}) \\
-    & \frac{\partial \mathcal{L}}{\partial P_G2} = 2 \cdot b_2 \cdot P_G2 + \lambda - \mu_3 + \mu_4 = 0 \quad & (\text{Optimality conditions}) \\
-    & \frac{\partial \mathcal{L}}{\partial \lambda} = P_G1 + P_G2 - P_D = 0 \quad &  (\text{Primal feasibility (equality constraint)}) \\
-    &  - P_G1 \leq 0 \quad & (\text{Primal feasibility (inequality constraint}) \\
-    &  P_G1 - P_{G1}^{max} \leq 0  \quad & (\text{Primal feasibility (inequality constraint}) \\
-    &  - P_G2 \leq 0  \quad & (\text{Primal feasibility (inequality constraint}) \\
-    &  P_G2 - P_{G2}^{max} \quad & (\text{Primal feasibility (inequality constraint}) \\
-    & \mu_1 \cdot ( - P_G1) = 0  \quad & (\text{Complementary slackness conditions}) \\
-    & \mu_2 \cdot ( P_G1 - P_{G1}^{max}) = 0 \quad & (\text{Complementary slackness conditions}) \\
-    & \mu_3 \cdot ( - P_G2 )  = 0 \quad & (\text{Complementary slackness conditions}) \\
-    & \mu_4 \cdot ( P_G2 - P_{G2}^{max}) = 0 \quad & (\text{Complementary slackness conditions}) \\
+    & \frac{\partial \mathcal{L}}{\partial P_{G_1}} = 2 \cdot b_1 \cdot P_{G_1} + \lambda - \mu_1 + \mu_2 = 0 \quad & (\text{Optimality conditions}) \\
+    & \frac{\partial \mathcal{L}}{\partial P_{G_2}} = 2 \cdot b_2 \cdot P_{G_2} + \lambda - \mu_3 + \mu_4 = 0 \quad & (\text{Optimality conditions}) \\
+    & \frac{\partial \mathcal{L}}{\partial \lambda} = P_{G_1} + P_{G_2} - P_D = 0 \quad &  (\text{Primal feasibility (equality constraint)}) \\
+    &  - P_{G_1} \leq 0 \quad & (\text{Primal feasibility (inequality constraint}) \\
+    &  P_{G_1} - P_{G_1}^{max} \leq 0  \quad & (\text{Primal feasibility (inequality constraint}) \\
+    &  - P_{G_2} \leq 0  \quad & (\text{Primal feasibility (inequality constraint}) \\
+    &  P_{G_2} - P_{G_2}^{max} \quad & (\text{Primal feasibility (inequality constraint}) \\
+    & \mu_1 \cdot ( - P_{G_1}) = 0  \quad & (\text{Complementary slackness conditions}) \\
+    & \mu_2 \cdot ( P_{G_1} - P_{G_1}^{max}) = 0 \quad & (\text{Complementary slackness conditions}) \\
+    & \mu_3 \cdot ( - P_{G_2} )  = 0 \quad & (\text{Complementary slackness conditions}) \\
+    & \mu_4 \cdot ( P_{G_2} - P_{G_2}^{max}) = 0 \quad & (\text{Complementary slackness conditions}) \\
     & \mu_1, \mu_2, \mu_3, \mu_4 \geq 0 \quad & (\text{Dual feasibility})
 \end{align}
 
-Clearly, this is a large set of equations. This problem is not trivial to solve because the complementary slackness constraints are non-linear. For simple cases addressed in this course, we can solve the problem by using trial-and-error: "What if a certain constraint $g_j(x)$ is binding? Does that lead to a feasible solution? Is the solution optimal?" In this example, there are four inequality constraints so in theory there are 16 ($=2^4$) possible combinations. However, some combinations are not possible, for example if $P_G1 = 0$, then $P_G1 \neq P_{G1}^{max}$. By trying different combinations of constraints, we come up with candidate solutions, then assess whether they are optimal or not.
+Clearly, this is a large set of equations. This problem is not trivial to solve because the complementary slackness constraints are non-linear. For simple cases addressed in this course, we can solve the problem by using trial-and-error: "What if a certain constraint $g_j(x)$ is binding? Does that lead to a feasible solution? Is the solution optimal?" In this example, there are four inequality constraints so in theory there are 16 ($=2^4$) possible combinations. However, some combinations are not possible, for example if $P_{G_1} = 0$, then $P_{G_1} \neq P_{G_1}^{max}$. By trying different combinations of constraints, we come up with candidate solutions, then assess whether they are optimal or not.
 
-Let's look at the problem graphically (see {numref}`fig:KKT_g2const_graphical`). We assume that the feasible range of values for $P_G2$ is reduced to the capacity constraints. Therefore, the original optimal solution (green dot) is no longer in the feasible region. By looking at the graph and reasoning, we can suppose that the upper capacity limit of $P_G2$ will be binding. So, we will test the solution in which $P_G1$ is producing within its operating range $0 \leq P_G1 \leq P_{G1}^{max}$ (the inequality constraints are non-binding) and $P_G2$ is operating at maximum capacity $P_G2 = P_{G2}^{max}$. The solution still needs to lie on the blue line to satisfy the equality constraint.
+Let's look at the problem graphically (see {numref}`fig:KKT_G2const_graphical`). We assume that the feasible range of values for $P_{G_2}$ is reduced to the capacity constraints. Therefore, the original optimal solution (green dot) is no longer in the feasible region. By looking at the graph and reasoning, we can suppose that the upper capacity limit of $P_{G_2}$ will be binding. So, we will test the solution in which $P_{G_1}$ is producing within its operating range $0 \leq P_{G_1} \leq P_{G_1}^{max}$ (the inequality constraints are non-binding) and $P_{G_2}$ is operating at maximum capacity $P_{G_2} = P_{G_2}^{max}$. The solution still needs to lie on the blue line to satisfy the equality constraint.
 
 ```{figure} ../images/KKT_g2const_graphical.png
 :name: fig:KKT_g2const_graphical
@@ -432,17 +432,17 @@ Graphical representation of the economic dispatch problem with reduced feasible 
 
 Given this test solution, we know that $\mu_1$, $\mu_2$, $\mu_3$ $= 0$ and $\mu_4 \neq 0$. This simplifies the set of KKT conditions to:
 \begin{align}
-    & \frac{\partial \mathcal{L}}{\partial P1} = 2 \cdot b_1 \cdot P_G1 + \lambda  = 0  \\
-    & \frac{\partial \mathcal{L}}{\partial P_G2} = 2 \cdot b_2 \cdot P_G2 + \lambda + \mu_4 = 0  \\
-    & \frac{\partial \mathcal{L}}{\partial \lambda} = P_G1 + P_G2 - L = 0  \\
-    &  - P_G1 < 0  \\
-    &  P_G1 - P_{G1}^{max} < 0   \\
-    & P_G2 = P_{G2}^{max} \\
+    & \frac{\partial \mathcal{L}}{\partial P1} = 2 \cdot b_1 \cdot P_{G_1} + \lambda  = 0  \\
+    & \frac{\partial \mathcal{L}}{\partial P_{G_2}} = 2 \cdot b_2 \cdot P_{G_2} + \lambda + \mu_4 = 0  \\
+    & \frac{\partial \mathcal{L}}{\partial \lambda} = P_{G_1} + P_{G_2} - P_D = 0  \\
+    &  - P_{G_1} < 0  \\
+    &  P_{G_1} - P_{G_1}^{max} < 0   \\
+    & P_{G_2} = P_{G_2}^{max} \\
     & \mu_1, \mu_2, \mu_3 = 0  \\
     & \mu_4 \geq 0
 \end{align}
 
-The only unknown variables are $P_G1$, $\lambda$, and $\mu_4$, which we can solve for. If we can find a solution, it is optimal. We can also ask ourselves "Does the solution make sense? Is there an alternative set of binding inequality constraints that would yield a better solution?" to check that indeed we have found the optimal solution. The new solution---orange dot in {numref}`fig:KKT_g2const_graphical`---satisfies the constraints but comes at a higher total operating cost than before.
+The only unknown variables are $P_{G_1}$, $\lambda$, and $\mu_4$, which we can solve for. If we can find a solution, it is optimal. We can also ask ourselves "Does the solution make sense? Is there an alternative set of binding inequality constraints that would yield a better solution?" to check that indeed we have found the optimal solution. The new solution---orange dot in {numref}`fig:KKT_g2const_graphical`---satisfies the constraints but comes at a higher total operating cost than before.
 
 Ok, you might ask: what is this all good for? KKT conditions can help us find the optimal solutions to nonlinear problems (we don't need them for linear problems), and we will apply them when looking at mixed complementarity problems in {numref}`content:mixed-complementarity`. But they also give us a different view on duality, and this is what we want to turn our attention to last.
 
