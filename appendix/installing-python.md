@@ -30,7 +30,7 @@ The Anaconda Python distribution is optional, to make things easier for people w
 * Download the environment file <a href="../_static/environment.yml">environment.yml</a>, then in a terminal window, navigate to the downloaded file and install the requirements by executing: `conda env create -f environment.yml`
 * Run Jupyter Lab from a location of your choosing - this way you don't have to manually navigate to the folder within Jupyter Lab: `cd path/to/my/directory; conda activate optimisation-course; jupyter lab`
 
-If you prefer to manually configure your environment, these are the packages installed by the environment file:
+If you prefer to manually configure your environment, this is the exact content of the downloadable `environment.yml` file, showing you the packages it will install:
 
 ```{literalinclude} ../_static/environment.yml
 :language: yaml
