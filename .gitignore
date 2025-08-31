@@ -2,3 +2,6 @@ _build
 _assets
 .pixi
 *.egg-info
+
+# Specific files from running Jupyter notebooks
+basics/results.csv

@@ -1,41 +1,8 @@
+(content:uncert-stochastic)=
+
 # Stochastic programming
 
 (content:uncert-stochastic:introduction)=
-
-## Addressing parametric uncertainty
-
-We can distinguish two broad kinds of uncertainty (recall the discussion of uncertainty in {numref}`content:sensitivity-analysis`): structural uncertainty and parametric uncertainty. **Structural uncertainty** pertains to uncertainty in the model's structure: we are not certain if the model is an appropriate representation of reality. For example, it could be oversimplified in a way that limits its usefulness for our intended application because we model nonlinear relations with linear equations. **Parametric uncertainty** stems from limited information on the parameters in the model: the numbers we feed into it. Assuming the structure of our model is broadly fine, we may still be uncertain about the exact value of particular parameters to fill in, such as electricity demand or wind power generation. We will only discuss this second type of uncertainty here.
-
-```{figure} ../images/uncertainty-types.jpg
-:name: fig:uncertainty_summary
-:figwidth: 550px
-
-Parametric uncertainty in the context of broader uncertainty. Based on a talk by David Spiegelhalter, "Uncertainty in Decision Models" (not available online).
-```
-
-We have already covered sensitivity analysis in {numref}`content:sensitivity-analysis`. We checked how the optimal solution changes as parameters in the problem formulation change. An alterative to sensitivity analysis is robustness analysis: here, we take a solution (e.g. the optimal solution) and investigate how well it performs when parameters change. Like sensitivity analysis, this is done after the model is solved. You can read more about robustness analysis in {cite:p}`starreveld2024robustness`.
-
-What about methods that allow us to incorporate uncertainty already when we formulate a model? There are two widely-used approaches for doing that.
-
-First, there is stochastic programming. In stochastic programming, we explicitly model the fact that some parameters are uncertain, and we assume that we know the probabilities of specific outcomes for these parameters. We can set up several scenarios with known probabilities and formulate our problem such that all scenarios are considered, along with their probabilities, in solving the optimisation problem. As a result, stochastic programming can tell us what decisions to make based on our uncertainty quantification in the form of scenarios and their probabilities. Its usefulness depends heavily on how well these scenarios represent the uncertainties they represent.
-
-Second, there is robust optimisation. Here also, we explicitly model the fact that some parameters are uncertain. There are different kinds of robust optimisation, but most commonly, problems are formulated so that the worst-case realisation of uncertain parameters is accounted for (and thus optimised for). At the same time, robust optimisation ensures that the solution is feasible for all possible realisations of the uncertain parameters. So we have a solution that is guaranteed to work, based on our assessment of the uncertainty in parameters, and works best in their worst-case realisation.
-
-Robust optimisation is very different from how stochastic programming deals with uncertainty: rather than optimising for a single (worst-case) outcome, stochastic programming allows us to explicitly consider different uncertain outcomes---if we can describe these uncertain outcomes as a set of scenarios with given probabilities (which, in practice, can be difficult or even impossible).
-
-The following table gives a high-level overview of some methods to deal with parametric uncertainty:
-
-(parametric-uncertainty-methods-table)=
-:::{table} Overview of parametric uncertainty methods
-|  | Stochastic programming | Robust optimisation | Sensitivity analysis | Robustness analysis |
-| --- | --- | --- | --- | --- |
-| When to do it | When formulating the model | When formulating the model | After we solve the model | After we solve the model |
-| What you need | Explicit quantification of scenarios with their probability for uncertain variables | Specification of an uncertainty set for uncertain variables | Access to shadow prices, or a set of scenarios for parameter values to test | A model solution to test under different scenarios |
-| What you get | Solution that includes the possibility for recourse---choosing one of several alternatives once we know more about the realisation of uncertain parameters | Solution that is feasible for any possible realisation of the uncertain parameters, and optimal for the worst case | Effect of changes in limited numbers of parameters on the optimal solution (e.g. by looking at shadow prices), but only for small perturbations around the optimal solution | Effect of changes in limited numbers of parameters on the feasibility of a fixed solution, but only for small perturbations in parameters |
-| Where to read more | Below in this chapter | In a future version of this reader | {numref}`content:sensitivity-analysis` | {cite:p}`starreveld2024robustness` |
-:::
-
-For the remainder of this chapter, we will focus on stochastic programming.
 
 ## Using scenarios to characterise uncertainty
 
@@ -143,29 +110,37 @@ Third, there is a ramping limit of 1.5 kWh between time periods.
 
 In our example, we end up with the following optimisation problem:
 
-* Variables: $u_1, u_{21}, u_{31}, u_{41}, u_{22}, u_{32}, u_{42}$
-* Objective (to be minimised):
+Variables: $u_1, u_{21}, u_{31}, u_{41}, u_{22}, u_{32}, u_{42}$
+
+Objective (to be minimised):
+
 \begin{equation}
     \begin{split}
         J = &  (120-100)u_1 + 0.5\left[(105-100)u_{21} + (154-100)u_{31} + (84-100)u_{41}\right] \\
         & + 0.5\left[(45-100)u_{22} + (66-100)u_{32} + (36-100)u_{42}\right]
     \end{split}
 \end{equation}
-* Consumption per time period constraint:
+
+Consumption per time period constraint:
+
 \begin{equation}
     \begin{split}
         0 \leq u_1 \leq 3 & \\
         0 \leq u_{t\omega} \leq 3 & \hspace{20 pt} \omega=1,2, t=2,3,4 \\
     \end{split}
 \end{equation}
-* Total consumption constraint:
+
+Total consumption constraint:
+
 \begin{equation}
     \begin{split}
         u_1 + \sum_t u_{t\omega} \leq 8 & \hspace{20 pt} \omega=1,2, t=2,3,4 \\
         u_1 + \sum_t u_{t\omega} \geq 6 & \hspace{20 pt} \omega=1,2, t=2,3,4 \\
     \end{split}
 \end{equation}
-* Ramping limits constraint:
+
+Ramping limits constraint:
+
 \begin{equation}
     \begin{split}
         u_1 - u_0 \leq 1.5 & \hspace{20 pt} \omega=1,2, u_0=0 \\
@@ -216,6 +191,8 @@ What is crucially important to realise is that we have incorporated the uncertai
 ```{admonition} Multi-stage stochastic problems
 Here we have formulated and solved a two-stage stochastic problem. In principle we could consider $\gt2$ stages and turn this into a multi-stage problem. However, problem size explodes dramatically with every stage that we add and quickly becomes computationally infeasible. So, as often, there is trade-off here between model "realism" and computational limitations.
 ```
+
+(content:uncert-stochastic:comparison-without-uncert)=
 
 ### Comparison to a case without uncertainty
 
@@ -285,8 +262,17 @@ Note that the performance of the stochastic problem is better (=lower objective 
 
 Not surprisingly, if the prices are higher than expected in the case with no uncertainty, the modelled decisions do not perform so well. The objective function which we are trying to minimise is objectively worse than in the other cases.
 
-## References
+<!--
+Calculations of the objective function values for internal reference:
 
-```{bibliography}
-:filter: docname in docnames
-```
+-147.5 = (120-100)*1 + (75-100)*2.5 + (110-100)*1.5 + (60-100)*3
+
+65.5 = (120-100)*1 + (105-100)*2.5 + (154-100)*1.5 + (84-100)*3
+
+-174 = (120-100)*0.25 + 0.5*((105-100)*1.75 + (154-100)*1.25 + (84-100)*2.75) + 0.5 * ((45-100)*1.75 + (66-100)*3 + (36-100)*3)
+
+37.25 = (120-100)*0.25 + (105-100)*1.75 + (154-100)*1.25 + (84-100)*2.75
+
+-385.25 = (120-100)*0.25 + (45-100)*1.75 + (66-100)*3 + (36-100)*3
+
+-->

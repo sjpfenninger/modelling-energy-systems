@@ -10,6 +10,8 @@ title: Changelog
 * Added [modelling languages chapter](tools/modelling-languages.md)
 * Added [Pyomo chapter](tools/pyomo.ipynb)
 * Added info on Python and Python installation instructions in appendices
+* Separated a more detailed uncertainty section from the stochastic programming section
+* Added appendix on robust optimisation
 
 ## Version 2024-10
 

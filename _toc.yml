@@ -19,6 +19,7 @@ parts:
   numbered: true
   chapters:
     - file: advanced/mixed-complementarity.md
+    - file: advanced/uncertainty.md
     - file: advanced/stochastic-programming.md
 - caption: Appendices
   chapters:
@@ -26,6 +27,7 @@ parts:
     - file: appendix/python-basics.md
     - file: appendix/duality.md
     - file: appendix/kkts-summary.md
+    - file: appendix/robust-optimisation.md
 - caption: Reference
   chapters:
     - file: reference/reading.md
