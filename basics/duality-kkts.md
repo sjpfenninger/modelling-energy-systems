@@ -299,7 +299,7 @@ You will notice that in this section, we write all constraints in a standard for
 
 The equality constrained optmisation problem also has a graphical interpretation. {numref}`fig:KKT_eqconst_graphical` shows the graphical interpretation of our economic dispatch example.
 
-```{figure} ../images/KKT_eqconst_graphical.png
+```{figure} ..images/built/fig_kkt_contours.jpg
 :name: fig:KKT_eqconst_graphical
 :figwidth: 400 px
 
@@ -324,7 +324,7 @@ In energy systems, we have both equality and inequality constraints. For example
 
 To solve the problem with equality and inequality constraints, we extend our graphical interpretation. The grey area in {numref}`fig:KKT_eqconst_ineqconst_graphical` is the feasible region because it represents the feasible range of output of $P_{G1}$ and $P_{G2}$. The set of feasible solutions---the values of $P_{G1}$ and $P_{G2}$ that satisfy both the equality and inequality constraints---lie on the blue line within the grey area. This is exactly what we already did in {numref}`content:lp:economic-dispatch`, just with different notation for our generation and demand constraints - and as will become clear in {numref}`fig:KKT_eqconst_ineqconst_graphical`, a key difference in where the optimal solution lies, since we are dealing with a quadratic rather than a linear problem.
 
-```{figure} ../images/KKT_eqconst_ineqconst_graphical.png
+```{figure} ..images/built/fig_kkt_contours_constraints.jpg
 :name: fig:KKT_eqconst_ineqconst_graphical
 :figwidth: 400 px
 
@@ -450,7 +450,7 @@ Clearly, this is a large set of equations. This problem is not trivial to solve 
 
 Let's look at the problem graphically (see {numref}`fig:KKT_G2const_graphical`). We assume that the feasible range of values for $P_{G2}$ is reduced to the capacity constraints. Therefore, the original optimal solution (green dot) is no longer in the feasible region. By looking at the graph and reasoning, we can suppose that the upper capacity limit of $P_{G2}$ will be binding. So, we will test the solution in which $P_{G1}$ is producing within its operating range $0 \leq P_{G1} \leq P_{G1}^{max}$ (the inequality constraints are non-binding) and $P_{G2}$ is operating at maximum capacity $P_{G2} = P_{G2}^{max}$. The solution still needs to lie on the blue line to satisfy the equality constraint.
 
-```{figure} ../images/KKT_g2const_graphical.png
+```{figure} ..images/built/fig_kkt_limited_constraints.jpg
 :name: fig:KKT_g2const_graphical
 :figwidth: 400 px
 
