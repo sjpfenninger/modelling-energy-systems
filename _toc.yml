@@ -9,19 +9,24 @@ parts:
     - file: basics/sensitivity-analysis.md
     - file: basics/duality-kkts.md
     - file: basics/markets-milp.md
-    # - file: basics/modelling-languages.md
+- caption: Modelling tools and larger models
+  numbered: true
+  chapters:
+    - file: tools/modelling-languages.md
+    - file: tools/pyomo.ipynb
+    - file: tools/calliope.md
 - caption: Advanced topics
   numbered: true
   chapters:
-    # - file: advanced/nonlinear.md
     - file: advanced/mixed-complementarity.md
+    - file: advanced/uncertainty.md
     - file: advanced/stochastic-programming.md
 - caption: Appendices
   chapters:
+    - file: appendix/installing-python.md
+    - file: appendix/python-basics.md
     - file: appendix/game-theory.md
-    - file: appendix/duality-conversion.md
-    - file: appendix/duality-examples.md
-    - file: appendix/kkts-summary.md
+    - file: appendix/robust-optimisation.md
 - caption: Reference
   chapters:
     - file: reference/reading.md

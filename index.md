@@ -22,7 +22,7 @@ Modelling energy systems
 
 ::::
 
-```{warning}
+```{note}
 *Modelling energy systems* is under development and will see iterative additions and improvements through time. See the [changelog](changelog.md) for an overview of recent additions.
 ```
 

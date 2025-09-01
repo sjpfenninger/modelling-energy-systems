@@ -149,24 +149,50 @@ The left-hand side of the primal and dual constraints can be understood as a rot
 Notice that when there is a factor of $P_\mathbf{1}$ in a primal constraint, this leads to a term in the **first** dual constraint. When there is a factor of $P_\mathbf{2}$, it leads to a term in the **second** dual constraint. The **first** primal constraint leads to a factor of $X_\mathbf{1}$ in the dual constraint, the **second** primal constraint leads to a factor of $X_\mathbf{2}$ in the dual constraint, the **third** primal constraint leads to a factor of $X_\mathbf{3}$ in the dual constraint, and so on.
 :::
 
-We can solve the dual problem to obtain the optimal solution ($X_1 = -1, X_2 = 0, X_3 = 0, X_4 = 0, X_5 = 4$). Recall that this solution to the dual problem gives the shadow prices of the primal problem. Looking at the shadow prices also reveals something about the primal constraints. When the shadow price is zero, that means the constraint is non-binding. In our example, only the first constraint ($P_{G_1} \leq 300$, capacity limit on unit 1) and last constraint ($P_{G_1} + P_{G_2} = 500$, demand constraint) are active. If the right-hand side of the demand constraint is changed marginally (by one unit) then the optimal value of the objective function will change by $X_5 = 4$. The objective function value is 1700 in both the primal and dual solution. The optimal value of the objective function in the primal problem is always equal to the optimal value of the dual objective function.
+(content:duality-kkts:duality-practical-applications)=
 
+### Practical applications of duality
+
+We can solve the dual problem to obtain the optimal solution ($X_1 = -1, X_2 = 0, X_3 = 0, X_4 = 0, X_5 = 4$). Recall that this solution to the dual problem gives the shadow prices of the primal problem.
+
+Looking at the shadow prices also reveals something about the primal constraints. When the shadow price is zero, that means the constraint is non-binding. In our example, only the first constraint ($P_1 \leq 300$, capacity limit on unit 1) and last constraint ($P_1 + P_2 = 500$, demand constraint) are active. If the right-hand side of the demand constraint is changed marginally (by one unit) then the optimal value of the objective function will change by $X_5 = 4$.
+
+As we can see in this example, duality allows us to easily obtain the shadow prices of the primal problem, and this opens up many practical insights into our models. The two most important practical applications of duality that we care about are:
+
+* **Sensitivity analysis**: We already discussed the use of shadow prices in sensitivity analysis in the section {ref}`content:sensitivity-analysis:shadow-prices`.
+
+* **Marginal costs**: When we obtain a solution in a model of a resource-constrained system, we are often interested in the marginal costs or marginal benefits of changing a parameter, such as increasing electricity demand in a dispatch model. We will use this to calculate the market clearing price in an electricity market in the section {ref}`content:milp:power-markets`.
 
 (content:duality-kkts:duality-conversion-strategy)=
 
 ### Strategies to convert a primal into its dual problem
 
-The easiest approach to convert a primal problem to its dual problem, and the one we use above, is:
+The easiest approach to convert a primal problem to its dual problem, and the one we use above, consists of two steps: first rewrite the problem to [standard form](content:lp:standard-form), then follow the (standard, always same) steps to convert the standard-form problem to its dual.
 
-* Rewrite the primal problem to standard form
-* Follow the (standard, always same) steps to convert the standard-form problem to its dual
+**Step one**: Rewrite to standard form:
 
-:::{admonition} Summary of the recommended approach
-:class: tip
-{ref}`content:appendix:duality-conversion-summary` in the appendix contains a summary of this recommended approach with a generic example.
-:::
+* Minimisation.
+* All constraints of the form $ax \leq b$.
+* All variables with bound $\geq 0 $.
 
-You do not have to rewrite to standard form first, however. There is a method called "SOB" which gives you a "map" on how to translate a primal problem into the corresponding dual problem, no matter what exact form it is in. In principle this also always works, but it can be a bit trickier to get your head around and it is easier to make mistakes.
+**Step two**: Convert the standard-form primal problem into the dual problem, as illustrated in {numref}`fig:generic_primal_dual_conversion` and written out in the bullet point list below:
+
+```{figure} ../images/primal_dual.jpg
+:name: fig:generic_primal_dual_conversion
+
+Illustration of the conversion from standard form primal problem to dual problem.
+```
+
+* The primal objective function coefficients, $c_n$, are the dual constraint parameters.
+* The primal constraint parameters, $b_m$, are the dual objective function coefficients.
+* The primal constraints in $\leq$ form lead to dual variables $y_m \leq 0$.
+* The primal constraints in $=$ form lead to dual variables $y_m$ which are unconstrained / free.
+* The primal variables $x_n \geq 0$ lead to dual constraints of $\leq$ form.
+* The constraint coefficient $a_{mn}$ corresponds to the m-th constraint and n-th variable in the primal problem. It corresponds to the n-th constraint and m-th variable in the dual problem.
+
+#### More general approach
+
+For the above strategy, you do not have to rewrite to standard form first. There is a method called "SOB" which gives you a "map" on how to translate a primal problem into the corresponding dual problem, no matter what exact form it is in. In principle this also always works, but it can be a bit trickier to get your head around and it is easier to make mistakes.
 
 The table in {numref}`fig:duality_conversion_table` shows you how what the rules in the SOB method are.
 
@@ -177,9 +203,10 @@ The table in {numref}`fig:duality_conversion_table` shows you how what the rules
 How to convert a primal problem into a dual problem From the "SOB method": Benjamin (1995), SIAM Review 37(1): 85-87 as summarised in {cite:p}`hillier_introduction_2021`, Table 6.14**
 ```
 
-### Additional examples
-
-In the appendix chapter "{ref}`content:appendix:duality-examples`" you can find additional examples of duality, including an example of how duality allows you to see the same problem from two perspectives (the buyer and the seller of ingredients for a lunch).
+:::{admonition} Additional example
+:class: tip
+Below, under {ref}`content:duality-kkts:lunch-example` you can find an additional example of how duality allows you to see the same problem from two perspectives (the buyer and the seller of ingredients for a lunch).
+:::
 
 (content:duality-kkts:kkt-conditions)=
 
@@ -483,6 +510,121 @@ As mentioned at the beginning, strong duality is when the optimal value of the p
 Weak duality is when $d^* \leq p^*$. This holds even for non-convex problems. In such problems, $p^* - d^*$ is referred to as the duality gap.
 
 In practice, we do not need to start from the general expression in Equation {eq}`eqn:dual` to derive the dual problem. Instead, we can simply follow the steps introduced above ({numref}`content:duality-kkts:duality-conversion-strategy`): write the primal problem in standard form and then mechanistically translate it into its dual counterpart.
+
+(content:duality-kkts:lunch-example)=
+
+## Another example of the perspective switch in duality: lunch purchase choice
+
+An illustrative small example of the relationship between primal and
+dual linear programs will show that these two problems arise from two
+different perspectives on the same application. As an example, we
+introduce a diet problem.
+
+Johanna is deciding what to purchase for lunch. She has two choices:
+
+1.  Soup, which costs 2.80€ per portion,
+
+2.  Salad with fresh vegetables, which costs 3.20€ per portion.
+
+In this lunchroom, it is possible to purchase a fraction of an item if
+the client wishes. Also, the farmer can sell a fraction of a vegetable
+to the owner of the lunchroom.
+
+The soup ingredients are: onion, carrot, and tomato. The ingredients for
+the salad are onion, carrot, and apple. The amount of the ingredients is
+specified in recipes presented in the table below:
+
+| Ingredient | Soup ($x_1$) | Salad ($x_2$) |
+| --- | --- | --- |
+| Onion | 1 | 0.5 |
+| Carrot | 2.5 | 3 |
+| Tomato | 2 | 0 |
+| Apple | 0 | 1 |
+| Cost | 2.80 | 3.20 |
+
+
+Johanna's dietary requirements:
+-   Onion: 0.5
+-   Carrot: 4
+-   Tomato: 1.5
+-   Apple: 1.5
+
+Johanna wants to minimise the lunch cost by finding the least expensive
+combination of soup and fresh salad that meets her requirements, whereby
+she needs at least 0.5 onion, 4 carrots, 1.5 tomatoes, and 1.5 apples for lunch.
+
+This decision problem can be formulated as an LP problem as follows:
+
+$$\text{Min. } 2.80x_1 + 3.20x_2$$
+
+subject to:
+
+\begin{align}
+    x_1 + 0.5x_2 \geq 0.5 \\
+    2.5x_1 + 3x_2 \geq 4 \\
+    2x_1 \geq 1.5 \\
+    x_2 \geq 1.5 \\
+    x_1, x_2 \geq 0 \\
+\end{align}
+
+By applying the linear programming method to this problem, we can find
+easily that the unique solution is $x_1 = 0.75$ and $x_2 = 1.5$, i.e. it
+means $3/4$ portion soup and $1.5$ portion salad.
+
+The value of the cost function for the optimal solution is
+$2.80 \times 0.75 + 3.20 \times 1 = 6.90$.
+
+There are 2 active constraints: $2x_1 \geq 1.5$ and $x_2 \geq 1.5$.
+
+The shadow price is 1.40 for the active constraint $2x_1 \geq 1.5$, i.e.,
+the cost will be 8.30 if the wish would be to eat at least 2.5 tomatoes.
+
+The shadow price is 3.20 for the active constraint $x_2 \geq 1.5$, i.e.,
+the cost will be 10.10 if the wish would be to eat at least 2.5 apples.
+
+Let us have a look at this problem from the perspective of the farmer
+who supplies the lunchroom with vegetables. The owner of the lunchroom
+needs to buy at least 0.5 onion, 4 carrots, 1.5 tomatoes, and 1.5
+apples.
+
+The farmer wants to maximise his revenues. His decision problem is: How
+can I set the prices per onion, carrot, tomato, and apple so that the
+lunchroom owner will buy them from me, and my revenue is maximised?
+
+The lunchroom owner will buy vegetables only if the total cost of soup
+is below 2.80€ and for the salad, below 3.20€.
+
+These restrictions impose the following constraints on the prices
+$\mu_1, \mu_2, \mu_3, \mu_4$ for onions, carrots, tomatoes, and apples:
+
+$$1 \mu_1 + 2.5 \mu_2 + 2 \mu_3 + 0 \mu_4 \leq 2.80$$
+
+$$0.5 \mu_1 + 3 \mu_2 + 0 \mu_3 + 1 \mu_4 \leq 3.20$$
+
+Clearly, all the prices for all these vegetables should be non-negative.
+
+The revenue of the farmer is
+$(0.5 \mu_1 + 4 \mu_2 + 1.5 \mu_3 + 1.5 \mu_4)$ and it should be
+maximised. This gives us the following dual problem:
+
+$$\text{Max. } F(\mu) = 0.5 \mu_1 + 4 \mu_2 + 1.5 \mu_3 + 1.5 \mu_4$$
+
+subject to:
+\begin{align}
+    1 \mu_1 + 2.5 \mu_2 + 2 \mu_3 \leq 2.80 \\
+    0.5 \mu_1 + 3 \mu_2 + \mu_4 \leq 3.20 \\
+    \mu_1, \mu_2, \mu_3, \mu_4 \geq 0 \\
+\end{align}
+
+By applying the linear programming method to this dual problem, we can
+find easily that the unique solution is
+$\mu_1 = 0, \mu_2 = 0, \mu_3 = 1.40, \mu_4 = 3.20$.
+
+It may seem strange that the farmer charges nothing for onion
+($\mu_1 = 0$) and carrot ($\mu_2 = 0$). He charges 1.40€ per tomato and
+3.20€ per apple. It is better for him to give onions and carrots for
+free and charge as much as possible for tomatoes and apples.
+
 
 ## Further reading
 
