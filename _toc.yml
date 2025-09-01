@@ -26,6 +26,7 @@ parts:
     - file: appendix/installing-python.md
     - file: appendix/python-basics.md
     - file: appendix/robust-optimisation.md
+    - file: appendix/game-theory.md
 - caption: Reference
   chapters:
     - file: reference/reading.md
