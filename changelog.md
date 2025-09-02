@@ -4,14 +4,17 @@ title: Changelog
 
 # Changelog
 
-## Version 2025-09 (in development)
+## Version 2025-08
 
 * Letters instead of numbers for optimisation problem components ([#7](https://github.com/sjpfenninger/modelling-energy-systems/issues/7))
 * Added [modelling languages chapter](tools/modelling-languages.md)
 * Added [Pyomo chapter](tools/pyomo.ipynb)
 * Added info on Python and Python installation instructions in appendices
+* Added barebones [Calliope chapter](tools/calliope.md) with more content to follow
 * Separated a more detailed uncertainty section from the stochastic programming section
 * Added appendix on robust optimisation
+* Improved nomenclature alignment across the LP, MILP and duality/KKT chapters
+* Other minor improvements
 
 ## Version 2024-10
 
