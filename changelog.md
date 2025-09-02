@@ -4,6 +4,8 @@ title: Changelog
 
 # Changelog
 
+## Version 2025-09 (in development)
+
 ## Version 2025-08
 
 * Letters instead of numbers for optimisation problem components ([#7](https://github.com/sjpfenninger/modelling-energy-systems/issues/7))
