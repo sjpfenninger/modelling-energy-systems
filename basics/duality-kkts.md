@@ -200,7 +200,7 @@ The table in {numref}`fig:duality_conversion_table` shows you how what the rules
 :name: fig:duality_conversion_table
 :figwidth: 600 px
 
-How to convert a primal problem into a dual problem From the "SOB method": Benjamin (1995), SIAM Review 37(1): 85-87 as summarised in {cite:p}`hillier_introduction_2021`, Table 6.14**
+How to convert a primal problem into a dual problem From the "SOB method": Benjamin (1995), SIAM Review 37(1): 85-87 as summarised in {cite:p}`hillier_introduction_2021`, Table 6.14.
 ```
 
 :::{admonition} Additional example
@@ -269,7 +269,7 @@ To do this, we draw on our knowledge of unconstrained optimisation, since now we
     & \frac{\partial \mathcal{L}}{\partial \lambda} =P_D - P_{G1} - P_{G2} = 0
 \end{align}
 
-Notice that now we have three equations and three unknowns. So, we can solve for $P_{G1}$, $P_{G2}$, and $\lambda$, which gives the optimal solution to the original optimisation problem. Note that the last equation is identical to our original constraint. A solution to the system of equations above will hence be as such that $g_1$ and $g_2$ jointly meet the load $L$.
+Notice that now we have three equations and three unknowns. So, we can solve for $P_{G1}$, $P_{G2}$, and $\lambda$, which gives the optimal solution to the original optimisation problem. Note that the last equation is identical to our original constraint. A solution to the system of equations above will hence be as such that $P_{G1}$ and $P_{G2}$ jointly meet the load $P_D$.
 
 Now we will generalise the Lagrangian to any equality constrained optimisation problem. Consider the following minimisation problem with equality constraints $h_i(x)$:
 \begin{align}
@@ -297,13 +297,13 @@ You will notice that in this section, we write all constraints in a standard for
 
 :::
 
-The equality constrained optmisation problem also has a graphical interpretation. {numref}`fig:KKT_eqconst_graphical` shows the graphical interpretation of our economic dispatch example.
+The equality constrained optmisation problem also has a graphical interpretation. {numref}`fig:KKT_eqconst_graphical` shows the graphical interpretation of our economic dispatch example. Note that the contour lines representing the objective function (in red) are no longer linear - because our objective is now a quadratic function.
 
-```{figure} ../images/KKT_eqconst_graphical.png
+```{figure} ../images/KKT_eqconst_graphical.jpg
 :name: fig:KKT_eqconst_graphical
 :figwidth: 400 px
 
-Graphical representation of the equality constrained economic dispatch problem
+Graphical representation of the equality constrained economic dispatch problem. The contour lines of the objective function are shown in red.
 ```
 
 $P_{G1}$ and $P_{G2}$ are on the axes. The red contour lines are constant values of the objective function (total operating cost). The total operating cost increases as $P_{G1}$ and $P_{G2}$ increase. The blue line is the equality constraint. The green dot is the optimal solution. At this point, the gradient of the objective function $\nabla f(x)$ (red arrow) is (1) perpendicular to the constraint and (2) parallel to the gradient of the constraint $\nabla h(x)$ (blue arrow). This can be expressed as:
@@ -324,11 +324,11 @@ In energy systems, we have both equality and inequality constraints. For example
 
 To solve the problem with equality and inequality constraints, we extend our graphical interpretation. The grey area in {numref}`fig:KKT_eqconst_ineqconst_graphical` is the feasible region because it represents the feasible range of output of $P_{G1}$ and $P_{G2}$. The set of feasible solutions---the values of $P_{G1}$ and $P_{G2}$ that satisfy both the equality and inequality constraints---lie on the blue line within the grey area. This is exactly what we already did in {numref}`content:lp:economic-dispatch`, just with different notation for our generation and demand constraints - and as will become clear in {numref}`fig:KKT_eqconst_ineqconst_graphical`, a key difference in where the optimal solution lies, since we are dealing with a quadratic rather than a linear problem.
 
-```{figure} ../images/KKT_eqconst_ineqconst_graphical.png
+```{figure} ../images/KKT_eqconst_ineqconst_graphical.jpg
 :name: fig:KKT_eqconst_ineqconst_graphical
 :figwidth: 400 px
 
-Graphical representation of the equality and inequality constrained economic dispatch problem
+Graphical representation of the equality and inequality constrained economic dispatch problem. The grey box represents the feasible region.
 ```
 
 The optimal solution needs to be part of the feasible solution set. In this case, we see that the optimal solution (green dot) is indeed in the feasible area. Thus the inequality constraints $0 \leq P_{G1} \leq P_{G1}^{max}$ and $0 \leq P_{G2} \leq P_{G2}^{max}$ actually do not play a role in this particular example.
@@ -450,11 +450,11 @@ Clearly, this is a large set of equations. This problem is not trivial to solve 
 
 Let's look at the problem graphically (see {numref}`fig:KKT_G2const_graphical`). We assume that the feasible range of values for $P_{G2}$ is reduced to the capacity constraints. Therefore, the original optimal solution (green dot) is no longer in the feasible region. By looking at the graph and reasoning, we can suppose that the upper capacity limit of $P_{G2}$ will be binding. So, we will test the solution in which $P_{G1}$ is producing within its operating range $0 \leq P_{G1} \leq P_{G1}^{max}$ (the inequality constraints are non-binding) and $P_{G2}$ is operating at maximum capacity $P_{G2} = P_{G2}^{max}$. The solution still needs to lie on the blue line to satisfy the equality constraint.
 
-```{figure} ../images/KKT_g2const_graphical.png
+```{figure} ../images/KKT_g2const_graphical.jpg
 :name: fig:KKT_g2const_graphical
 :figwidth: 400 px
 
-Graphical representation of the economic dispatch problem with reduced feasible range for $g_2$
+Graphical representation of the economic dispatch problem with reduced feasible range for $P_{G2}$.
 ```
 
 Given this test solution, we know that $\mu_1$, $\mu_2$, $\mu_3$ $= 0$ and $\mu_4 \neq 0$. This simplifies the set of KKT conditions to:
