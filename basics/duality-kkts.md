@@ -155,7 +155,7 @@ Notice that when there is a factor of $P_\mathbf{1}$ in a primal constraint, thi
 
 We can solve the dual problem to obtain the optimal solution ($X_1 = -1, X_2 = 0, X_3 = 0, X_4 = 0, X_5 = 4$). Recall that this solution to the dual problem gives the shadow prices of the primal problem.
 
-Looking at the shadow prices also reveals something about the primal constraints. When the shadow price is zero, that means the constraint is non-binding. In our example, only the first constraint ($P_1 \leq 300$, capacity limit on unit 1) and last constraint ($P_1 + P_2 = 500$, demand constraint) are active. If the right-hand side of the demand constraint is changed marginally (by one unit) then the optimal value of the objective function will change by $X_5 = 4$.
+Looking at the shadow prices also reveals something about the primal constraints. When the shadow price is zero, that means the constraint is non-binding. In our example, only the first constraint ($P_{G1} \leq 300$, capacity limit on unit 1) and last constraint ($P_{G1} + P_{G2} = 500$, demand constraint) are active. If the right-hand side of the demand constraint is changed marginally (by one unit) then the optimal value of the objective function will change by $X_5 = 4$.
 
 As we can see in this example, duality allows us to easily obtain the shadow prices of the primal problem, and this opens up many practical insights into our models. The two most important practical applications of duality that we care about are:
 
@@ -299,9 +299,9 @@ You will notice that in this section, we write all constraints in a standard for
 
 The equality constrained optmisation problem also has a graphical interpretation. {numref}`fig:KKT_eqconst_graphical` shows the graphical interpretation of our economic dispatch example.
 
-```{figure} ..images/built/fig_kkt_contours.jpg
+```{figure} ../images-built/fig_kkt_contours.jpg
 :name: fig:KKT_eqconst_graphical
-:figwidth: 400 px
+:figwidth: 500px
 
 Graphical representation of the equality constrained economic dispatch problem
 ```
@@ -324,9 +324,9 @@ In energy systems, we have both equality and inequality constraints. For example
 
 To solve the problem with equality and inequality constraints, we extend our graphical interpretation. The grey area in {numref}`fig:KKT_eqconst_ineqconst_graphical` is the feasible region because it represents the feasible range of output of $P_{G1}$ and $P_{G2}$. The set of feasible solutions---the values of $P_{G1}$ and $P_{G2}$ that satisfy both the equality and inequality constraints---lie on the blue line within the grey area. This is exactly what we already did in {numref}`content:lp:economic-dispatch`, just with different notation for our generation and demand constraints - and as will become clear in {numref}`fig:KKT_eqconst_ineqconst_graphical`, a key difference in where the optimal solution lies, since we are dealing with a quadratic rather than a linear problem.
 
-```{figure} ..images/built/fig_kkt_contours_constraints.jpg
+```{figure} ../images-built/fig_kkt_contours_constraints.jpg
 :name: fig:KKT_eqconst_ineqconst_graphical
-:figwidth: 400 px
+:figwidth: 500px
 
 Graphical representation of the equality and inequality constrained economic dispatch problem
 ```
@@ -450,16 +450,16 @@ Clearly, this is a large set of equations. This problem is not trivial to solve 
 
 Let's look at the problem graphically (see {numref}`fig:KKT_G2const_graphical`). We assume that the feasible range of values for $P_{G2}$ is reduced to the capacity constraints. Therefore, the original optimal solution (green dot) is no longer in the feasible region. By looking at the graph and reasoning, we can suppose that the upper capacity limit of $P_{G2}$ will be binding. So, we will test the solution in which $P_{G1}$ is producing within its operating range $0 \leq P_{G1} \leq P_{G1}^{max}$ (the inequality constraints are non-binding) and $P_{G2}$ is operating at maximum capacity $P_{G2} = P_{G2}^{max}$. The solution still needs to lie on the blue line to satisfy the equality constraint.
 
-```{figure} ..images/built/fig_kkt_limited_constraints.jpg
+```{figure} ../images-built/fig_kkt_limited_constraints.jpg
 :name: fig:KKT_g2const_graphical
-:figwidth: 400 px
+:figwidth: 500px
 
 Graphical representation of the economic dispatch problem with reduced feasible range for $g_2$
 ```
 
 Given this test solution, we know that $\mu_1$, $\mu_2$, $\mu_3$ $= 0$ and $\mu_4 \neq 0$. This simplifies the set of KKT conditions to:
 \begin{align}
-    & \frac{\partial \mathcal{L}}{\partial P1} = 2 \cdot b_1 \cdot P_{G1} + \lambda  = 0  \\
+    & \frac{\partial \mathcal{L}}{\partial P_{G1}} = 2 \cdot b_1 \cdot P_{G1} + \lambda  = 0  \\
     & \frac{\partial \mathcal{L}}{\partial P_{G2}} = 2 \cdot b_2 \cdot P_{G2} + \lambda + \mu_4 = 0  \\
     & \frac{\partial \mathcal{L}}{\partial \lambda} = P_{G1} + P_{G2} - P_D = 0  \\
     &  - P_{G1} < 0  \\
