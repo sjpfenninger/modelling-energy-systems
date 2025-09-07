@@ -4,7 +4,9 @@ title: Changelog
 
 # Changelog
 
-## Version 2025-09 (in development)
+## Version 2025-09
+
+* Updated Calliope to 0.7.0.dev7 and Calligraph to 0.1.1.dev7
 
 ## Version 2025-08
 
