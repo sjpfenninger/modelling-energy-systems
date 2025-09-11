@@ -115,7 +115,7 @@ Now, we can use the rules in {numref}`table:standard_duality_conversion`:
 "$\leq$","$\leq 0$"
 ```
 
-The dual problem becomes a maximisation problem. There are two primal variables of the form "$\geq 0$" so there are two dual constraints of the form "$\leq$". The primal constraints of "$\leq$" form become dual variables with bounds "$\leq 0$", while the primal constraint of "$=$" form corresponds to a dual variable that is unconstrained or unbounded. We have five primal constraints, which means there are five dual variables.
+The dual problem becomes a maximisation problem. There are two primal variables of the form "$\geq 0$" so there are two dual constraints of the form "$\leq$". The primal constraints of "$\leq$" form become dual variables with bounds "$\leq 0$", while the primal constraint of "$=$" form corresponds to a dual variable that is unconstrained. We have five primal constraints, which means there are five dual variables.
 
 This is the resulting conversion:
 
@@ -133,7 +133,7 @@ We end up with this dual problem:
     & X_2 - X_4 + X_5 \leq 4 \\
 \end{align}
 
-Our new variables are $X_1 \leq 0, X_2 \leq 0, X_3 \leq 0, X_4 \leq 0$, and $X_5$ unconstrained. Notice that the objective function coefficients 3 and 4 are the parameters in the dual constraints. Likewise, the primal constraint parameters 300, 400, -50, -100, and 500 are the coefficients in the dual objective function.
+Our new variables are $X_1 \leq 0, X_2 \leq 0, X_3 \leq 0, X_4 \leq 0$, and $X_5$ unconstrained. Notice that the objective function coefficients 3 and 4 are the right-hand side parameters in the dual constraints. Likewise, the primal constraint parameters 300, 400, -50, -100, and 500 are the coefficients in the dual objective function.
 
 :::{admonition} Elaboration on constraints (red box in {numref}`fig:duality_ed_conversion`)
 :class: tip
@@ -169,13 +169,13 @@ As we can see in this example, duality allows us to easily obtain the shadow pri
 
 The easiest approach to convert a primal problem to its dual problem, and the one we use above, consists of two steps: first rewrite the problem to [standard form](content:lp:standard-form), then follow the (standard, always same) steps to convert the standard-form problem to its dual.
 
-**Step one**: Rewrite to standard form:
+**Step 1**: Rewrite to standard form:
 
 * Minimisation.
 * All constraints of the form $ax \leq b$.
 * All variables with bound $\geq 0 $.
 
-**Step two**: Convert the standard-form primal problem into the dual problem, as illustrated in {numref}`fig:generic_primal_dual_conversion` and written out in the bullet point list below:
+**Step 2**: Convert the standard-form primal problem into the dual problem, as illustrated in {numref}`fig:generic_primal_dual_conversion` and written out in the bullet point list below:
 
 ```{figure} ../images/primal_dual.jpg
 :name: fig:generic_primal_dual_conversion
@@ -205,20 +205,20 @@ How to convert a primal problem into a dual problem From the "SOB method": Benja
 
 :::{admonition} Additional example
 :class: tip
-Below, under {ref}`content:duality-kkts:lunch-example` you can find an additional example of how duality allows you to see the same problem from two perspectives (the buyer and the seller of ingredients for a lunch).
+Under {ref}`content:duality-kkts:lunch-example` you can find an additional example of how duality allows you to see the same problem from two perspectives (the buyer and the seller of ingredients for a lunch).
 :::
 
 (content:duality-kkts:kkt-conditions)=
 
 ## Karush-Kuhn-Tucker (KKT) conditions
 
-In this section, we introduce the Karush-Kuhn-Tucker (KKT) conditions for convex optimisation problems with equality and inequality constraints. For such convex problems, these form a set of conditions that describe all optimal solutions to the problem at hand. They are the basis for numerical solutions to optimization problems and in simple cases, allow determining the solution analytically. They also combine primal and dual variables, which offers additional insight in the solution (e.g., which constraints are active, or what is the electricity price in this system).
+In this section, we introduce the Karush-Kuhn-Tucker (KKT) conditions for convex optimisation problems with equality and inequality constraints. For the convex problems we'll deal with in this course, these form a set of conditions that describe all optimal solutions to the problem at hand. They are the basis for numerical solutions to optimization problems and in simple cases, allow determining the solution analytically. They also combine primal and dual variables, which offers additional insight in the solution (e.g., which constraints are active, or what is the electricity price in this system).
 
 We start from an optimisation problem without constraints (unconstrained) and gradually introduce equality and inequality constraints. We will use an economic dispatch example to illustrate our approach.
 
 ### Unconstrained optimisation
 
-Let's go back to basic optimisation (high school mathematics). Whenever you had to optimise (minimise or maximise) a function, you were doing unconstrained optimisation. To determine the maximum or minimum of a certain function, we should take the derivative of that function with respect to the decision variable $x$ and equate it to zero (necessary condition for optimality). Then we take the second order derivative to see if it is a minimum or maximum (sufficient condition). If there are multiple variables, we take partial derivatives.
+Let's go back to basic optimisation from your high school mathematics courses. Whenever you had to optimise (minimise or maximise) a function, you were doing unconstrained optimisation. To determine the maximum or minimum of a certain function, we take the derivative of that function with respect to the decision variable $x$ and equate it to zero (necessary condition for optimality). Then we take the second-order derivative to see if it is a minimum or maximum (sufficient condition). If there are multiple variables, we use partial derivatives.
 
 \begin{align}
     \min f(x) & \rightarrow & \frac{\partial f(x)}{\partial x} =  0 \quad \text{(necessary condition)} \\
@@ -227,21 +227,21 @@ Let's go back to basic optimisation (high school mathematics). Whenever you had 
     & & \frac{\partial^2 f(x)}{\partial x^2} < 0 \quad \text{(sufficient condition)} \\
 \end{align}
 
-A point that satisfies the necessary condition for optimality ($\frac{\partial f(x)}{\partial x} =  0$) is called a stationary point. For convex optimisation problems, we never use the sufficient condition because any stationary point will be a minimum.
+A point that satisfies the necessary condition for optimality ($\frac{\partial f(x)}{\partial x} =  0$) is called a stationary point. For the convex optimisation problem we'll deal with in this course, we never use the sufficient condition because any stationary point will be a minimum.
 
 (content:duality-kkt:economic-dispatch)=
 
 ### Equality constrained optimisation
 
-In energy systems, a constrained optimisation is most common. Consider the example of economic dispatch from {numref}`content:lp:economic-dispatch`. We will again use an economic dispatch example, and build up the complexity of the problem throughout this chapter, to illustrate how we can use KKT conditions and duality to solve such problems and interpret their solutions.
+In energy systems, a constrained optimisation is most common. Consider the example of economic dispatch from {numref}`content:lp:economic-dispatch`. We will again use an economic dispatch example and build up the complexity of the problem throughout this chapter to illustrate how we can use KKT conditions and duality to solve such problems and interpret their solutions.
 
-Consider two generators able to produce $P_{G1}$ and $P_{G2}$. Each generator has a quadratic cost function: $C_1 = a_1 + b_1 \cdot P_{G1}^2$ and $C_2 = a_2 + b_2 \cdot P_{G2}^2$. Note that the cost functions here are quadratic, _not_ linear. This is quite typical in power systems. $C_i$ denotes the total operating cost of powerplant $i$, while $a_i$ is a fixed cost and $b_i$ is the cost in €/MW.
+Consider two generators able to produce $P_{G1}$ and $P_{G2}$. Each generator has a quadratic cost function: $C_1 = a_1 + b_1 \cdot P_{G1}^2$ and $C_2 = a_2 + b_2 \cdot P_{G2}^2$. Note that the cost functions here are quadratic, _not_ linear. This is quite typical in power systems. $C_i$ denotes the total operating cost of powerplant $i$, while $a_i$ is a fixed cost and $b_i$ is the cost in €/MWh$^2$.
 
 Unlike the linear dispatch problem in {numref}`content:lp:economic-dispatch`, we now have a **quadratic programming (QP)** problem. This is still a convex optimisation problem. Therefore, the techniques we use here also apply to linear programming problems.
 
 ```{admonition} Reminder: convex optimisation
 :class: tip
-[Convex optimisation](https://en.wikipedia.org/wiki/Convex_optimization) means that we are dealing with convex functions over convex regions. Both linear and quadratic optimisation problems are convex. In general, however, many kinds of non-linear optimisation problems are non-convex, and we cannot apply the techniques we discuss here to them.
+[Convex optimisation](https://en.wikipedia.org/wiki/Convex_optimization) means that we are dealing with convex functions over convex regions. Both linear and quadratic optimisation problems are convex. In general, however, many kinds of non-linear optimisation problems are non-convex, and we cannot directly apply the techniques we discuss here to them.
 ```
 
 We need to dispatch the generators to meet a demand $P_D$ at minimal cost. We will ignore the capacity constraints of the generators for now. Thus, we have the following optimisation problem:
@@ -251,9 +251,9 @@ We need to dispatch the generators to meet a demand $P_D$ at minimal cost. We wi
     & \text{s.t.} \quad P_{G1} + P_{G2} = P_D
 \end{align}
 
-If we do not consider the equality constraint $P_{G1} + P_{G2} = P_D$ then the optimal solution to this problem (what minimises operating cost of the system) is $P_{G1}^* = 0$, $P_{G2}^*=0$, i.e. not run the generators at all. You can easily confirm this with the necessary condition for optimality: take the derivative of the objective function w.r.t. $P_{G1}$ and $P_{G2}$, equate those expressions to zero, and solve for $P_{G1}$ and $P_{G2}$. This is the unconstrained optimisation previously discussed.
+If we do not consider the equality constraint $P_{G1} + P_{G2} = P_D$ then the optimal solution to this problem (what minimizes the operating cost of the system) is $P_{G1}^* = 0$, $P_{G2}^*=0$, i.e., not run the generators at all. You can easily confirm this with the necessary condition for optimality: take the derivative of the objective function w.r.t. $P_{G1}$ and $P_{G2}$, equate those expressions to zero, and solve for $P_{G1}$ and $P_{G2}$. This is the unconstrained optimisation previously discussed.
 
-To deal with the constraint in our optimisation problem, we introduce the Lagrangian. The Lagrangian integrates the constraint to the objective function.
+To deal with the constraint in our optimisation problem, we introduce the Lagrangian. The Lagrangian integrates the constraint into the objective function.
 
 \begin{equation}
     \mathcal{L} = (a_1 + b_1 \cdot P_{G1}^2+ a_2 + b_2 \cdot P_{G2}^2) + \lambda \cdot (P_D - P_{G1} - P_{G2})
@@ -290,13 +290,6 @@ We can find the optimal solution ($x^*, \lambda_i^*$) to the original optimisati
     & \frac{\partial \mathcal{L}}{\partial \lambda_i} = h_i(x) = 0 \quad \forall i \in  \{1,2,...,m\}
 \end{align}
 
-:::{admonition} Notation and standard form
-:class: tip
-
-You will notice that in this section, we write all constraints in a standard form with zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints below). This ensures that you don't make mistakes when you're constructing the Lagrangian. In {numref}`content:duality-kkts:duality` above we used a different standard form that makes it easier to construct the dual problem. This highlights that there is no generally "correct" approach to write a standard form. It makes sense to go with an approach that works best for what you are doing.
-
-:::
-
 The equality constrained optmisation problem also has a graphical interpretation. {numref}`fig:KKT_eqconst_graphical` shows the graphical interpretation of our economic dispatch example. Note that the contour lines representing the objective function (in red) are no longer linear - because our objective is now a quadratic function.
 
 ```{figure} ../images/KKT_eqconst_graphical.jpg
@@ -311,7 +304,7 @@ $P_{G1}$ and $P_{G2}$ are on the axes. The red contour lines are constant values
     \nabla f(x) + \lambda \cdot \nabla h(x) = 0
 \end{equation}
 
-### General optimisation
+### Equality and inequality constrained optimisation
 
 In energy systems, we have both equality and inequality constraints. For example, in the economic dispatch example of {numref}`content:lp:economic-dispatch`, the generators have maximum generation capacity constraints. These maximum constraints are notated as $P_{G1}^{max}$ and $P_{G2}^{max}$ and cannot run at negative output (lower bound of zero). The optimisation problem becomes:
 
@@ -350,6 +343,13 @@ In a general optimisation problem with both equality and inequality constraints,
     & g_j(x) \leq 0 \quad (\mu_j) \quad \forall j \in \{1,2,...,n\}
 \end{align}
 There are $m$ equality constraints associated with Lagrange multipliers $\lambda_i$ and $n$ inequality constraints associated with Lagrange multipliers $\mu_j$.
+
+:::{admonition} Notation and standard form
+:class: tip
+
+You will notice that in this section, we write all constraints in a standard form with zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints). This ensures that you don't make mistakes when you're constructing the Lagrangian. In {numref}`content:duality-kkts:duality` above we used a different standard form that makes it easier to construct the dual problem. This highlights that there is no generally "correct" approach to write a standard form. It makes sense to go with an approach that works best for what you are doing.
+
+:::
 
 The Lagrangian is:
 
