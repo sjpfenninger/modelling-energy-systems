@@ -347,7 +347,12 @@ There are $m$ equality constraints associated with Lagrange multipliers $\lambda
 :::{admonition} Notation and standard form
 :class: tip
 
-You will notice that in this section, we write all constraints in a standard form with zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints). This ensures that you don't make mistakes when you're constructing the Lagrangian. In {numref}`content:duality-kkts:duality` above we used a different standard form that makes it easier to construct the dual problem. This highlights that there is no generally "correct" approach to write a standard form. It makes sense to go with an approach that works best for what you are doing.
+You will notice that in this section, we write all constraints in a standard form with zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints). This ensures that you don't make mistakes when you're constructing the Lagrangian. In {numref}`content:duality-kkts:duality` above we used a different standard form that makes it easier to construct the dual problem:
+
+* All constraints in a standard form have zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints below).
+* Inequality constraints are always of the form $g_j(x) \leq 0$, not $g_j(x) \geq 0$. Only if you write all inequality constraints as $g_j(x) \leq 0$, the signs of the Lagrangian above are correct!
+
+This highlights that there is no generally "correct" approach to write a standard form. It makes sense to go with an approach that works best for what you are doing.
 
 :::
 
@@ -374,22 +379,14 @@ Then, with the help of the Lagrangian, we derive the following set of equations 
 \end{align}
 ```
 
-:::{admonition} Note on inequality signs in standard form
-:class: tip
-
-* Note that all constraints in a standard form have zeros on the right-hand side (i.e., $=0$ or $\leq 0$ for equality constraints below).
-* Inequality constraints are always of the form $g_j(x) \leq 0$, not $g_j(x) \geq 0$. Only if you write all inequality constraints as $g_j(x) \leq 0$, the signs of the Lagrangian above are correct!
-
-:::
-
 Let's look at each of these equations in a little more detail. We have:
-1. Derivative of Lagrangian w.r.t. decision variables $x$ equal to zero $\rightarrow$ optimality conditions
-2. Derivative of Lagrangian w.r.t. Lagrange multipliers $\lambda_i$ (equality constraints) $\rightarrow$ primal feasibility (solution is feasible with respect to the primal constraints)
-3. Derivative of Lagrangian w.r.t. Lagrange multipliers $\mu_j$ (inequality constraints) $\rightarrow$ primal feasibility
-4. The multiplication of a Lagrange multiplier with its associated inequality constraint is zero $\rightarrow$ complementary slackness conditions (indicates that in some cases the inequality constraints might not be binding)
+1. Derivative of Lagrangian w.r.t. decision variables $x$ equal to zero $\rightarrow$ first-order optimality conditions
+2. Derivative of Lagrangian w.r.t. Lagrange multipliers $\lambda_i$ (equality constraints) $\rightarrow$ primal feasibility 
+3. Derivative of Lagrangian w.r.t. Lagrange multipliers $\mu_j$ (inequality constraints) $\rightarrow$ primal feasibility 
+4. The multiplication of a Lagrange multiplier with its associated inequality constraint is zero $\rightarrow$ complementary slackness conditions 
 5. Lagrange multipliers $\mu_j$ need to be positive or zero $\rightarrow$ dual feasibility
 
-Let's look more carefully at the interpretation of the complementary slackness conditions---the last two constraints in Equation {eq}`eqn:kkts-KKT`:
+The primal feasibility constraints indicate that any solution must be feasible with respect to the primal constraints. Let's look more carefully at the interpretation of the complementary slackness conditions---the last two constraints in Equation {eq}`eqn:kkts-KKT`:
 
 \begin{align}
     & \mu_j \cdot g_j(x) =  0 \quad \forall j \in  \{1,2,...,n\}  \\
@@ -398,7 +395,7 @@ Let's look more carefully at the interpretation of the complementary slackness c
 
 If a constraint is active, we can replace the inequality sign with an equality sign, so we have $g_j(x) = 0$. Then, the Lagrange multiplier $\mu_j$ may take on any non-zero value ($\mu_j \geq 0$). Since $g_j(x) = 0$ in this case, the constraint $\mu_j \cdot g_j(x) = 0$ will be satisfied no matter the value of $\mu_j$. On the other hand, if the constraint is non-binding ($g_j(x) < 0$), the Lagrange multiplier will equal zero ($\mu_j = 0$). Otherwise the constraint $\mu_j \cdot g_j(x) = 0$ would be violated. This shows that an inequality constraint can only affect the optimal solution if it is binding. Note that these constraints are non-linear.
 
-Now we want to find a solution to the set of equations (values for $x$, $\lambda_i$, and $\mu_j$). For most, but not all, convex problems, these conditions are sufficient and necessary conditions for optimality, so the obtained solution would be an optimal solution. Note that KKT conditions can only be formulated for convex problems.  Typically, these are the dispatch optimisation problems we discuss here and can be purely linear or problems with a quadratic (nonlinear) objective function.
+Now we want to find a solution to the set of equations (values for $x$, $\lambda_i$, and $\mu_j$). For most, but not all, convex problems, these conditions are sufficient and necessary conditions for optimality, so the obtained solution would be an optimal solution. This holds for the optimisation problems we discuss in this course (linear problems or problems with a quadratic (nonlinear) objective function).
 
 :::{admonition} Condensed form of KKT conditions
 :class: tip
@@ -446,9 +443,9 @@ Then we derive the KKT conditions:
     & \mu_1, \mu_2, \mu_3, \mu_4 \geq 0 \quad & (\text{Dual feasibility})
 \end{align}
 
-Clearly, this is a large set of equations. This problem is not trivial to solve because the complementary slackness constraints are non-linear. For simple cases addressed in this course, we can solve the problem by using trial-and-error: "What if a certain constraint $g_j(x)$ is binding? Does that lead to a feasible solution? Is the solution optimal?" In this example, there are four inequality constraints so in theory there are 16 ($=2^4$) possible combinations. However, some combinations are not possible, for example if $P_{G1} = 0$, then $P_{G1} \neq P_{G1}^{max}$. By trying different combinations of constraints, we come up with candidate solutions, then assess whether they are optimal or not.
+Clearly, this is a large set of equations. This problem is not trivial to solve because the complementary slackness constraints are non-linear. For simple cases addressed in this course, we can solve the problem by using trial-and-error: "What if a certain constraint $g_j(x)$ is binding? Does that lead to a feasible solution to this system of equations?" In this example, there are four inequality constraints so in theory there are 16 ($=2^4$) possible combinations. However, some combinations are not possible, for example if $P_{G1} = 0$, then $P_{G1} \neq P_{G1}^{max}$. By trying different combinations of constraints, we come up with candidate solutions, then assess whether they are optimal or not by testing whether they satisfy the KKT conditions.
 
-Let's look at the problem graphically (see {numref}`fig:KKT_G2const_graphical`). We assume that the feasible range of values for $P_{G2}$ is reduced to the capacity constraints. Therefore, the original optimal solution (green dot) is no longer in the feasible region. By looking at the graph and reasoning, we can suppose that the upper capacity limit of $P_{G2}$ will be binding. So, we will test the solution in which $P_{G1}$ is producing within its operating range $0 \leq P_{G1} \leq P_{G1}^{max}$ (the inequality constraints are non-binding) and $P_{G2}$ is operating at maximum capacity $P_{G2} = P_{G2}^{max}$. The solution still needs to lie on the blue line to satisfy the equality constraint.
+Let's look at the problem graphically (see {numref}`fig:KKT_G2const_graphical`). We assume that the feasible range of values for $P_{G2}$ is reduced to its capacity constraints. Therefore, the original optimal solution (green dot) is no longer in the feasible region. By looking at the graph and reasoning, we can suppose that the upper capacity limit of $P_{G2}$ will be binding. So, we will test the solution in which $P_{G1}$ is producing within its operating range $0 \leq P_{G1} \leq P_{G1}^{max}$ (the inequality constraints are non-binding) and $P_{G2}$ is operating at maximum capacity $P_{G2} = P_{G2}^{max}$. The solution still needs to lie on the blue line to satisfy the equality constraint.
 
 ```{figure} ../images/KKT_g2const_graphical.jpg
 :name: fig:KKT_g2const_graphical
@@ -469,9 +466,9 @@ Given this test solution, we know that $\mu_1$, $\mu_2$, $\mu_3$ $= 0$ and $\mu_
     & \mu_4 \geq 0
 \end{align}
 
-The only unknown variables are $P_{G1}$, $\lambda$, and $\mu_4$, which we can solve for. If we can find a solution, it is optimal. We can also ask ourselves "Does the solution make sense? Is there an alternative set of binding inequality constraints that would yield a better solution?" to check that indeed we have found the optimal solution. The new solution---orange dot in {numref}`fig:KKT_g2const_graphical`---satisfies the constraints but comes at a higher total operating cost than before.
+The only unknown variables are $P_{G1}$, $\lambda$, and $\mu_4$, which we can solve for. If we can find a solution, it is optimal. The new solution---orange dot in {numref}`fig:KKT_g2const_graphical`---satisfies the constraints but comes at a higher total operating cost than before. This is logical, as we've further constrained the problem by lowering the capacity of the second generator. For any solution, we also always ask ourselves "Does the solution make sense?" to check that indeed we have found the optimal solution.
 
-Ok, you might ask: what is this all good for? KKT conditions can help us find the optimal solutions to nonlinear problems (we don't need them for linear problems), and we will apply them when looking at mixed complementarity problems in {numref}`content:mixed-complementarity`. But they also give us a different view on duality, and this is what we want to turn our attention to last.
+So, what is this all good for? KKT conditions can help us find the optimal solutions to nonlinear problems (we don't need them for linear problems), and we will apply them when looking at mixed complementarity problems in {numref}`content:mixed-complementarity`. But they also give us a different view on duality, and this is what we want to turn our attention to last.
 
 ## The connection between duality and KKT conditions
 
@@ -505,7 +502,7 @@ The dual function defines a lower bound on the optimal value $p^*$ of the primal
 ```
 This is the dual problem. We denote the optimal value of this problem as $d^*$.
 
-As mentioned at the beginning, strong duality is when the optimal value of the primal equals the optimal value of the dual. In our new terminology, this is written as $d^* = p^*$. Strong duality can be used to show that a solution that satisfies the KKT conditions must be an optimal solution to the primal and dual problems. In other words, the KKT conditions are necessary and sufficient conditions for optimality.
+As mentioned at the beginning, strong duality holds when the optimal value of the primal equals the optimal value of the dual. In our new terminology, this is written as $d^* = p^*$. Strong duality can be used to show that a solution that satisfies the KKT conditions must be an optimal solution to the primal and dual problems. In other words, the KKT conditions are necessary and sufficient conditions for optimality. This is, however, beyond the scope of this course.
 
 Weak duality is when $d^* \leq p^*$. This holds even for non-convex problems. In such problems, $p^* - d^*$ is referred to as the duality gap.
 
