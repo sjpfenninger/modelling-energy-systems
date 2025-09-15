@@ -4,6 +4,12 @@ title: Changelog
 
 # Changelog
 
+## Version 2025-09.1
+
+* Initial revision of MCP chapters, improvements to KKT section
+* Removed references to game theory
+* Fixed main chapter numbering
+
 ## Version 2025-09
 
 * Updated Calliope to 0.7.0.dev7 and Calligraph to 0.1.1.dev7

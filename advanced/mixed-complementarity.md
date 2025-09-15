@@ -49,7 +49,7 @@ We can write the Karush Kuhn Tacker conditions for the market clearing problem o
 
 Above we presented the clearing of the market as faced by the market operator, who aims to maximise social welfare. In the case of the market operator, the supply and demand bids are given, since they are submitted by the corresponding supply and demand agents. From the supply and demand agents perspective, the objective is different.
 
-The **supply agents** want to maximise their profit, given the price the market clears at. We assume the electricity suppliers are price-taking, meaning they don't influence the market price. Since the firms do not influence the price and compete on both prices and quantities, the electricity market can be described as a Nash game, in the context of game theory (for more details see {numref}`content:appendix:game-theory`). The optimisation problem of each agents $i$ in Eq. {eq}`supply_side` reads:
+The **supply agents** want to maximise their profit, given the price the market clears at. We assume the electricity suppliers are price-taking, meaning they don't influence the market price. Since the firms do not influence the price and compete on both prices and quantities, the electricity market can be described as a Nash game, in the context of [game theory](https://en.wikipedia.org/wiki/Game_theory). The optimisation problem of each agents $i$ in Eq. {eq}`supply_side` reads:
 
 ```{math}
 :label: supply_side
