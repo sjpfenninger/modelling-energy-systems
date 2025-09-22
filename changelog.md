@@ -4,6 +4,11 @@ title: Changelog
 
 # Changelog
 
+## Version 2025-09.2
+
+* Updated environment definition to address MacOS installation issues
+* Further improvements to KKT section
+
 ## Version 2025-09.1
 
 * Initial revision of MCP chapters, improvements to KKT section

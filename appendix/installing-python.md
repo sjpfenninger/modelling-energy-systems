@@ -7,9 +7,9 @@
 These instructions should be equally valid for macOS, Linux, and Windows.
 
 1. Follow the official instructions to download and install the [Anaconda Python distribution](https://www.anaconda.com/docs/getting-started/anaconda/install).
-2. Download the environment file <a href="../_static/environment-2025-09.yml">environment-2025-09.yml</a>. This is a text file (feel free to have a closer look at it) that defines the version of Python and a set of third-party Python packages to install. Defining an environment this way makes it easy to ensure that you have the correct versions of all Python components installed.
+2. Download the environment file <a href="../_static/environment-2025-10.yml">environment-2025-10.yml</a>. This is a text file (feel free to have a closer look at it) that defines the version of Python and a set of third-party Python packages to install. Defining an environment this way makes it easy to ensure that you have the correct versions of all Python components installed.
 3. [Launch Anaconda Navigator](https://www.anaconda.com/docs/tools/anaconda-navigator/getting-started#starting-navigator) (included with the Anaconda Python distribution)
-4. Create a new environment in Anaconda Navigator by importing the `environment-2025-09.yml` file that you downloaded in step 2, [as per the official documentation](https://www.anaconda.com/docs/tools/anaconda-navigator/tutorials/manage-environments#importing-an-environment). Once this step is completed, you can delete the downloaded `environment-2025-09.yml` file.
+4. Create a new environment in Anaconda Navigator by importing the `environment-2025-10.yml` file that you downloaded in step 2, [as per the official documentation](https://www.anaconda.com/docs/tools/anaconda-navigator/tutorials/manage-environments#importing-an-environment). Once this step is completed, you can delete the downloaded `environment-2025-10.yml` file.
 
 After these installation steps, you can use Anaconda Navigator to launch Jupyter Lab whenever you want to work in Python:
 
@@ -27,19 +27,19 @@ If you have issues with JupyterLab not appearing in your list of installed tools
 
 The Anaconda Python distribution is optional, to make things easier for people with little Python experience. You can use any other installation of Python and just need to install the required packages. Assuming you have a working `conda` installation you can:
 
-* Download the environment file <a href="../_static/environment-2025-09.yml">environment-2025-09.yml</a>, then in a terminal window, navigate to the downloaded file and install the requirements by executing: `conda env create -f environment-2025-09.yml`
+* Download the environment file <a href="../_static/environment-2025-10.yml">environment-2025-10.yml</a>, then in a terminal window, navigate to the downloaded file and install the requirements by executing: `conda env create -f environment-2025-10.yml`
 * Run Jupyter Lab from a location of your choosing - this way you don't have to manually navigate to the folder within Jupyter Lab: `cd path/to/my/directory; conda activate optimisation-course; jupyter lab`
 
-If you prefer to manually configure your environment, this is the exact content of the downloadable `environment-2025-09.yml` file, showing you the packages it will install:
+If you prefer to manually configure your environment, this is the exact content of the downloadable `environment-2025-10.yml` file, showing you the packages it will install:
 
-```{literalinclude} ../_static/environment-2025-09.yml
+```{literalinclude} ../_static/environment-2025-10.yml
 :language: yaml
 
 ```
 
 ### Using an editor
 
-If you prefer working with an editor rather than Jupyter Lab, you can still use the provided `environment-2025-09.yml` file to install all requirements.
+If you prefer working with an editor rather than Jupyter Lab, you can still use the provided `environment-2025-10.yml` file to install all requirements.
 
 #### Visual Studio Code
 

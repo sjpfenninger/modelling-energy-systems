@@ -1,4 +1,4 @@
-name: modelling-energy-systems-2025-09
+name: modelling-energy-systems-2025-10
 channels:
     - conda-forge/label/calliope_dev
     - conda-forge
@@ -12,6 +12,7 @@ dependencies:
     - ipopt=3.14.16
     - gurobi
     - calliope=0.7.0dev7
+    - pyproj
     - pip
     - pip:
         - optimutils
