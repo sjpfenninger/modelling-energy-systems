@@ -3,15 +3,18 @@
 
 # Interactions between actors: Mixed Complementarity Problems
 
-In this section we consider an approach to depict how relations between actors affect the outcome of the electricity markets which, in {numref}`content:milp`, we had considered as optimisation problems from the perspective of a market operator.
+In this section, we consider an approach to depict how relations between actors affect the outcome of the electricity markets. We will study electricity market situations as Nash and Nash-Cournot games. These games can be represented as a set of optimisation problems, describing the decision problems of each of the involved actors, that are linked together via a common coupling constraint. We can formulate this as a Mixed Complementarity Problem (MCP): the set of KKT conditions of the decision problems of the involved agents and the coupling constraint.
 
-We will study electricity market situations as Nash and Nash-Cournot games. These games can be represented as a set of optimisation problems, describing the decision problems of each of the involved actors, that are linked together via a common coupling constraint. Based on that observation, we can formulate a Mixed Complementarity Problem (MCP) which is associated to these linked optimisation problems. The MCP is given by the set of KKT conditions of the decision problems of the involved agents and the coupling constraint. Before we continue, let's briefly revisit the KKT conditions.
 
-## Revisiting the market clearing problem
+## The market clearing problem as a Nash Game
 
-In {numref}`content:milp:day-ahead-auction` we discussed the clearing of a day-ahead power market, from the perspective of a market operator, when the price-quantity pairs by the supply and demand agents are given. Using those price-quantity bids, the market operator clears the market in a way that maximizes social welfare.
+Before we dive into the MCP formulation, we'll revisit the market clearing problem, introduced in {numref}`content:milp`, formulated an optimization problem. 
 
-The optimisation problem is considered under given price-quantity pairs of supply and demand agents, $(P_i^s, Q_i^s), (P_j^d, Q_j^d)$. This is exactly the same problem that we formulated with "bids" and "offers" in {numref}`content:milp:day-ahead-auction`, just with different notation. This optimisation problem can be formulated as :
+### Revisiting the market clearing problem
+
+In {numref}`content:milp:day-ahead-auction` we discussed the clearing of a day-ahead power market, from the perspective of a market operator, when the price-quantity bids and offers of the supply and demand agents are given. Using those price-quantity pairs, the market operator clears the market in a way that maximizes social welfare.
+
+Let $(P_i^s, Q_i^s), (P_j^d, Q_j^d)$ be the price-quantity pairs of supply and demand agents. This market clearing problem can be formulated as :
 
 ```{math}
 :label: market_clearing
@@ -23,8 +26,9 @@ The optimisation problem is considered under given price-quantity pairs of suppl
 & 0 \leq q^d_j \leq Q^d_j \quad (\underline{ν_j}, \overline{ν_j}) \quad \forall j \in J \tag{4}\\
 \end{align}
 ```
+Note this is exactly the same problem that we formulated with "bids" and "offers" in {numref}`content:milp:day-ahead-auction`, just with different notation. 
 
-This market clearing problem allows for determining the demand served $q^d_j$ and supply cleared $q^s_i$ in the market. The market clearing price $\lambda$ is the dual variable associated with the supply-demand balance.
+This market clearing problem allows for determining the demand served $ \sum_{j \in J} q^d_j$ and supply cleared $\sum_{i \in I} q^s_i$ in the market. The market clearing price $\lambda$ is the dual variable associated with the supply-demand balance.
 
 We can write the Karush Kuhn Tacker conditions for the market clearing problem of Eq. {eq}`market_clearing`, as:
 
@@ -47,9 +51,9 @@ We can write the Karush Kuhn Tacker conditions for the market clearing problem o
 
 ### The market clearing problem from the perspective of the participants
 
-Above we presented the clearing of the market as faced by the market operator, who aims to maximise social welfare. In the case of the market operator, the supply and demand bids are given, since they are submitted by the corresponding supply and demand agents. From the supply and demand agents perspective, the objective is different.
+Above, we presented the clearing of the market as faced by the market operator, who aims to maximise social welfare, assuming known supply offers and demand bids. However, in real-life markets, supply and demand agents aim to maximize their own profit or utility. 
 
-The **supply agents** want to maximise their profit, given the price the market clears at. We assume the electricity suppliers are price-taking, meaning they don't influence the market price. Since the firms do not influence the price and compete on both prices and quantities, the electricity market can be described as a Nash game, in the context of [game theory](https://en.wikipedia.org/wiki/Game_theory). The optimisation problem of each agents $i$ in Eq. {eq}`supply_side` reads:
+The **supply agents** want to maximise their profit. We assume the electricity suppliers are price-taking, meaning they don't influence the market price, and hence, consider this as a parameter in their own decision problem. The optimisation problem of each agents $i$ in Eq. {eq}`supply_side` reads:
 
 ```{math}
 :label: supply_side
@@ -79,7 +83,7 @@ The KKT conditions of the problem in Eq. {eq}`supply_side` are the following :
 \end{align}
 ```
 
-Similarly, the **demand agents** aim to maximize their utility, again considering the clearing price as given. The demand agents are also price-takers. The optimisation problem of each agent $i$ in Eq. {eq}`demand_side` reads:
+Similarly, the **demand agents** aim to maximize their utility, again considering the clearing price as given. In other words, the demand agents are also price-takers. The optimisation problem of each agent $i$ in Eq. {eq}`demand_side` reads:
 
 ```{math}
 :label: demand_side
@@ -117,9 +121,9 @@ Equations {eq}`supply_side` and {eq}`demand_side` presented the optimisation ind
 \end{align}
 ```
 
-## A solution to market clearing through the KKT conditions
+Since the firms do not influence the price and compete on both prices and quantities, the electricity market can be described as a Nash game.
 
-To arrive at the equilibrium of supply and demand, we have to **simultaneously** solve the supply-side problems {eq}`supply_side`, the demand-side problems {eq}`demand_side` and the linking constraint (2). Thus, we have to find an optimal solution for all optimisation problems at once. Equivalently, we can find a solution to all Karush Kuhn Tucker conditions at once. We can concatenate the KKT conditions of the three problems as:
+To determine the equilibrium, we have to **simultaneously** solve the supply-side problems {eq}`supply_side`, the demand-side problems {eq}`demand_side` and the linking constraint (2). Thus, we have to find an optimal solution for all optimisation problems at once. This requires finding a solution to all Karush Kuhn Tucker conditions at once. We can concatenate the KKT conditions of the three problems as: 
 
 ```{math}
 :label: MCP_KKT
@@ -138,7 +142,17 @@ To arrive at the equilibrium of supply and demand, we have to **simultaneously**
 \end{align}
 ```
 
-Comparing the KKTs of the concatenated (supply + demand + linking constraint) problem in Eq. {eq}`MCP_KKT` with those of the market clearing problem (market operator perspective) in Eq. {eq}`market_clearing`, we can deduce that there is **only** a difference in the following constraints:
+By concatenating the optimality conditions of the supply and demand agent dispatch problems and the linking constraint, we have formed a Mixed Complementarity Problem. 
+
+### Solving MCPs
+
+There are three different approaches to solving the MCP and calculating the clearing price of the market:
+
+* This MCP can be solved directly either with dedicated solvers such as [PATH](https://pages.cs.wisc.edu/~ferris/path.html) or as a feasibility problem (NLP or MILP) using optimisation. In simple cases, you can determine the equilibrium solution analytically by deriving best response functions (see {numref}`content:mixed-complementarity:nash-cournot-games`). Larger problems, however, are very challenging to solve directly as we are - by definition, due to the complementarity conditions - dealing with non-linear problems.
+* Apply price-search algorithms and iterative methods. The general principle of such methods is as follows: we start by making an educated guess on what the equilibrium price $\lambda$ in the game is. We present this price to each of the agents in the game and solve their decision problems. Those solutions are optimal from their perspective, but may not ensure that demand and supply are matched (Eq. (2)). Based on the mismatch in demand and supply, we adjust the price $\lambda$ accordingly and repeat this process until we have found the equilibrium price $\lambda$. We will not cover these techniques here.
+* For some MCPs, we can derive an equivalent optimisation problem (EOP) and solve it like we do other problems - using mathematical programming languages such as YALMIP or Pyomo and solvers such as Gurobi. This builds on the notion that if we can find an optimisation problem that is described by the same set of KKT conditions as the MCP, solutions to that optimisation problem will -- by definition -- also be solutions to the MCP.
+
+We'll illustrate the last approach on the market clearing problem. Comparing the KKTs of the concatenated (supply + demand + linking constraint) problem in Eq. {eq}`MCP_KKT` with those of the market clearing problem (market operator perspective) in Eq. {eq}`market_clearing`, we can deduce that there is **only** a difference in the following constraints:
 
 \begin{align}
 & VC_i - λ - \underline{μ_i} + \overline{μ_i} =0 \tag{10a} \\
@@ -156,17 +170,9 @@ By concatenating the optimality conditions of the supply and demand agent dispat
 ```{warning} Every optimisation has an equivalent MCP, but not every MCP has an equivalent optimisation problem.
 ```
 
-### Solving MCPs
+###  Alternative notation using an inverse demand function
 
-There are three different approaches to solving the MCP and calculate the clearing price of the market:
-
-* This MCP can be solved directly either with dedicated solvers such as [PATH](https://pages.cs.wisc.edu/~ferris/path.html) or as a feasibility problem (NLP or MILP) using optimisation. In simple cases, you can determine the equilibrium solution analytically by deriving best response functions (see {numref}`content:mixed-complementarity:nash-cournot-games`). Larger problems, however, are very challenging to solve directly as we are - by definition, due to the complementarity conditions - dealing with non-linear problems.
-* Apply price-search algorithms and iterative methods. The general principle of such methods is as follows: we start by making an educated guess on what the equilibrium price $\lambda$ in the game is. We present this price to each of the agents in the game and solve their decision problems. Those solutions are optimal from their perspective, but may not ensure that demand and supply are matched (Eq. (2)). Based on the mismatch in demand and supply, we adjust the price $\lambda$ accordingly and repeat this process until we have found the equilibrium price $\lambda$. We will not cover these techniques here.
-* For some MCPs, we can derive an equivalent optimisation problem (EOP) and solve it like we do other problems - using mathematical programming languages such as YALMIP or Pyomo and solvers such as Gurobi. This builds on the notion that if we can find an optimisation problem that is described by the same set of KKT conditions as the MCP, solutions to that optimisation problem will -- by definition -- also be solutions to the MCP.
-
-## Use of an inverse demand function
-
-We can formulate the MCP problem through the use of an inverse demand function. Instead of the price-quantity bids of the demand agents, w use a linear relationship between the price of electricity and the demanded quantity to represent the demand side of the market. The linear equation takes the form of :
+We can formulate the MCP problem using an inverse demand function. Instead of the price-quantity bids of the demand agents, we use a linear relationship between the price of electricity and the demanded quantity to represent the demand side of the market. The linear equation takes the form of :
 
 ```{math}
 :label: linear demand
@@ -175,7 +181,7 @@ We can formulate the MCP problem through the use of an inverse demand function. 
 \end{align}
 ```
 
-From the market clearing constraint we know $\sum_{j \in J} q^d_j = \sum_{i \in I} q^s_i$. Hence, the inverse demand function can be rewritten as $λ = \overline{λ} - β \cdot \sum_{i \in I} q^s_i$. In this way, we have eliminated the second vector of decision variables $q^d_j$. The $\overline{λ}$ is the interceptor of the demand curve and signifies the maximum willingness to pay and you can see the graphic interpretation of the inverse curve in {numref}`fig-inverse-demand`. Taking all the above into account, the game can be finally reformulated as :
+From the market clearing constraint we know $\sum_{j \in J} q^d_j = \sum_{i \in I} q^s_i$. Hence, the inverse demand function can be rewritten as $λ = \overline{λ} - β \cdot \sum_{i \in I} q^s_i$. In this way, we have eliminated the second vector of decision variables $q^d_j$. The $\overline{λ}$ is the intercept of the demand curve and signifies the maximum willingness to pay and you can see the graphic interpretation of the inverse curve in {numref}`fig-inverse-demand`. Taking all the above into account, the game can be finally reformulated as :
 
 ```{figure} ../images/inverse_demand_function.jpg
 :name: fig-inverse-demand
@@ -206,9 +212,9 @@ The KKT conditions of the decision problems of the suppliers and the inverse dem
 \end{align}
 ```
 
-With the MCP defined, we can now derive the Equivalent optimisation problem to determine the equilibrium solution to the game in Eq. {eq}`game_inverse_demand`. Remember here, that the KKT conditions of the EOP have to match the MCP in order for the EOP to provide a solution to the initial problem. To derive the EOP, we make use of the graphical interpretation of the problem show in {numref}`fig-inverse-demand`.
+With the MCP defined, we can now derive the Equivalent optimisation problem to determine the equilibrium solution to the game in Eq. {eq}`game_inverse_demand`. Remember that the KKT conditions of the EOP have to match the MCP in order for the EOP to provide a solution to the initial problem. To derive the EOP, we make use of the graphical interpretation of the problem show in {numref}`fig-inverse-demand`.
 
-From the discussion above, we know that the Nash game between suppliers and consumers in perfectly competitive electricity markets will maximize social welfare in that market. Hence, we can formulate a candidate EOP which aims to maximize social welfare. Based on {numref}`fig-inverse-demand-area` and the fact that  social welfare is the area between the demand and supply curve, social welfare can be computed as :
+From the discussion above, we know that the Nash game between suppliers and consumers in perfectly competitive electricity markets will maximize social welfare in that market. Hence, we can formulate a candidate EOP that aims to maximize social welfare. Based on {numref}`fig-inverse-demand-area` and the fact that  social welfare is the area between the demand and supply curve, social welfare can be computed as :
 
 $$
 SW = (ABDE) - (ABC) - \text{Area of sketched polygon} = \overline{\lambda} \cdot \sum_{i} q^s_i - \frac{1}{2}\beta(\sum_{i} q^s_i)^2 - \sum_{i} VC_i \cdot q^s_i
@@ -304,7 +310,7 @@ By concatenating the KKTs of the individual problems (Eqs. {eq}`supply_side`, {e
 
 ## Nash-Cournot games
 
-Up to now, we have assumed a **perfectly competitive market**, meaning firms have zero market power and act as pure price-takers. This is demonstrated by the example in {numref}`content:appendix:game-theory`. This was a **Nash game**. Contrary, in Nash-Cournot games agents strategically anticipate how their own quantity decisions influence the price (and hence their profit or utility). Each agent takes the decisions of the other players as given, as in a Nash game. In this Section, we will describe how the optimisation problem changes, when agents anticipate the impact of their actions on price.
+Up to now, we have assumed a **perfectly competitive market**, meaning firms have zero market power and act as pure price-takers. This is demonstrated by the example in {numref}`content:appendix:game-theory`. This was a **Nash game**. On the contrary, in Nash-Cournot games, agents strategically anticipate how their own quantity decisions influence the price (and hence their profit or utility). Each agent takes the decisions of the other players as given, as in a Nash game. In this Section, we will describe how the optimisation problem changes, when agents anticipate the impact of their actions on price.
 
 ### A simple Nash-Cournot game
 
@@ -388,7 +394,7 @@ With the introduction of the Mixed Complementarity Problems as a way to solve th
 
 For both Nash and Nash-Cournot games, we developed formulations of the game (i.e., the set of interrelated optimisation problems and the coupling constraint) and the corresponding mixed complementarity problem (i.e., the KKT conditions of the decision problems of the involved actors and the coupling constraint). We discussed how we can determine the equilibria in such games, focusing on equivalent optimisation problems. For the Nash game, we showed that the equivalent optimisation problem is a maximization of social welfare. We also obtained an equivalent optimisation problem for the Nash-Cournot game.
 
-These games allow making relationships and interactions between market agents explicit. In complex cases, for which the formulation of an optimisation problem is non-trivial, MCPs offer a more intuitive way of formalizing problems.
+These games allow making relationships and interactions between market agents explicit. When the formulation of an optimisation problem is non-trivial, MCPs offer a more intuitive way of formalizing problems. 
 
 ## References
 
