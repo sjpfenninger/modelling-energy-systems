@@ -89,7 +89,7 @@ We can contrast the above problem to this slightly modified version, where we in
     &~ x_1, x_2 \text{ are integers}
 \end{align}
 
-How do the optimal solutions to these two problems compare? Counter-intuitively, as we can see in {numref}`fig:markets-milp:milp-solution`, the optimal solution to the mixed-integer (MILP) problem is quite far away from the solution to the purely continuous (LP) problem: the red dot shows the optimal solution if $x_1$ and $x_2$ are continuous, the orange dot shows the optimal integer solution (note that the integer constraints turn the feasible region from the grey space to the set of blue dots). This example demonstrates that it is not straightforward to solve an MILP problem: we cannot simply solve an LP version of the problem and then look for the closest integer solution by "rounding" our variable values to integers.
+How do the optimal solutions to these two problems compare? Counter-intuitively, as we can see in {numref}`fig:markets-milp:milp-solution`, the optimal solution to the mixed-integer (MILP) problem is quite far away from the solution to the purely continuous (LP) problem: the red dot shows the optimal solution if $x_1$ and $x_2$ are continuous, the orange dot shows the optimal integer solution (note that the integer constraints turn the feasible region from the grey space to the set of grey dots). This example demonstrates that it is not straightforward to solve an MILP problem: we cannot simply solve an LP version of the problem and then look for the closest integer solution by "rounding" our variable values to integers.
 
 ```{figure} ../images/milp-solution.jpg
 :name: fig:markets-milp:milp-solution

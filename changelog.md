@@ -4,6 +4,12 @@ title: Changelog
 
 # Changelog
 
+## Version 2025-10
+
+* MCP: Clarified the relationship between actors in electricity markets, including Nash and Nash-Cournot games
+* MCP: Updated the market clearing problem explanation and introduced the use of inverse demand functions
+* MILP: Fixed LP-to-MILP comparison figure
+
 ## Version 2025-09.2
 
 * Updated environment definition to address MacOS installation issues
