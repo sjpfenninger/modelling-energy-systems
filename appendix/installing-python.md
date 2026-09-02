@@ -1,16 +1,18 @@
 (content:installing-python)=
 
-# Installing Python and the course software
+# Installing Python
+
+## Installing Python and the course software
 
 You need two things: **pixi**, a small program that manages Python and all course packages for you, and the **course folder**, which tells pixi exactly what to install.
 If you have other Python installations on your system, including Anaconda, it won't interfere, but don't use its "Anaconda Prompt"; use the normal terminal as described below.)
 
-## Step 1 — Open a terminal
+### Step 1 — Open a terminal
 
 - **Windows:** open the Start menu, type `terminal`, and open **Terminal**. This is a window into which you type commands.
 - **macOS:** press Cmd+Space, type `terminal`, press Enter.
 
-## Step 2 — Install pixi
+### Step 2 — Install pixi
 
 You only need to do this once. Copy the line for your system, paste it into the terminal, and press Enter:
 
@@ -32,7 +34,7 @@ Then **close the terminal, open a new terminal**, and check that Pixi is install
 pixi --version
 ```
 
-## Step 3 — Download the course folder
+### Step 3 — Download the course folder
 
 Download [`modelling-energy-systems-course.zip`](https://github.com/sjpfenninger/modelling-course-env/releases/latest/download/modelling-energy-systems-course.zip), unzip it, and move the resulting `modelling-energy-systems` folder somewhere you'll keep your work, for example into `Documents`.
 This folder defines the course software and is also where your code will live.
@@ -42,7 +44,7 @@ It is best not to put the folder in a location synced by OneDrive, Dropbox or iC
 The course software is several hundred megabytes. Syncing it will be slow and can make the installation fail partway through.
 ```
 
-## Step 4 — Check that everything works
+### Step 4 — Check that everything works
 
 In the terminal, move into the folder, then run the check.
 Assuming you unzipped the folder into "Documents" (adjust the path as needed):
@@ -74,7 +76,9 @@ Everything works!
 If you see that, your setup is complete.
 If you see something else, look at the troubleshooting section below.
 
-## Step 5 — Start JupyterLab
+## Using the installed tools
+
+### Start JupyterLab
 
 ```bash
 pixi run jupyter-lab
@@ -87,13 +91,21 @@ It is empty to start with. Feel free to use your own folder structure, of course
 
 When you're done working, close the browser tab and press **Ctrl+C** in the terminal.
 
-## Step 6 — Start Calliope Studio
+### Start Calliope Studio
+
+Assuming you have a Calliope model with a `model.yaml` file in `my-model-folder`, you can simply run:
 
 ```bash
 pixi run calliope-studio my-model-folder
 ```
 
-It opens in your browser like JupyterLab does; stop it with Ctrl+C.
+Alternatively, to see the model chooser, run Calliope Studio without providing a model folder at all:
+
+```bash
+pixi run calliope-studio
+```
+
+It opens in your browser like JupyterLab does. To stop it close the browser tab and press **Ctrl+C** in the terminal.
 
 ## Troubleshooting
 
