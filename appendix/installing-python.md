@@ -1,50 +1,106 @@
 (content:installing-python)=
 
-# Installing Python
+# Installing Python and the course software
 
-## Recommended approach to install everything
+You need two things: **pixi**, a small program that manages Python and all course packages for you, and the **course folder**, which tells pixi exactly what to install.
+If you have other Python installations on your system, including Anaconda, it won't interfere, but don't use its "Anaconda Prompt"; use the normal terminal as described below.)
 
-These instructions should be equally valid for macOS, Linux, and Windows.
+## Step 1 — Open a terminal
 
-1. Follow the official instructions to download and install the [Anaconda Python distribution](https://www.anaconda.com/docs/getting-started/anaconda/install).
-2. Download the environment file <a href="../_static/environment-2025-10.yml">environment-2025-10.yml</a>. This is a text file (feel free to have a closer look at it) that defines the version of Python and a set of third-party Python packages to install. Defining an environment this way makes it easy to ensure that you have the correct versions of all Python components installed.
-3. [Launch Anaconda Navigator](https://www.anaconda.com/docs/tools/anaconda-navigator/getting-started#starting-navigator) (included with the Anaconda Python distribution)
-4. Create a new environment in Anaconda Navigator by importing the `environment-2025-10.yml` file that you downloaded in step 2, [as per the official documentation](https://www.anaconda.com/docs/tools/anaconda-navigator/tutorials/manage-environments#importing-an-environment). Once this step is completed, you can delete the downloaded `environment-2025-10.yml` file.
+- **Windows:** open the Start menu, type `terminal`, and open **Terminal**. This is a window into which you type commands.
+- **macOS:** press Cmd+Space, type `terminal`, press Enter.
 
-After these installation steps, you can use Anaconda Navigator to launch Jupyter Lab whenever you want to work in Python:
+## Step 2 — Install pixi
 
-* Go to the "Home" tab in Anaconda Navigator, and click "JupyterLab" to launch Jupyter Lab. Make sure your newly-created environment is active on the "Environments" tab beforehand.
-* Within the file browser, navigate to the directory where you want to keep the files for working on energy system modelling.
-* To test that everything works, download the Jupyter notebook for {ref}`content:pyomo-basics` and try to open and run it on your computer.
+You only need to do this once. Copy the line for your system, paste it into the terminal, and press Enter:
 
-```{tip}
-If you have issues with JupyterLab not appearing in your list of installed tools, a possible workaround is to launch JupyterLab by launching a terminal from Anaconda Navigator and then typing `jupyter lab` in the terminal window that appears.
+**Windows:**
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm -useb https://pixi.sh/install.ps1 | iex"
 ```
 
-## Alternative instructions for more experienced users
+**macOS / Linux:**
 
-### Using the terminal
-
-The Anaconda Python distribution is optional, to make things easier for people with little Python experience. You can use any other installation of Python and just need to install the required packages. Assuming you have a working `conda` installation you can:
-
-* Download the environment file <a href="../_static/environment-2025-10.yml">environment-2025-10.yml</a>, then in a terminal window, navigate to the downloaded file and install the requirements by executing: `conda env create -f environment-2025-10.yml`
-* Run Jupyter Lab from a location of your choosing - this way you don't have to manually navigate to the folder within Jupyter Lab: `cd path/to/my/directory; conda activate optimisation-course; jupyter lab`
-
-If you prefer to manually configure your environment, this is the exact content of the downloadable `environment-2025-10.yml` file, showing you the packages it will install:
-
-```{literalinclude} ../_static/environment-2025-10.yml
-:language: yaml
-
+```bash
+curl -fsSL https://pixi.sh/install.sh | sh
 ```
 
-### Using an editor
+Then **close the terminal, open a new terminal**, and check that Pixi is installed and working, by typing:
 
-If you prefer working with an editor rather than Jupyter Lab, you can still use the provided `environment-2025-10.yml` file to install all requirements.
+```
+pixi --version
+```
 
-#### Visual Studio Code
+## Step 3 — Download the course folder
 
-See the official documentation on [how to work with "conda" type Python environments](https://code.visualstudio.com/docs/python/environments).
+Download [`modelling-energy-systems-course.zip`](https://github.com/sjpfenninger/modelling-course-env/releases/latest/download/modelling-energy-systems-course.zip), unzip it, and move the resulting `modelling-energy-systems` folder somewhere you'll keep your work, for example into `Documents`.
+This folder defines the course software and is also where your code will live.
 
-#### PyCharm
+```{warning}
+It is best not to put the folder in a location synced by OneDrive, Dropbox or iCloud.
+The course software is several hundred megabytes. Syncing it will be slow and can make the installation fail partway through.
+```
 
-See the official documentation on [configuring a conda virtual environment](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html#conda-requirements).
+## Step 4 — Check that everything works
+
+In the terminal, move into the folder, then run the check.
+Assuming you unzipped the folder into "Documents" (adjust the path as needed):
+
+On Windows:
+
+```powershell
+cd Documents\modelling-energy-systems
+pixi run check-setup
+```
+
+On macOS or Linux:
+
+```bash
+cd Documents/modelling-energy-systems
+pixi run check-setup
+```
+
+The first time, pixi downloads Python and all course packages.
+This can take a few minutes.
+Every later start is instant and works offline.
+
+After installing everything, the check prints the version of each package, solves two small optimisation problems, and finishes with:
+
+```
+Everything works!
+```
+
+If you see that, your setup is complete.
+If you see something else, look at the troubleshooting section below.
+
+## Step 5 — Start JupyterLab
+
+```bash
+pixi run jupyter-lab
+```
+
+JupyterLab opens in your browser, showing the contents of the course folder.
+
+It is recommended to keep your own notebooks and exercise files in the `notebooks` folder.
+It is empty to start with. Feel free to use your own folder structure, of course.
+
+When you're done working, close the browser tab and press **Ctrl+C** in the terminal.
+
+## Step 6 — Start Calliope Studio
+
+```bash
+pixi run calliope-studio my-model-folder
+```
+
+It opens in your browser like JupyterLab does; stop it with Ctrl+C.
+
+## Troubleshooting
+
+- _`pixi` is not recognized / command not found_ — you didn't open a fresh terminal after Step 2.
+- _`No such file or directory` after `cd`_ — the folder isn't where the path says it is; make sure you are using the folder where you unzipped everything on your computer.
+- _`pixi` says it cannot find a `pixi.toml` or workspace_ — you are one folder too high. Unzipping on Windows often nests the course folder inside a folder named after the zip, giving `Documents\modelling-energy-systems-course\modelling-energy-systems`. `cd` into whichever folder directly contains `pixi.toml`.
+- _Installing fails, or `pixi run update-course` won't start_ — every `pixi run` command installs the course software first, so none of them can run if that install is broken. Download the course folder again from Step 3, then copy your `notebooks` folder into the new one.
+- _`No module named pyomo` inside a notebook_ — JupyterLab wasn't started with `pixi run jupyter-lab` from inside the course folder.
+- _The install is very slow, or fails partway through_ — check that the folder is not inside OneDrive, Dropbox or iCloud (see the warning in Step 3). Moving it to a normal local folder and running `pixi run check-setup` again may fix this.
+- _Something else_ — run `pixi run check-setup` and bring the output to a class tutorial session.
