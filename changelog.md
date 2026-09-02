@@ -7,6 +7,7 @@ title: Changelog
 ## Version 2026-09
 
 - Updated installation instructions
+- [Pyomo chapter](tools/pyomo.ipynb): switched from Gurobi to the free and open-source HiGHS solver, and updated the "Solver choice" section accordingly
 
 ## Version 2025-10
 

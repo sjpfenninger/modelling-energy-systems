@@ -3,8 +3,8 @@ name = "modelling-energy-systems"
 version = "0.1.0"
 # authors = ["Stefan Pfenninger <stefan@pfenninger.org>"]
 
-[tool.pixi.project]
-channels = ["conda-forge", "gurobi"]
+[tool.pixi.workspace]
+channels = ["conda-forge"]
 platforms = ["osx-arm64", "linux-64", "win-64"]
 
 [tool.pixi.tasks]
@@ -21,10 +21,9 @@ numpy = "2.3.2.*"
 matplotlib = "3.10.5.*"
 click = "8.1.*"
 seaborn = "0.13.2.*"
-glpk = "5.0.*"
 ipopt = "3.14.16.*"
-gurobi = "12.*"
-pyomo = "6.8.2.*"
+highspy = "1.15.1.*"
+pyomo = "6.10.1.*"
 
 [tool.pixi.pypi-dependencies]
 modelling_energy_systems = { path = ".", editable = true }

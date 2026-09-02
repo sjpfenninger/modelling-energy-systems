@@ -4,4 +4,4 @@ _assets
 *.egg-info
 
 # Specific files from running Jupyter notebooks
-basics/results.csv
+tools/results.csv
