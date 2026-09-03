@@ -4,6 +4,10 @@ title: Changelog
 
 # Changelog
 
+## Version 2026-09.1
+
+- Use the `highs` instead of the `appsi_highs` interface in Pyomo. This lets HiGHS be used for quadratic problems in the MCP chapter, too. IPOPT is therefore not needed any more.
+
 ## Version 2026-09
 
 - Updated installation instructions
