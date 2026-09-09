@@ -6,7 +6,7 @@ title: Changelog
 
 ## Version 2026-09.2
 
-- Add VS code instructions to the [installation instructions](appendix/installing-python.md)
+- Improved the [installation instructions](appendix/installing-python.md)
 
 ## Version 2026-09.1
 
