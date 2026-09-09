@@ -112,14 +112,46 @@ pixi run calliope-studio
 
 It opens in your browser like JupyterLab does. To stop it close the browser tab and press **Ctrl+C** in the terminal.
 
+## Using VS Code or other editors
+
+JupyterLab is all you need and the recommended way to work here, but if you prefer working in [Visual Studio Code](https://code.visualstudio.com/), you can point it at the course software by following the approach below.
+You should be able to use other editors or IDEs by following a similar approach.
+
+```{tip}
+Run `pixi run check-setup` (Step 4) at least once before you start, because that forces pixi to actually install everything.
+```
+
+In VS Code, open the Extensions panel and make sure that Microsoft's **Python** and **Jupyter** extensions are installed.
+
+Choose **File → Open Folder** and select the `modelling-energy-systems` folder that you unzipped (that is, the folder that contains the `pixi.toml` file).
+
+Now you need to tell VS Code to use the Python version installed by Pixi.
+Press **Ctrl+Shift+P** (**Cmd+Shift+P** on macOS), type `Python: Select Interpreter`, and choose the entry whose path is inside `.pixi/envs/default`.
+If it is not in the list, choose **Enter interpreter path…** and type the path yourself.
+
+On Windows:
+
+```powershell
+.pixi\envs\default\python.exe
+```
+
+On macOS or Linux:
+
+```bash
+.pixi/envs/default/bin/python
+```
+
+To work in a notebook from VS Code, open a `.ipynb` file, click **Select Kernel** at the top right, choose **Python Environments…**, and pick that same environment.
+
 ## Troubleshooting
 
-| Problem | Solution |
-| --- | --- |
-| `pixi` is not recognized / command not found | You didn't open a fresh terminal after Step 2. |
-| `No such file or directory` after `cd` | The folder isn't where the path says it is; make sure you are using the folder where you unzipped everything on your computer. |
-| `pixi` says it cannot find a `pixi.toml` or workspace | You are one folder too high. Unzipping on Windows often nests the course folder inside a folder named after the zip, giving `Documents\modelling-energy-systems-course\modelling-energy-systems`. `cd` into whichever folder directly contains `pixi.toml`. |
-| Installing fails, or `pixi run update-course` won't start | Every `pixi run` command installs the course software first, so none of them can run if that install is broken. Download the course folder again from Step 3, then copy your `notebooks` folder into the new one. |
-| `No module named pyomo` inside a notebook | JupyterLab wasn't started with `pixi run jupyter-lab` from inside the course folder. |
-| The install is very slow, or fails partway through | Check that the folder is not inside OneDrive, Dropbox or iCloud (see the warning in Step 3). Moving it to a normal local folder and running `pixi run check-setup` again may fix this. |
-| Something else | Run `pixi run check-setup` and bring the output to a class tutorial session. |
+| Problem                                                   | Solution                                                                                                                                                                                                                                                    |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pixi` is not recognized / command not found              | You didn't open a fresh terminal after Step 2.                                                                                                                                                                                                              |
+| `No such file or directory` after `cd`                    | The folder isn't where the path says it is; make sure you are using the folder where you unzipped everything on your computer.                                                                                                                              |
+| `pixi` says it cannot find a `pixi.toml` or workspace     | You are one folder too high. Unzipping on Windows often nests the course folder inside a folder named after the zip, giving `Documents\modelling-energy-systems-course\modelling-energy-systems`. `cd` into whichever folder directly contains `pixi.toml`. |
+| Installing fails, or `pixi run update-course` won't start | Every `pixi run` command installs the course software first, so none of them can run if that install is broken. Download the course folder again from Step 3, then copy your `notebooks` folder into the new one.                                           |
+| `No module named pyomo` inside a notebook                 | JupyterLab wasn't started with `pixi run jupyter-lab` from inside the course folder, or, in VS Code, the wrong interpreter or kernel is selected.                                                                                                           |
+| VS Code doesn't list the course environment               | You haven't run `pixi run check-setup` yet, or you opened the wrong folder. Follow the instructions for VS Code above.                                                                                                                                      |
+| The install is very slow, or fails partway through        | Check that the folder is not inside OneDrive, Dropbox or iCloud (see the warning in Step 3). Moving it to a normal local folder and running `pixi run check-setup` again may fix this.                                                                      |
+| Something else                                            | Run `pixi run check-setup` and bring the output to a class tutorial session.                                                                                                                                                                                |
