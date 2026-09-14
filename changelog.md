@@ -7,6 +7,7 @@ title: Changelog
 ## Version 2026-09.2
 
 - Improved the [installation instructions](appendix/installing-python.md)
+- Fix typo in Eq. 4.23 in the Duality/KKTs section
 
 ## Version 2026-09.1
 

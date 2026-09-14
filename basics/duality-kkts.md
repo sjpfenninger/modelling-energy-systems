@@ -435,7 +435,7 @@ Then we derive the KKT conditions:
     &  - P_{G1} \leq 0 \quad & (\text{Primal feasibility (inequality constraint}) \\
     &  P_{G1} - P_{G1}^{max} \leq 0  \quad & (\text{Primal feasibility (inequality constraint}) \\
     &  - P_{G2} \leq 0  \quad & (\text{Primal feasibility (inequality constraint}) \\
-    &  P_{G2} - P_{G2}^{max} \quad & (\text{Primal feasibility (inequality constraint}) \\
+    &  P_{G2} - P_{G2}^{max} \leq 0 \quad & (\text{Primal feasibility (inequality constraint}) \\
     & \mu_1 \cdot ( - P_{G1}) = 0  \quad & (\text{Complementary slackness conditions}) \\
     & \mu_2 \cdot ( P_{G1} - P_{G1}^{max}) = 0 \quad & (\text{Complementary slackness conditions}) \\
     & \mu_3 \cdot ( - P_{G2} )  = 0 \quad & (\text{Complementary slackness conditions}) \\
